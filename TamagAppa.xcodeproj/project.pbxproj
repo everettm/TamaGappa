@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		683D6C11191FF3A9002FA436 /* StatusBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 683D6C10191FF3A9002FA436 /* StatusBarViewController.m */; };
 		68D21DE9191FDD4E00CDEBE5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68D21DE8191FDD4E00CDEBE5 /* Foundation.framework */; };
 		68D21DEB191FDD4E00CDEBE5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68D21DEA191FDD4E00CDEBE5 /* CoreGraphics.framework */; };
 		68D21DED191FDD4E00CDEBE5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68D21DEC191FDD4E00CDEBE5 /* UIKit.framework */; };
@@ -42,6 +43,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		683D6C0F191FF3A9002FA436 /* StatusBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusBarViewController.h; sourceTree = "<group>"; };
+		683D6C10191FF3A9002FA436 /* StatusBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusBarViewController.m; sourceTree = "<group>"; };
 		68D21DE5191FDD4E00CDEBE5 /* TamagAppa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TamagAppa.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		68D21DE8191FDD4E00CDEBE5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		68D21DEA191FDD4E00CDEBE5 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -144,6 +147,8 @@
 				68D21E03191FDD4E00CDEBE5 /* Images.xcassets */,
 				68D21E2E191FEA4A00CDEBE5 /* theBestChooseGameViewController.h */,
 				68D21E2F191FEA4A00CDEBE5 /* theBestChooseGameViewController.m */,
+				683D6C0F191FF3A9002FA436 /* StatusBarViewController.h */,
+				683D6C10191FF3A9002FA436 /* StatusBarViewController.m */,
 				68D21DEF191FDD4E00CDEBE5 /* Supporting Files */,
 			);
 			path = TamagAppa;
@@ -282,6 +287,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				683D6C11191FF3A9002FA436 /* StatusBarViewController.m in Sources */,
 				68D21E02191FDD4E00CDEBE5 /* ViewController.m in Sources */,
 				68D21DF9191FDD4E00CDEBE5 /* AppDelegate.m in Sources */,
 				68D21DF5191FDD4E00CDEBE5 /* main.m in Sources */,

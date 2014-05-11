@@ -68,7 +68,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="ZS8-4v-gnP" kind="push" id="IdF-mD-xlt"/>
+                                    <segue destination="Ldz-7t-dgL" kind="push" id="a5N-fK-Yz4"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -117,25 +117,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6oO-Kt-DI6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1140" y="149"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="Xj2-46-j2j">
-            <objects>
-                <viewController id="ZS8-4v-gnP" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="wJO-7C-1ke"/>
-                        <viewControllerLayoutGuide type="bottom" id="4G8-fc-B0y"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Byn-ZG-ynm">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="Z1H-D1-fGK"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="1i4-Hi-aN0" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="685" y="804"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="8UZ-Io-MGc">
@@ -347,6 +328,78 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="trJ-By-g7o" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1567" y="152"/>
+        </scene>
+        <!--Status Bar View Controller-->
+        <scene sceneID="FWK-pc-Z8r">
+            <objects>
+                <viewController id="Ldz-7t-dgL" customClass="StatusBarViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="7Tm-4q-SvX"/>
+                        <viewControllerLayoutGuide type="bottom" id="NEi-VL-ud9"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="mvg-ht-KLU">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ZLI-QL-g5r">
+                                <rect key="frame" x="67" y="71" width="186" height="2"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                            </progressView>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="tbq-9O-iJh">
+                                <rect key="frame" x="67" y="171" width="186" height="2"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </progressView>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Teo-Nz-h2i">
+                                <rect key="frame" x="67" y="258" width="186" height="2"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </progressView>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="cCm-tO-rzC">
+                                <rect key="frame" x="67" y="351" width="186" height="2"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </progressView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Health" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="67z-bt-4Ac">
+                                <rect key="frame" x="135" y="81" width="50" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Happiness" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X9M-os-Lzv">
+                                <rect key="frame" x="119" y="181" width="82" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Hunger" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z44-Ro-T35">
+                                <rect key="frame" x="130" y="268" width="57" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Energy" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5SZ-ae-yPj">
+                                <rect key="frame" x="134" y="361" width="53" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="vcg-QW-xgM"/>
+                    <connections>
+                        <outlet property="energyBar" destination="cCm-tO-rzC" id="rqp-9R-yHY"/>
+                        <outlet property="energyLabel" destination="5SZ-ae-yPj" id="Bl9-QB-zKt"/>
+                        <outlet property="happinessBar" destination="tbq-9O-iJh" id="1r6-dz-6W5"/>
+                        <outlet property="happinessLabel" destination="X9M-os-Lzv" id="3Ds-Od-5GJ"/>
+                        <outlet property="healthBar" destination="ZLI-QL-g5r" id="aaH-tN-Exv"/>
+                        <outlet property="healthLabel" destination="67z-bt-4Ac" id="SmN-7j-V8L"/>
+                        <outlet property="hungerBar" destination="Teo-Nz-h2i" id="KCt-d4-bSQ"/>
+                        <outlet property="hungerLabel" destination="z44-Ro-T35" id="jGX-oe-whH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="50v-oV-UEq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="685" y="841"/>
         </scene>
     </scenes>
     <resources>
