@@ -22,6 +22,13 @@
 		68D21E0D191FDD4E00CDEBE5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68D21DEC191FDD4E00CDEBE5 /* UIKit.framework */; };
 		68D21E15191FDD4E00CDEBE5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 68D21E13191FDD4E00CDEBE5 /* InfoPlist.strings */; };
 		68D21E17191FDD4E00CDEBE5 /* TamagAppaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D21E16191FDD4E00CDEBE5 /* TamagAppaTests.m */; };
+		68D21E25191FE28000CDEBE5 /* appa-default.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D21E24191FE28000CDEBE5 /* appa-default.png */; };
+		68D21E27191FE32600CDEBE5 /* watermelon.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D21E26191FE32600CDEBE5 /* watermelon.png */; };
+		68D21E29191FE39600CDEBE5 /* ball.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D21E28191FE39600CDEBE5 /* ball.png */; };
+		68D21E2B191FE4B900CDEBE5 /* sleep.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D21E2A191FE4B900CDEBE5 /* sleep.png */; };
+		68D21E2D191FE66000CDEBE5 /* trash-can.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D21E2C191FE66000CDEBE5 /* trash-can.png */; };
+		68D21E30191FEA4A00CDEBE5 /* theBestChooseGameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D21E2F191FEA4A00CDEBE5 /* theBestChooseGameViewController.m */; };
+		68D21E32191FEAA100CDEBE5 /* Appa.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D21E31191FEAA100CDEBE5 /* Appa.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +62,14 @@
 		68D21E12191FDD4E00CDEBE5 /* TamagAppaTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TamagAppaTests-Info.plist"; sourceTree = "<group>"; };
 		68D21E14191FDD4E00CDEBE5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		68D21E16191FDD4E00CDEBE5 /* TamagAppaTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TamagAppaTests.m; sourceTree = "<group>"; };
+		68D21E24191FE28000CDEBE5 /* appa-default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "appa-default.png"; path = "../../Desktop/appa-default.png"; sourceTree = "<group>"; };
+		68D21E26191FE32600CDEBE5 /* watermelon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = watermelon.png; path = ../../Desktop/watermelon.png; sourceTree = "<group>"; };
+		68D21E28191FE39600CDEBE5 /* ball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ball.png; path = ../../Desktop/ball.png; sourceTree = "<group>"; };
+		68D21E2A191FE4B900CDEBE5 /* sleep.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sleep.png; path = ../../Desktop/sleep.png; sourceTree = "<group>"; };
+		68D21E2C191FE66000CDEBE5 /* trash-can.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "trash-can.png"; path = "../../Desktop/trash-can.png"; sourceTree = "<group>"; };
+		68D21E2E191FEA4A00CDEBE5 /* theBestChooseGameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = theBestChooseGameViewController.h; sourceTree = "<group>"; };
+		68D21E2F191FEA4A00CDEBE5 /* theBestChooseGameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = theBestChooseGameViewController.m; sourceTree = "<group>"; };
+		68D21E31191FEAA100CDEBE5 /* Appa.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Appa.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +99,12 @@
 		68D21DDC191FDD4E00CDEBE5 = {
 			isa = PBXGroup;
 			children = (
+				68D21E2C191FE66000CDEBE5 /* trash-can.png */,
+				68D21E2A191FE4B900CDEBE5 /* sleep.png */,
+				68D21E26191FE32600CDEBE5 /* watermelon.png */,
+				68D21E24191FE28000CDEBE5 /* appa-default.png */,
+				68D21E28191FE39600CDEBE5 /* ball.png */,
+				68D21E31191FEAA100CDEBE5 /* Appa.png */,
 				68D21DEE191FDD4E00CDEBE5 /* TamagAppa */,
 				68D21E10191FDD4E00CDEBE5 /* TamagAppaTests */,
 				68D21DE7191FDD4E00CDEBE5 /* Frameworks */,
@@ -121,6 +142,8 @@
 				68D21E00191FDD4E00CDEBE5 /* ViewController.h */,
 				68D21E01191FDD4E00CDEBE5 /* ViewController.m */,
 				68D21E03191FDD4E00CDEBE5 /* Images.xcassets */,
+				68D21E2E191FEA4A00CDEBE5 /* theBestChooseGameViewController.h */,
+				68D21E2F191FEA4A00CDEBE5 /* theBestChooseGameViewController.m */,
 				68D21DEF191FDD4E00CDEBE5 /* Supporting Files */,
 			);
 			path = TamagAppa;
@@ -232,9 +255,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				68D21DFF191FDD4E00CDEBE5 /* Main_iPad.storyboard in Resources */,
+				68D21E27191FE32600CDEBE5 /* watermelon.png in Resources */,
+				68D21E25191FE28000CDEBE5 /* appa-default.png in Resources */,
+				68D21E2D191FE66000CDEBE5 /* trash-can.png in Resources */,
 				68D21E04191FDD4E00CDEBE5 /* Images.xcassets in Resources */,
 				68D21DFC191FDD4E00CDEBE5 /* Main_iPhone.storyboard in Resources */,
+				68D21E2B191FE4B900CDEBE5 /* sleep.png in Resources */,
+				68D21E32191FEAA100CDEBE5 /* Appa.png in Resources */,
 				68D21DF3191FDD4E00CDEBE5 /* InfoPlist.strings in Resources */,
+				68D21E29191FE39600CDEBE5 /* ball.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,6 +285,7 @@
 				68D21E02191FDD4E00CDEBE5 /* ViewController.m in Sources */,
 				68D21DF9191FDD4E00CDEBE5 /* AppDelegate.m in Sources */,
 				68D21DF5191FDD4E00CDEBE5 /* main.m in Sources */,
+				68D21E30191FEA4A00CDEBE5 /* theBestChooseGameViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
