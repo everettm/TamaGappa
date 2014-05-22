@@ -15,7 +15,6 @@
 		68D21DF5191FDD4E00CDEBE5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D21DF4191FDD4E00CDEBE5 /* main.m */; };
 		68D21DF9191FDD4E00CDEBE5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D21DF8191FDD4E00CDEBE5 /* AppDelegate.m */; };
 		68D21DFC191FDD4E00CDEBE5 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68D21DFA191FDD4E00CDEBE5 /* Main_iPhone.storyboard */; };
-		68D21E02191FDD4E00CDEBE5 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D21E01191FDD4E00CDEBE5 /* ViewController.m */; };
 		68D21E04191FDD4E00CDEBE5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68D21E03191FDD4E00CDEBE5 /* Images.xcassets */; };
 		68D21E0B191FDD4E00CDEBE5 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68D21E0A191FDD4E00CDEBE5 /* XCTest.framework */; };
 		68D21E0C191FDD4E00CDEBE5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68D21DE8191FDD4E00CDEBE5 /* Foundation.framework */; };
@@ -23,6 +22,7 @@
 		68D21E15191FDD4E00CDEBE5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 68D21E13191FDD4E00CDEBE5 /* InfoPlist.strings */; };
 		68D21E17191FDD4E00CDEBE5 /* TamagAppaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D21E16191FDD4E00CDEBE5 /* TamagAppaTests.m */; };
 		68D21E30191FEA4A00CDEBE5 /* patternMatchingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D21E2F191FEA4A00CDEBE5 /* patternMatchingViewController.m */; };
+		68EF67CA192EB7620006D664 /* MainPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68EF67C9192EB7620006D664 /* MainPageViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,8 +49,6 @@
 		68D21DF7191FDD4E00CDEBE5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		68D21DF8191FDD4E00CDEBE5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		68D21DFB191FDD4E00CDEBE5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
-		68D21E00191FDD4E00CDEBE5 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		68D21E01191FDD4E00CDEBE5 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		68D21E03191FDD4E00CDEBE5 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		68D21E09191FDD4E00CDEBE5 /* TamagAppaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TamagAppaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		68D21E0A191FDD4E00CDEBE5 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -59,6 +57,8 @@
 		68D21E16191FDD4E00CDEBE5 /* TamagAppaTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TamagAppaTests.m; sourceTree = "<group>"; };
 		68D21E2E191FEA4A00CDEBE5 /* patternMatchingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = patternMatchingViewController.h; sourceTree = "<group>"; };
 		68D21E2F191FEA4A00CDEBE5 /* patternMatchingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = patternMatchingViewController.m; sourceTree = "<group>"; };
+		68EF67C8192EB7620006D664 /* MainPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainPageViewController.h; sourceTree = "<group>"; };
+		68EF67C9192EB7620006D664 /* MainPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainPageViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,11 +121,11 @@
 				68D21DF7191FDD4E00CDEBE5 /* AppDelegate.h */,
 				68D21DF8191FDD4E00CDEBE5 /* AppDelegate.m */,
 				68D21DFA191FDD4E00CDEBE5 /* Main_iPhone.storyboard */,
-				68D21E00191FDD4E00CDEBE5 /* ViewController.h */,
-				68D21E01191FDD4E00CDEBE5 /* ViewController.m */,
 				68D21E03191FDD4E00CDEBE5 /* Images.xcassets */,
 				68D21E2E191FEA4A00CDEBE5 /* patternMatchingViewController.h */,
 				68D21E2F191FEA4A00CDEBE5 /* patternMatchingViewController.m */,
+				68EF67C8192EB7620006D664 /* MainPageViewController.h */,
+				68EF67C9192EB7620006D664 /* MainPageViewController.m */,
 				683D6C0F191FF3A9002FA436 /* StatusBarViewController.h */,
 				683D6C10191FF3A9002FA436 /* StatusBarViewController.m */,
 				68D21DEF191FDD4E00CDEBE5 /* Supporting Files */,
@@ -259,8 +259,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				68EF67CA192EB7620006D664 /* MainPageViewController.m in Sources */,
 				683D6C11191FF3A9002FA436 /* StatusBarViewController.m in Sources */,
-				68D21E02191FDD4E00CDEBE5 /* ViewController.m in Sources */,
 				68D21DF9191FDD4E00CDEBE5 /* AppDelegate.m in Sources */,
 				68D21DF5191FDD4E00CDEBE5 /* main.m in Sources */,
 				68D21E30191FEA4A00CDEBE5 /* patternMatchingViewController.m in Sources */,
