@@ -22,7 +22,7 @@
 		68D21E0D191FDD4E00CDEBE5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68D21DEC191FDD4E00CDEBE5 /* UIKit.framework */; };
 		68D21E15191FDD4E00CDEBE5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 68D21E13191FDD4E00CDEBE5 /* InfoPlist.strings */; };
 		68D21E17191FDD4E00CDEBE5 /* TamagAppaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D21E16191FDD4E00CDEBE5 /* TamagAppaTests.m */; };
-		68D21E30191FEA4A00CDEBE5 /* theBestChooseGameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D21E2F191FEA4A00CDEBE5 /* theBestChooseGameViewController.m */; };
+		68D21E30191FEA4A00CDEBE5 /* patternMatchingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D21E2F191FEA4A00CDEBE5 /* patternMatchingViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,8 +57,8 @@
 		68D21E12191FDD4E00CDEBE5 /* TamagAppaTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TamagAppaTests-Info.plist"; sourceTree = "<group>"; };
 		68D21E14191FDD4E00CDEBE5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		68D21E16191FDD4E00CDEBE5 /* TamagAppaTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TamagAppaTests.m; sourceTree = "<group>"; };
-		68D21E2E191FEA4A00CDEBE5 /* theBestChooseGameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = theBestChooseGameViewController.h; sourceTree = "<group>"; };
-		68D21E2F191FEA4A00CDEBE5 /* theBestChooseGameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = theBestChooseGameViewController.m; sourceTree = "<group>"; };
+		68D21E2E191FEA4A00CDEBE5 /* patternMatchingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = patternMatchingViewController.h; sourceTree = "<group>"; };
+		68D21E2F191FEA4A00CDEBE5 /* patternMatchingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = patternMatchingViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,8 +124,8 @@
 				68D21E00191FDD4E00CDEBE5 /* ViewController.h */,
 				68D21E01191FDD4E00CDEBE5 /* ViewController.m */,
 				68D21E03191FDD4E00CDEBE5 /* Images.xcassets */,
-				68D21E2E191FEA4A00CDEBE5 /* theBestChooseGameViewController.h */,
-				68D21E2F191FEA4A00CDEBE5 /* theBestChooseGameViewController.m */,
+				68D21E2E191FEA4A00CDEBE5 /* patternMatchingViewController.h */,
+				68D21E2F191FEA4A00CDEBE5 /* patternMatchingViewController.m */,
 				683D6C0F191FF3A9002FA436 /* StatusBarViewController.h */,
 				683D6C10191FF3A9002FA436 /* StatusBarViewController.m */,
 				68D21DEF191FDD4E00CDEBE5 /* Supporting Files */,
@@ -263,7 +263,7 @@
 				68D21E02191FDD4E00CDEBE5 /* ViewController.m in Sources */,
 				68D21DF9191FDD4E00CDEBE5 /* AppDelegate.m in Sources */,
 				68D21DF5191FDD4E00CDEBE5 /* main.m in Sources */,
-				68D21E30191FEA4A00CDEBE5 /* theBestChooseGameViewController.m in Sources */,
+				68D21E30191FEA4A00CDEBE5 /* patternMatchingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

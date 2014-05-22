@@ -1,22 +1,22 @@
 //
-//  theBestChooseGameViewController.m
+//  patternMatchingViewController.m
 //  PatternMatching
 //
 //  Created by Lab User on 5/9/14.
 //
 //
 
-#import "theBestChooseGameViewController.h"
+#import "patternMatchingViewController.h"
 #include <stdlib.h>
 
-@interface theBestChooseGameViewController ()
+@interface patternMatchingViewController ()
 @property NSArray *buttonList;
 @property NSMutableArray *randInts;
 @property int numAppas;
 
 @end
 
-@implementation theBestChooseGameViewController
+@implementation patternMatchingViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {

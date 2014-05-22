@@ -136,10 +136,10 @@
             </objects>
             <point key="canvasLocation" x="159" y="152"/>
         </scene>
-        <!--The Best Choose Game View Controller-->
+        <!--Pattern Matching View Controller-->
         <scene sceneID="hKA-VC-Sxn">
             <objects>
-                <viewController id="cyF-b9-cme" customClass="theBestChooseGameViewController" sceneMemberID="viewController">
+                <viewController id="cyF-b9-cme" customClass="patternMatchingViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="VhA-e0-pQs"/>
                         <viewControllerLayoutGuide type="bottom" id="APi-Cf-II1"/>

@@ -1,5 +1,5 @@
 //
-//  theBestChooseGameViewController.h
+//  patternMatchingViewController.h
 //  PatternMatching
 //
 //  Created by Lab User on 5/9/14.
@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 
-@interface theBestChooseGameViewController : UIViewController
+@interface patternMatchingViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UIButton *button1;
 @property (weak, nonatomic) IBOutlet UIButton *button2;
 @property (weak, nonatomic) IBOutlet UIButton *button3;
