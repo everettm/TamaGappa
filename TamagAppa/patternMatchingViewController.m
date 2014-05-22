@@ -93,64 +93,11 @@
     
 }
 
-- (IBAction)button1Click:(id)sender {
-    [_button1 setImage:[UIImage imageNamed:@"Appa.png"]  forState:UIControlStateNormal];
-    [self checkValidity:(1)];
+- (IBAction)buttonClicked:(id)sender {
+    [sender setImage:[UIImage imageNamed:@"Appa.png"] forState:UIControlStateNormal];
+    [self checkValidity:([sender tag])];
 }
 
-- (IBAction)button2Click:(id)sender {
-    [_button2 setImage:[UIImage imageNamed:@"Appa.png"]  forState:UIControlStateNormal];
-    [self checkValidity:(2)];
-}
 
-- (IBAction)button3Click:(id)sender {
-    [_button3 setImage:[UIImage imageNamed:@"Appa.png"]  forState:UIControlStateNormal];
-    [self checkValidity:(3)];
-}
-
-- (IBAction)button4Click:(id)sender {
-    [_button4 setImage:[UIImage imageNamed:@"Appa.png"]  forState:UIControlStateNormal];
-    [self checkValidity:(4)];
-}
-
-- (IBAction)button5Click:(id)sender {
-    [_button5 setImage:[UIImage imageNamed:@"Appa.png"]  forState:UIControlStateNormal];
-    [self checkValidity:(5)];
-}
-
-- (IBAction)button6Click:(id)sender {
-    [_button6 setImage:[UIImage imageNamed:@"Appa.png"]  forState:UIControlStateNormal];
-    [self checkValidity:(6)];
-}
-
-- (IBAction)button7Click:(id)sender {
-    [_button7 setImage:[UIImage imageNamed:@"Appa.png"]  forState:UIControlStateNormal];
-    [self checkValidity:(7)];
-}
-
-- (IBAction)button8Click:(id)sender {
-    [_button8 setImage:[UIImage imageNamed:@"Appa.png"]  forState:UIControlStateNormal];
-    [self checkValidity:(8)];
-}
-
-- (IBAction)button9Click:(id)sender {
-    [_button9 setImage:[UIImage imageNamed:@"Appa.png"]  forState:UIControlStateNormal];
-    [self checkValidity:(9)];
-}
-
-- (IBAction)button10Click:(id)sender {
-    [_button10 setImage:[UIImage imageNamed:@"Appa.png"]  forState:UIControlStateNormal];
-    [self checkValidity:(10)];
-}
-
-- (IBAction)button11Click:(id)sender {
-    [_button11 setImage:[UIImage imageNamed:@"Appa.png"]  forState:UIControlStateNormal];
-    [self checkValidity:(11)];
-}
-
-- (IBAction)button12Click:(id)sender {
-    [_button12 setImage:[UIImage imageNamed:@"Appa.png"]  forState:UIControlStateNormal];
-    [self checkValidity:(12)];
-}
 
 @end
