@@ -15,7 +15,6 @@
 		68D21DF5191FDD4E00CDEBE5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D21DF4191FDD4E00CDEBE5 /* main.m */; };
 		68D21DF9191FDD4E00CDEBE5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D21DF8191FDD4E00CDEBE5 /* AppDelegate.m */; };
 		68D21DFC191FDD4E00CDEBE5 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68D21DFA191FDD4E00CDEBE5 /* Main_iPhone.storyboard */; };
-		68D21DFF191FDD4E00CDEBE5 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68D21DFD191FDD4E00CDEBE5 /* Main_iPad.storyboard */; };
 		68D21E02191FDD4E00CDEBE5 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D21E01191FDD4E00CDEBE5 /* ViewController.m */; };
 		68D21E04191FDD4E00CDEBE5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68D21E03191FDD4E00CDEBE5 /* Images.xcassets */; };
 		68D21E0B191FDD4E00CDEBE5 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68D21E0A191FDD4E00CDEBE5 /* XCTest.framework */; };
@@ -24,12 +23,6 @@
 		68D21E15191FDD4E00CDEBE5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 68D21E13191FDD4E00CDEBE5 /* InfoPlist.strings */; };
 		68D21E17191FDD4E00CDEBE5 /* TamagAppaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D21E16191FDD4E00CDEBE5 /* TamagAppaTests.m */; };
 		68D21E30191FEA4A00CDEBE5 /* theBestChooseGameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D21E2F191FEA4A00CDEBE5 /* theBestChooseGameViewController.m */; };
-		68D21E32191FEAA100CDEBE5 /* Appa.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D21E31191FEAA100CDEBE5 /* Appa.png */; };
-		68D21E36191FF23300CDEBE5 /* ball.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 68D21E33191FF23300CDEBE5 /* ball.jpeg */; };
-		68D21E37191FF23300CDEBE5 /* sleep.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D21E34191FF23300CDEBE5 /* sleep.png */; };
-		68D21E38191FF23300CDEBE5 /* watermelon.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 68D21E35191FF23300CDEBE5 /* watermelon.jpeg */; };
-		68D21E3A191FF23C00CDEBE5 /* appa-default.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D21E39191FF23C00CDEBE5 /* appa-default.png */; };
-		68D21E3C191FF26C00CDEBE5 /* trash-can.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 68D21E3B191FF26C00CDEBE5 /* trash-can.jpeg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,7 +49,6 @@
 		68D21DF7191FDD4E00CDEBE5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		68D21DF8191FDD4E00CDEBE5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		68D21DFB191FDD4E00CDEBE5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
-		68D21DFE191FDD4E00CDEBE5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
 		68D21E00191FDD4E00CDEBE5 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		68D21E01191FDD4E00CDEBE5 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		68D21E03191FDD4E00CDEBE5 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -67,12 +59,6 @@
 		68D21E16191FDD4E00CDEBE5 /* TamagAppaTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TamagAppaTests.m; sourceTree = "<group>"; };
 		68D21E2E191FEA4A00CDEBE5 /* theBestChooseGameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = theBestChooseGameViewController.h; sourceTree = "<group>"; };
 		68D21E2F191FEA4A00CDEBE5 /* theBestChooseGameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = theBestChooseGameViewController.m; sourceTree = "<group>"; };
-		68D21E31191FEAA100CDEBE5 /* Appa.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Appa.png; sourceTree = "<group>"; };
-		68D21E33191FF23300CDEBE5 /* ball.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ball.jpeg; sourceTree = "<group>"; };
-		68D21E34191FF23300CDEBE5 /* sleep.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sleep.png; sourceTree = "<group>"; };
-		68D21E35191FF23300CDEBE5 /* watermelon.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = watermelon.jpeg; sourceTree = "<group>"; };
-		68D21E39191FF23C00CDEBE5 /* appa-default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "appa-default.png"; sourceTree = "<group>"; };
-		68D21E3B191FF26C00CDEBE5 /* trash-can.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "trash-can.jpeg"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,12 +88,6 @@
 		68D21DDC191FDD4E00CDEBE5 = {
 			isa = PBXGroup;
 			children = (
-				68D21E3B191FF26C00CDEBE5 /* trash-can.jpeg */,
-				68D21E39191FF23C00CDEBE5 /* appa-default.png */,
-				68D21E33191FF23300CDEBE5 /* ball.jpeg */,
-				68D21E34191FF23300CDEBE5 /* sleep.png */,
-				68D21E35191FF23300CDEBE5 /* watermelon.jpeg */,
-				68D21E31191FEAA100CDEBE5 /* Appa.png */,
 				68D21DEE191FDD4E00CDEBE5 /* TamagAppa */,
 				68D21E10191FDD4E00CDEBE5 /* TamagAppaTests */,
 				68D21DE7191FDD4E00CDEBE5 /* Frameworks */,
@@ -141,7 +121,6 @@
 				68D21DF7191FDD4E00CDEBE5 /* AppDelegate.h */,
 				68D21DF8191FDD4E00CDEBE5 /* AppDelegate.m */,
 				68D21DFA191FDD4E00CDEBE5 /* Main_iPhone.storyboard */,
-				68D21DFD191FDD4E00CDEBE5 /* Main_iPad.storyboard */,
 				68D21E00191FDD4E00CDEBE5 /* ViewController.h */,
 				68D21E01191FDD4E00CDEBE5 /* ViewController.m */,
 				68D21E03191FDD4E00CDEBE5 /* Images.xcassets */,
@@ -259,15 +238,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				68D21E37191FF23300CDEBE5 /* sleep.png in Resources */,
-				68D21E3A191FF23C00CDEBE5 /* appa-default.png in Resources */,
-				68D21E38191FF23300CDEBE5 /* watermelon.jpeg in Resources */,
-				68D21E36191FF23300CDEBE5 /* ball.jpeg in Resources */,
-				68D21DFF191FDD4E00CDEBE5 /* Main_iPad.storyboard in Resources */,
-				68D21E3C191FF26C00CDEBE5 /* trash-can.jpeg in Resources */,
 				68D21E04191FDD4E00CDEBE5 /* Images.xcassets in Resources */,
 				68D21DFC191FDD4E00CDEBE5 /* Main_iPhone.storyboard in Resources */,
-				68D21E32191FEAA100CDEBE5 /* Appa.png in Resources */,
 				68D21DF3191FDD4E00CDEBE5 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -328,14 +300,6 @@
 				68D21DFB191FDD4E00CDEBE5 /* Base */,
 			);
 			name = Main_iPhone.storyboard;
-			sourceTree = "<group>";
-		};
-		68D21DFD191FDD4E00CDEBE5 /* Main_iPad.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				68D21DFE191FDD4E00CDEBE5 /* Base */,
-			);
-			name = Main_iPad.storyboard;
 			sourceTree = "<group>";
 		};
 		68D21E13191FDD4E00CDEBE5 /* InfoPlist.strings */ = {

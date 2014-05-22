@@ -16,7 +16,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="appa-default.png" translatesAutoresizingMaskIntoConstraints="NO" id="a4l-VS-FMP">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="appa-default" translatesAutoresizingMaskIntoConstraints="NO" id="a4l-VS-FMP">
                                 <rect key="frame" x="-5" y="126" width="325" height="384"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
@@ -31,7 +31,7 @@
                                 <rect key="frame" x="20" y="70" width="47" height="47"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <state key="normal" image="sleep.png">
+                                <state key="normal" image="sleep">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
@@ -39,7 +39,7 @@
                                 <rect key="frame" x="98" y="70" width="47" height="47"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <state key="normal" image="watermelon.jpeg">
+                                <state key="normal" image="watermelon">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
@@ -47,7 +47,7 @@
                                 <rect key="frame" x="168" y="70" width="54" height="48"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <state key="normal" image="ball.jpeg">
+                                <state key="normal" image="ball">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -57,7 +57,7 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HNb-yB-6wO">
                                 <rect key="frame" x="241" y="70" width="54" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="trash-can.jpeg">
+                                <state key="normal" image="trash-can">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
@@ -403,11 +403,11 @@
         </scene>
     </scenes>
     <resources>
-        <image name="appa-default.png" width="681" height="562"/>
-        <image name="ball.jpeg" width="241" height="209"/>
-        <image name="sleep.png" width="256" height="256"/>
-        <image name="trash-can.jpeg" width="102" height="102"/>
-        <image name="watermelon.jpeg" width="155" height="151"/>
+        <image name="appa-default" width="681" height="562"/>
+        <image name="ball" width="144" height="136"/>
+        <image name="sleep" width="256" height="256"/>
+        <image name="trash-can" width="128" height="128"/>
+        <image name="watermelon" width="151" height="139"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
