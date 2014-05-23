@@ -9,14 +9,11 @@
 #import "patternMatchingViewController.h"
 #include <stdlib.h>
 
-@interface patternMatchingViewController ()
-@property NSArray *buttonList;
-@property NSMutableArray *randInts;
-@property int numAppas;
-
-@end
-
 @implementation patternMatchingViewController
+
+@synthesize buttonList;
+@synthesize randInts;
+@synthesize numAppas;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -30,21 +27,21 @@
 {
     [self appasDisappear];
     self.view.userInteractionEnabled = NO;
-    [_randInts removeAllObjects];
-    for (int i = 1; i<= _numAppas; i++)
+    [randInts removeAllObjects];
+    for (int i = 1; i<= numAppas; i++)
     {
         int randInt = arc4random() %12;
-        while([_randInts containsObject:[NSNumber numberWithInt: randInt]])
+        while([randInts containsObject:[NSNumber numberWithInt: randInt]])
         {
             randInt = arc4random() %12;
         }
-        [_randInts addObject: [NSNumber numberWithInt: randInt]];
-        [_buttonList[randInt] setImage:[UIImage imageNamed:@"Appa.png"]  forState:UIControlStateNormal];
-        [_buttonList[randInt] setImage:[UIImage imageNamed:@"Appa.png"]  forState:UIControlStateDisabled];
+        [randInts addObject: [NSNumber numberWithInt: randInt]];
+        [buttonList[randInt] setImage:[UIImage imageNamed:@"Appa.png"]  forState:UIControlStateNormal];
+        [buttonList[randInt] setImage:[UIImage imageNamed:@"Appa.png"]  forState:UIControlStateDisabled];
     }
-    if (_numAppas <= 6)
+    if (numAppas <= 6)
     {
-        _numAppas += 1;
+        numAppas += 1;
     }
     [self performSelector:@selector(appasDisappear) withObject:nil afterDelay:2.0f];
 }
@@ -53,7 +50,7 @@
 {
     for (int i = 0; i < 12; i++)
     {
-        [_buttonList[i] setImage:nil forState:UIControlStateNormal];
+        [buttonList[i] setImage:nil forState:UIControlStateNormal];
     }
     _gameInfo.text = @"";
     self.view.userInteractionEnabled = YES;
@@ -62,10 +59,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _numAppas = 3;
+    numAppas = 3;
     _gameInfo.text = @"";
-    _randInts = [[NSMutableArray alloc] init];
-    _buttonList = [[NSArray alloc] initWithObjects: _button1, _button2, _button3, _button4, _button5, _button6, _button7, _button8, _button9, _button10, _button11, _button12, nil];
+    randInts = [[NSMutableArray alloc] init];
+    buttonList = [[NSArray alloc] initWithObjects: _button1, _button2, _button3, _button4, _button5, _button6, _button7, _button8, _button9, _button10, _button11, _button12, nil];
     [self appasAppear];
 }
 
@@ -75,17 +72,17 @@
 }
 
 - (void) checkValidity:(int)button {
-    if(![_randInts containsObject:[NSNumber numberWithInt: button - 1]])
+    if(![randInts containsObject:[NSNumber numberWithInt: button - 1]])
     {
         _gameInfo.text = @"Sorry, that was wrong.";
         [self performSelector:@selector(appasAppear) withObject:nil afterDelay:2.0f];
-        _numAppas -= 1;
+        numAppas -= 1;
     }
     else
     {
-        [_randInts removeObject: [NSNumber numberWithInt: button - 1]];
+        [randInts removeObject: [NSNumber numberWithInt: button - 1]];
     }
-    if ([_randInts count] == 0)
+    if ([randInts count] == 0)
     {
         _gameInfo.text = @"Well done!";
         [self performSelector:@selector(appasAppear) withObject:nil afterDelay:2.0f];

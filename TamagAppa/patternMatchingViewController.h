@@ -9,7 +9,15 @@
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 
-@interface patternMatchingViewController : UIViewController
+@interface patternMatchingViewController : UIViewController {
+    NSArray *buttonList;
+    NSMutableArray *randInts;
+    int numAppas;
+}
+
+@property (nonatomic, retain) NSArray* buttonList;
+@property (nonatomic, retain) NSMutableArray* randInts;
+@property (nonatomic) int numAppas;
 @property (retain, nonatomic) IBOutlet UIButton *button1;
 @property (retain, nonatomic) IBOutlet UIButton *button2;
 @property (retain, nonatomic) IBOutlet UIButton *button3;
