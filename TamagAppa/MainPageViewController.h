@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MainPageViewController : UIViewController
-
+@interface MainPageViewController : UIViewController {
+    IBOutlet UIButton *foodButton;
+}
 @end

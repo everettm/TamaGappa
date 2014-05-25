@@ -4,10 +4,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Main Page View Controller-->
         <scene sceneID="NgW-9i-6eL">
             <objects>
-                <viewController id="EWp-HO-Cc6" sceneMemberID="viewController">
+                <viewController id="EWp-HO-Cc6" customClass="MainPageViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="RQS-2P-QFA"/>
                         <viewControllerLayoutGuide type="bottom" id="Ke9-ld-sXN"/>
@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="appa-default" translatesAutoresizingMaskIntoConstraints="NO" id="a4l-VS-FMP">
-                                <rect key="frame" x="-5" y="126" width="325" height="384"/>
+                                <rect key="frame" x="3" y="199" width="317" height="244"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cu9-za-cm5">
@@ -85,6 +85,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="kOE-QX-vBh"/>
+                    <connections>
+                        <outlet property="foodButton" destination="q64-BK-nt3" id="o92-Mq-7LD"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B8i-Ib-ZLg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -413,7 +416,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="appa-default" width="681" height="562"/>
+        <image name="appa-default" width="587" height="420"/>
         <image name="ball" width="144" height="136"/>
         <image name="sleep" width="256" height="256"/>
         <image name="trash-can" width="128" height="128"/>

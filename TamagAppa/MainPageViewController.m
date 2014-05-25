@@ -8,11 +8,16 @@
 
 #import "MainPageViewController.h"
 
-@interface MainPageViewController ()
-
-@end
-
 @implementation MainPageViewController
+
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    
+}
+
+-(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+    UITouch *myTouch = [[event allTouches] anyObject];
+    foodButton.center = [myTouch locationInView:self.view];
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
