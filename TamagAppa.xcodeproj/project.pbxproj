@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		68328A391932C990001D42EC /* EliminationGameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68328A381932C990001D42EC /* EliminationGameViewController.m */; };
-		683D6C11191FF3A9002FA436 /* StatusBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 683D6C10191FF3A9002FA436 /* StatusBarViewController.m */; };
+		68328A52193384F2001D42EC /* Appa.m in Sources */ = {isa = PBXBuildFile; fileRef = 68328A51193384F2001D42EC /* Appa.m */; };
 		68D21DE9191FDD4E00CDEBE5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68D21DE8191FDD4E00CDEBE5 /* Foundation.framework */; };
 		68D21DEB191FDD4E00CDEBE5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68D21DEA191FDD4E00CDEBE5 /* CoreGraphics.framework */; };
 		68D21DED191FDD4E00CDEBE5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68D21DEC191FDD4E00CDEBE5 /* UIKit.framework */; };
@@ -39,8 +39,8 @@
 /* Begin PBXFileReference section */
 		68328A371932C990001D42EC /* EliminationGameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EliminationGameViewController.h; sourceTree = "<group>"; };
 		68328A381932C990001D42EC /* EliminationGameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EliminationGameViewController.m; sourceTree = "<group>"; };
-		683D6C0F191FF3A9002FA436 /* StatusBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusBarViewController.h; sourceTree = "<group>"; };
-		683D6C10191FF3A9002FA436 /* StatusBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusBarViewController.m; sourceTree = "<group>"; };
+		68328A50193384F2001D42EC /* Appa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Appa.h; sourceTree = "<group>"; };
+		68328A51193384F2001D42EC /* Appa.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Appa.m; sourceTree = "<group>"; };
 		68D21DE5191FDD4E00CDEBE5 /* TamagAppa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TamagAppa.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		68D21DE8191FDD4E00CDEBE5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		68D21DEA191FDD4E00CDEBE5 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -123,6 +123,8 @@
 			children = (
 				68328A371932C990001D42EC /* EliminationGameViewController.h */,
 				68328A381932C990001D42EC /* EliminationGameViewController.m */,
+				68328A50193384F2001D42EC /* Appa.h */,
+				68328A51193384F2001D42EC /* Appa.m */,
 				68D21DF7191FDD4E00CDEBE5 /* AppDelegate.h */,
 				68D21DF8191FDD4E00CDEBE5 /* AppDelegate.m */,
 				68D21DFA191FDD4E00CDEBE5 /* Main_iPhone.storyboard */,
@@ -131,8 +133,6 @@
 				68D21E2F191FEA4A00CDEBE5 /* PatternMatchingViewController.m */,
 				68EF67C8192EB7620006D664 /* MainPageViewController.h */,
 				68EF67C9192EB7620006D664 /* MainPageViewController.m */,
-				683D6C0F191FF3A9002FA436 /* StatusBarViewController.h */,
-				683D6C10191FF3A9002FA436 /* StatusBarViewController.m */,
 				68D21DEF191FDD4E00CDEBE5 /* Supporting Files */,
 			);
 			path = TamagAppa;
@@ -265,7 +265,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				68EF67CA192EB7620006D664 /* MainPageViewController.m in Sources */,
-				683D6C11191FF3A9002FA436 /* StatusBarViewController.m in Sources */,
+				68328A52193384F2001D42EC /* Appa.m in Sources */,
 				68D21DF9191FDD4E00CDEBE5 /* AppDelegate.m in Sources */,
 				68D21DF5191FDD4E00CDEBE5 /* main.m in Sources */,
 				68328A391932C990001D42EC /* EliminationGameViewController.m in Sources */,

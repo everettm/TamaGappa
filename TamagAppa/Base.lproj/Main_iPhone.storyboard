@@ -16,24 +16,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="appa-default" translatesAutoresizingMaskIntoConstraints="NO" id="a4l-VS-FMP">
-                                <rect key="frame" x="3" y="199" width="317" height="244"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cu9-za-cm5">
-                                <rect key="frame" x="-50" y="31" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q64-BK-nt3">
                                 <rect key="frame" x="20" y="70" width="47" height="47"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <state key="normal" image="sleep">
+                                <state key="normal" image="sleepButton">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="sleepButtonPressed:" destination="EWp-HO-Cc6" eventType="touchUpInside" id="G7v-eg-m8v"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OMq-kV-KX1">
                                 <rect key="frame" x="98" y="70" width="47" height="47"/>
@@ -51,6 +43,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
+                                    <action selector="playButtonPressed:" destination="EWp-HO-Cc6" eventType="touchUpInside" id="bKu-sH-SYe"/>
                                     <segue destination="cwR-6r-pBQ" kind="push" id="phA-7Z-h3M"/>
                                 </connections>
                             </button>
@@ -61,31 +54,110 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vi0-gc-tfU">
-                                <rect key="frame" x="137" y="518" width="46" height="30"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="appa-default" translatesAutoresizingMaskIntoConstraints="NO" id="w9X-Cw-Ywl">
+                                <rect key="frame" x="23" y="128" width="297" height="377"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <view tag="5" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8lV-JI-ADL" customClass="UIButton">
+                                <rect key="frame" x="148" y="316" width="140" height="101"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Status">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="Ldz-7t-dgL" kind="push" id="a5N-fK-Yz4"/>
-                                </connections>
-                            </button>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q7A-EM-60I">
+                                <rect key="frame" x="-142" y="159" width="160" height="250"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="nFd-F7-Evh">
+                                        <rect key="frame" x="16" y="95" width="88" height="2"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </progressView>
+                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="fU7-Ut-4rK">
+                                        <rect key="frame" x="16" y="70" width="88" height="2"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </progressView>
+                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="kWS-n7-KeO">
+                                        <rect key="frame" x="16" y="45" width="88" height="2"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    </progressView>
+                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ktd-Sp-yya">
+                                        <rect key="frame" x="16" y="20" width="88" height="2"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </progressView>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Ha" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gvo-cY-QgP">
+                                        <rect key="frame" x="120" y="85" width="22" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="E" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fWj-3T-qhy">
+                                        <rect key="frame" x="120" y="10" width="11" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Hu" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vFS-D2-d1W">
+                                        <rect key="frame" x="120" y="60" width="22" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="He" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GNd-AY-93O">
+                                        <rect key="frame" x="120" y="35" width="22" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SNC-xn-SOl">
+                                        <rect key="frame" x="144" y="114" width="22" height="22"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <gestureRecognizers/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <connections>
+                                            <action selector="slidingButtonPressed:" destination="EWp-HO-Cc6" eventType="touchUpInside" id="Bmy-P6-Hal"/>
+                                        </connections>
+                                    </button>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LnV-hh-duN">
+                                        <rect key="frame" x="55" y="153" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fbY-Fy-Jn3">
+                                        <rect key="frame" x="95" y="183" width="20" height="20"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="kOE-QX-vBh"/>
                     <connections>
-                        <outlet property="appaImage" destination="a4l-VS-FMP" id="quW-tE-oUn"/>
+                        <outlet property="appaFaceZone" destination="8lV-JI-ADL" id="Zsb-4A-aC2"/>
+                        <outlet property="appaIcon" destination="LnV-hh-duN" id="B3c-5p-3gz"/>
+                        <outlet property="energyBar" destination="ktd-Sp-yya" id="r2D-ec-j3C"/>
+                        <outlet property="energyLabel" destination="fWj-3T-qhy" id="Lr1-0N-t8v"/>
                         <outlet property="feedButton" destination="OMq-kV-KX1" id="EPK-d8-fyR"/>
-                        <outlet property="gamesButton" destination="GZw-0b-eAe" id="lv9-8g-bv0"/>
+                        <outlet property="happinessBar" destination="nFd-F7-Evh" id="Yko-EX-f9J"/>
+                        <outlet property="happinessLabel" destination="gvo-cY-QgP" id="ZfA-V9-BnT"/>
+                        <outlet property="healthBar" destination="kWS-n7-KeO" id="zvE-Ik-pmQ"/>
+                        <outlet property="healthLabel" destination="GNd-AY-93O" id="v5S-rq-RMs"/>
+                        <outlet property="hungerBar" destination="fU7-Ut-4rK" id="MNZ-Oi-HZ9"/>
+                        <outlet property="hungerLabel" destination="vFS-D2-d1W" id="18p-AS-v8d"/>
+                        <outlet property="levelLabel" destination="fbY-Fy-Jn3" id="d1W-Wz-uWv"/>
+                        <outlet property="mainAppaView" destination="w9X-Cw-Ywl" id="5IZ-29-sbg"/>
+                        <outlet property="playButton" destination="GZw-0b-eAe" id="1sQ-do-CAy"/>
                         <outlet property="sleepButton" destination="q64-BK-nt3" id="3LV-nt-i2j"/>
+                        <outlet property="slidingStatusView" destination="q7A-EM-60I" id="JtV-Xt-lvO"/>
                         <outlet property="trashButton" destination="HNb-yB-6wO" id="tLl-YB-Drb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B8i-Ib-ZLg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="685" y="152"/>
+            <point key="canvasLocation" x="656" y="145"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="8UZ-Io-MGc">
@@ -297,78 +369,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="trJ-By-g7o" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1567" y="152"/>
-        </scene>
-        <!--Status Bar View Controller-->
-        <scene sceneID="FWK-pc-Z8r">
-            <objects>
-                <viewController id="Ldz-7t-dgL" customClass="StatusBarViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="7Tm-4q-SvX"/>
-                        <viewControllerLayoutGuide type="bottom" id="NEi-VL-ud9"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="mvg-ht-KLU">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ZLI-QL-g5r">
-                                <rect key="frame" x="67" y="71" width="186" height="2"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
-                            </progressView>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="tbq-9O-iJh">
-                                <rect key="frame" x="67" y="171" width="186" height="2"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </progressView>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Teo-Nz-h2i">
-                                <rect key="frame" x="67" y="258" width="186" height="2"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </progressView>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="cCm-tO-rzC">
-                                <rect key="frame" x="67" y="351" width="186" height="2"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </progressView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Health" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="67z-bt-4Ac">
-                                <rect key="frame" x="135" y="81" width="50" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Happiness" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X9M-os-Lzv">
-                                <rect key="frame" x="119" y="181" width="82" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Hunger" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z44-Ro-T35">
-                                <rect key="frame" x="130" y="268" width="57" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Energy" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5SZ-ae-yPj">
-                                <rect key="frame" x="134" y="361" width="53" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="vcg-QW-xgM"/>
-                    <connections>
-                        <outlet property="energyBar" destination="cCm-tO-rzC" id="rqp-9R-yHY"/>
-                        <outlet property="energyLabel" destination="5SZ-ae-yPj" id="Bl9-QB-zKt"/>
-                        <outlet property="happinessBar" destination="tbq-9O-iJh" id="1r6-dz-6W5"/>
-                        <outlet property="happinessLabel" destination="X9M-os-Lzv" id="3Ds-Od-5GJ"/>
-                        <outlet property="healthBar" destination="ZLI-QL-g5r" id="aaH-tN-Exv"/>
-                        <outlet property="healthLabel" destination="67z-bt-4Ac" id="SmN-7j-V8L"/>
-                        <outlet property="hungerBar" destination="Teo-Nz-h2i" id="KCt-d4-bSQ"/>
-                        <outlet property="hungerLabel" destination="z44-Ro-T35" id="jGX-oe-whH"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="50v-oV-UEq" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="685" y="841"/>
         </scene>
         <!--Elimination Game View Controller-->
         <scene sceneID="uU5-aF-dU2">
@@ -673,7 +673,7 @@
     <resources>
         <image name="appa-default" width="587" height="420"/>
         <image name="ball" width="144" height="136"/>
-        <image name="sleep" width="256" height="256"/>
+        <image name="sleepButton" width="504" height="504"/>
         <image name="trash-can" width="128" height="128"/>
         <image name="watermelon" width="151" height="139"/>
     </resources>
