@@ -86,7 +86,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="kOE-QX-vBh"/>
                     <connections>
-                        <outlet property="foodButton" destination="q64-BK-nt3" id="o92-Mq-7LD"/>
+                        <outlet property="foodButton" destination="HNb-yB-6wO" id="yaJ-Rh-1Wj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B8i-Ib-ZLg" userLabel="First Responder" sceneMemberID="firstResponder"/>
