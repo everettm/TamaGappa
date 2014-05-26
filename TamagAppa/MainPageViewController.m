@@ -137,6 +137,7 @@
     UITouch *touch = [touches anyObject];
     CGPoint touchLocation = [touch locationInView:self.view];
     if (touch.phase == 3) {
+        statusPageOpen = NO;
         NSLog(@"%@", NSStringFromCGPoint(touchLocation));
         NSLog(@"%@", NSStringFromCGRect(_appaFaceZone.frame));
         if (CGRectContainsPoint(_appaFaceZone.frame, touchLocation)) {

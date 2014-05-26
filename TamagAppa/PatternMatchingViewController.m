@@ -61,19 +61,23 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    //    if ([_defaults integerForKey:@"level"] == 0)
-    //    {
-    //        [_defaults setInteger:1 forKey:@"level"];
-    //        [_defaults setInteger:3 forKey:@"row"];
-    //        [_defaults setInteger:4 forKey:@"column"];
+    UIImageView *backgroundImage = [[UIImageView alloc] initWithFrame:self.view.frame];
+    [backgroundImage setImage:[UIImage imageNamed:@"background.jpeg"]];
+    [self.view addSubview:backgroundImage];
+    [self.view sendSubviewToBack:backgroundImage];
+    //        if ([_defaults integerForKey:@"level"] == 0)
+    //        {
+    //            [_defaults setInteger:1 forKey:@"level"];
+    //            [_defaults setInteger:3 forKey:@"row"];
+    //            [_defaults setInteger:4 forKey:@"column"];
+    //            NSLog(@"%i", [_defaults integerForKey:@"level"]);
+    //        }
     //        NSLog(@"%i", [_defaults integerForKey:@"level"]);
-    //    }
-    //    NSLog(@"%i", [_defaults integerForKey:@"level"]);
-    //    _defaults = [NSUserDefaults standardUserDefaults];
-    //    _numAppas = [_defaults integerForKey:@"level"];
-    //    _numAppas += 2;
-    //    _numButtonsPerRow = [_defaults integerForKey:@"row"];
-    //    _numButtonsPerColumn = [_defaults integerForKey:@"column"];
+    //        _defaults = [NSUserDefaults standardUserDefaults];
+    //        _numAppas = [_defaults integerForKey:@"level"];
+    //        _numAppas += 2;
+    //        _numButtonsPerRow = [_defaults integerForKey:@"row"];
+    //        _numButtonsPerColumn = [_defaults integerForKey:@"column"];
     _numAppas = 3;
     _gameInfo.text = @"";
     _randInts = [[NSMutableArray alloc] init];
@@ -124,7 +128,6 @@
         }
         else
         {
-            _gameInfo.text = @"Well done!";
             [self performSelector:@selector(showAppas) withObject:nil afterDelay:2.0f];
             _numAppas += 1;
             [_defaults setInteger:_numAppas forKey:@"level"];
@@ -133,7 +136,11 @@
     
 }
 
-- (IBAction)buttonClick:(id)sender
+- (IBAction)instructionsButtonClick:(id)sender {
+    
+}
+
+- (IBAction)buttonClicked:(id)sender
 {
     [sender setImage:[UIImage imageNamed:@"Appa.png"]  forState:UIControlStateNormal];
     [self checkValidity: [sender tag]];
