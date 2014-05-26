@@ -10,12 +10,16 @@
 
 @implementation MainPageViewController
 
-BOOL draggingFood;
-@synthesize foodButton;
+@synthesize feedButton;
+@synthesize appaImage;
+@synthesize gamesButton;
+@synthesize sleepButton;
+@synthesize trashButton;
 
--(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    draggingFood = NO;
-}
+BOOL draggingFood = NO;
+UIButton *wedgeButton;
+NSArray *buttons;
+UIImage *wedgeImage;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -30,67 +34,89 @@ BOOL draggingFood;
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    [foodButton addTarget:self action:@selector(foodImageMoved:withEvent:) forControlEvents:UIControlEventTouchDragInside];
-    [foodButton addTarget:self action:@selector(foodImageMoved:withEvent:) forControlEvents:UIControlEventTouchDragOutside];
+    
+    buttons = [[NSArray alloc] initWithObjects: feedButton, gamesButton, sleepButton, trashButton, nil];
+    wedgeButton = nil;
+    wedgeImage = nil;
+    
+    [feedButton addTarget:self action:@selector(foodImageMoved:withEvent:) forControlEvents:UIControlEventTouchDragInside];
+    [feedButton addTarget:self action:@selector(foodImageMoved:withEvent:) forControlEvents:UIControlEventTouchDragOutside];
+    [feedButton addTarget:self action:@selector(checkcheck) forControlEvents:UIControlEventAllTouchEvents];
+}
 
-
+- (void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    UITouch *touch = [[event allTouches] anyObject];
+    CGPoint touchLocation = [touch locationInView:touch.view];
+    NSLog(@"%@", NSStringFromCGPoint(touchLocation));
+//    NSLog(@"%@",[touch.view class]);
+//    NSLog(@"%@",wedgeButton);
+//    NSLog(@"%f",wedgeButton.y);
+//    if (draggingFood) {
+//        [self toggleButtonsUserInteraction];
+//        draggingFood = NO;
+//    }
+    
 }
 
 
-//- (IBAction) imageMoved:(id) sender withEvent:(UIEvent *) event {
-//    NSLog(@"moved");
-//    
-//    CGPoint point = [[[event allTouches] anyObject] locationInView:self.view];
-//    
-//    if (![self.view viewWithTag:11]) {
-//        
-//        NSData *archivedData = [NSKeyedArchiver archivedDataWithRootObject:(UIButton*)sender];
-//        
-//        UIButton *anotherButton =(UIButton*) [NSKeyedUnarchiver unarchiveObjectWithData:archivedData];
-//        
-//        anotherButton.tag = 11;
-//        
-//        
-//        UIImage *senderImage=[(UIButton *)sender imageForState:UIControlStateNormal];
-//        
-//        
-//        
-//        
-//        CGImageRef cgImage = [senderImage CGImage];
-//        
-//        
-//        UIImage *copyOfImage = [[UIImage alloc] initWithCGImage:cgImage];
-//        
-//        
-//        
-//        [anotherButton setImage:copyOfImage forState:UIControlStateNormal];
-//        
-//        [self.view addSubview:anotherButton];
-//    }
-//    
-//    [self.view viewWithTag:11].center = point;
-//}
-
 - (IBAction) foodImageMoved:(id) sender withEvent:(UIEvent *) event {
- 
     CGPoint point = [[[event allTouches] anyObject] locationInView:self.view];
-    
     if (![self.view viewWithTag:11]) {
-        
+        draggingFood = YES;
+//        [self toggleButtonsUserInteraction];
+        for (UIView *subview in [self.view subviews]) {
+            if (![subview isKindOfClass:[UIButton class]] ) {
+                //do your code
+//            NSLog(@"%@",subview);
+//            NSLog(@"%hhd",subview.userInteractionEnabled);
+            }
+        }
+
         NSData *archivedData = [NSKeyedArchiver archivedDataWithRootObject:(UIButton*)sender];
         
-        UIButton *anotherButton =(UIButton*) [NSKeyedUnarchiver unarchiveObjectWithData:archivedData];
+        wedgeButton =(UIButton*) [NSKeyedUnarchiver unarchiveObjectWithData:archivedData];
         
-        anotherButton.tag = 11;
+        wedgeButton.tag = 11;
+
+        wedgeImage = [[UIImage alloc] initWithCGImage:[[UIImage imageNamed:@"watermelon-wedge"] CGImage]];
         
-        [anotherButton setImage:[UIImage imageNamed:@"watermelon-wedge"] forState:UIControlStateNormal];
         
-        [self.view addSubview:anotherButton];
+        [wedgeButton setImage:wedgeImage forState:UIControlStateNormal];
+        [wedgeButton sendActionsForControlEvents:UIControlEventTouchUpInside];
+//        [wedgeButton addTarget:self action:@selector(checkcheck) forControlEvents:UIControlEventTouchUpInside];
+        
+        [self.view addSubview:wedgeButton];
     }
+    NSLog(@"%@ --- %@", sender, wedgeButton);
     
     [self.view viewWithTag:11].center = point;
 }
+-(void) checkcheck {
+    NSLog(@"HERE WE ARE");
+}
 
+-(void) toggleButtonsUserInteraction {
+    for (UIButton *b in buttons) {
+        if (b.userInteractionEnabled) {
+            b.userInteractionEnabled = NO;
+        }
+        else {
+            b.userInteractionEnabled = YES;
+        }
+    }
+}
+
+- (IBAction) imageMoved:(id) sender withEvent:(UIEvent *) event
+{
+    CGPoint point = [[[event allTouches] anyObject] locationInView:self.view];
+    UIControl *control = sender;
+    control.center = point;
+}
+
+-(IBAction)checkForMouth:(id)sender withEvent:(UIEvent *) event {
+//    CGPoint point = [[[event allTouches] anyObject] locationInView:self.view];
+    NSLog(@"ended...");
+}
 
 - (void)didReceiveMemoryWarning
 {

@@ -9,9 +9,17 @@
 #import <UIKit/UIKit.h>
 
 @interface MainPageViewController : UIViewController {
-    IBOutlet UIButton *foodButton;
+    IBOutlet UIButton *feedButton;
+    IBOutlet UIButton *sleepButton;
+    IBOutlet UIButton *trashButton;
+    IBOutlet UIButton *gamesButton;
+    IBOutlet UIImageView *appaImage;
 }
 
-@property (retain, nonatomic) IBOutlet UIButton *foodButton;
+@property (retain, nonatomic) IBOutlet UIButton *feedButton;
+@property (retain, nonatomic) IBOutlet UIButton *sleepButton;
+@property (retain, nonatomic) IBOutlet UIButton *trashButton;
+@property (retain, nonatomic) IBOutlet UIButton *gamesButton;
+@property (retain, nonatomic) IBOutlet UIImageView *appaImage;
 
 @end

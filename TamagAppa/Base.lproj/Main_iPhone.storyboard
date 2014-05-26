@@ -60,10 +60,6 @@
                                 <state key="normal" image="trash-can">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <action selector="dragOut:withEvent:" destination="EWp-HO-Cc6" eventType="touchUpInside" id="FVA-6h-kBf"/>
-                                    <action selector="imageMoved:withEvent:" destination="EWp-HO-Cc6" eventType="touchUpInside" id="hLw-tC-Lea"/>
-                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vi0-gc-tfU">
                                 <rect key="frame" x="137" y="518" width="46" height="30"/>
@@ -80,7 +76,11 @@
                     </view>
                     <navigationItem key="navigationItem" id="kOE-QX-vBh"/>
                     <connections>
-                        <outlet property="foodButton" destination="OMq-kV-KX1" id="yWk-6n-Fuc"/>
+                        <outlet property="appaImage" destination="a4l-VS-FMP" id="quW-tE-oUn"/>
+                        <outlet property="feedButton" destination="OMq-kV-KX1" id="EPK-d8-fyR"/>
+                        <outlet property="gamesButton" destination="GZw-0b-eAe" id="lv9-8g-bv0"/>
+                        <outlet property="sleepButton" destination="q64-BK-nt3" id="3LV-nt-i2j"/>
+                        <outlet property="trashButton" destination="HNb-yB-6wO" id="tLl-YB-Drb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B8i-Ib-ZLg" userLabel="First Responder" sceneMemberID="firstResponder"/>
