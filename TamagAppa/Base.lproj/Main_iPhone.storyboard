@@ -50,7 +50,7 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HNb-yB-6wO">
                                 <rect key="frame" x="241" y="70" width="54" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="trash-can">
+                                <state key="normal" image="trashButton">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
@@ -674,7 +674,7 @@
         <image name="appa-default" width="587" height="420"/>
         <image name="ball" width="144" height="136"/>
         <image name="sleepButton" width="504" height="504"/>
-        <image name="trash-can" width="128" height="128"/>
+        <image name="trashButton" width="504" height="504"/>
         <image name="watermelon" width="151" height="139"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

@@ -179,23 +179,12 @@
     if([[Appa sharedInstance] getSleepStatus]){
         [[Appa sharedInstance] wakeAppaUp];
         [sender setImage:[UIImage imageNamed:@"sleepButton.png"] forState:UIControlStateNormal];
-        
-        UIGraphicsBeginImageContext(self.mainAppaView.frame.size);
-        [[UIImage imageNamed:@"appaNeutral.png"] drawInRect:self.mainAppaView.bounds];
-        UIImage* image = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
-        self.mainAppaView.backgroundColor = [UIColor colorWithPatternImage:image];
-        
+        self.mainAppaView.image = [UIImage imageNamed:@"appa-default.png"];
     }
     else{
         [[Appa sharedInstance] putAppaToSleep];
         [sender setImage:[UIImage imageNamed:@"alarmClock.png"] forState:UIControlStateNormal];
-        
-        UIGraphicsBeginImageContext(self.mainAppaView.frame.size);
-        [[UIImage imageNamed:@"appaSleeping.png"] drawInRect:self.mainAppaView.bounds];
-        UIImage* image = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
-        self.mainAppaView.backgroundColor = [UIColor colorWithPatternImage:image];
+        self.mainAppaView.image = [UIImage imageNamed:@"appaSleeping.png"];
     }
 }
 
