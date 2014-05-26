@@ -11,4 +11,7 @@
 @interface MainPageViewController : UIViewController {
     IBOutlet UIButton *foodButton;
 }
+
+@property (retain, nonatomic) IBOutlet UIButton *foodButton;
+
 @end
