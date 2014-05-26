@@ -20,8 +20,8 @@
 @property int clickedButton2;
 @property NSTimer *countdownTimer;
 @property int secondsCount;
-//@property NSUserDefaults *standardUserDefaults;
 @property int curLevel;
+@property BOOL gameWon;
 
 @end
 
@@ -43,15 +43,19 @@
 
 - (void)startTimer
 {
-    _secondsCount -= 1;
     int minutes = _secondsCount/60;
     int seconds = _secondsCount - (minutes * 60);
     NSString *timerOutput = [NSString stringWithFormat:@"%2d:%.2d", minutes, seconds];
+    _secondsCount -= 1;
     _timeLeftCountdown.text = timerOutput;
     if (_secondsCount == 0)
     {
         [_countdownTimer invalidate];
         _countdownTimer = NULL;
+        _gameMessage.text = @"You lose.";
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"loadPreviousData"];
+        self.view.userInteractionEnabled = NO;
+        _timeLeftCountdown.text = @" 0:00";
     }
 }
 
@@ -59,21 +63,37 @@
 {
     _gameMessage.text = @"";
     [_clickedButtonList removeAllObjects];
-    int randInt = arc4random() % 15;
-    for (int i = 0; i < 15; i++)
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"loadPreviousData"] == YES)
     {
-        if (i != randInt)
+        for (int i = 0; i < 15; i++)
         {
-            [_buttonList[i] setImage:[UIImage imageNamed:@"Appa.png"]  forState:UIControlStateNormal];
-            [_buttonList[i] setImage:[UIImage imageNamed:@"Appa.png"]  forState:UIControlStateDisabled];
-            _openSpaces[i] = _falseObject;
+            if (_openSpaces[i] == _falseObject)
+            {
+                [_buttonList[i] setImage:[UIImage imageNamed:@"Appa.png"]  forState:UIControlStateNormal];
+            }
+            else
+            {
+                [_buttonList[i] setImage:NULL  forState:UIControlStateNormal];
+            }
         }
-        else
+    }
+    else
+    {
+        int randInt = arc4random() % 15;
+        for (int i = 0; i < 15; i++)
         {
-            [_buttonList[i] setImage:NULL  forState:UIControlStateNormal];
-            [_buttonList[i] setImage:NULL  forState:UIControlStateDisabled];
-            _openSpaces[i] = _trueObject;
+            if (i != randInt)
+            {
+                [_buttonList[i] setImage:[UIImage imageNamed:@"Appa.png"]  forState:UIControlStateNormal];
+                _openSpaces[i] = _falseObject;
+            }
+            else
+            {
+                [_buttonList[i] setImage:NULL  forState:UIControlStateNormal];
+                _openSpaces[i] = _trueObject;
+            }
         }
+
     }
 }
 
@@ -89,11 +109,8 @@
     if (squareToBeEliminated == -1) { return; }
     UIButton *currentButton = _buttonList[squareToBeEliminated];
     [currentButton setImage:NULL forState:UIControlStateNormal];
-    [currentButton setImage:NULL forState:UIControlStateDisabled];
     [_buttonList[_clickedButton1] setImage:NULL forState:UIControlStateNormal];
-    [_buttonList[_clickedButton1] setImage:NULL forState:UIControlStateDisabled];
     [_buttonList[_clickedButton2] setImage:[UIImage imageNamed:@"Appa.png"] forState:UIControlStateNormal];
-    [_buttonList[_clickedButton2] setImage:[UIImage imageNamed:@"Appa.png"] forState:UIControlStateDisabled];
     _openSpaces[_clickedButton1] = _trueObject;
     _openSpaces[_clickedButton2] = _falseObject;
     _openSpaces[squareToBeEliminated] = _trueObject;
@@ -111,8 +128,10 @@
     if (numOpenSpaces == 14)
     {
         _gameMessage.text = @"Level up!";
+        _gameWon = YES;
         _curLevel += 1;
         [[NSUserDefaults standardUserDefaults] setInteger:_curLevel forKey:@"level"];
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"loadPreviousData"];
         [_resetGameButton setEnabled: NO];
         [_countdownTimer invalidate];
         _countdownTimer = nil;
@@ -188,6 +207,7 @@
         buttonToReset.selected = NO;
         buttonToReset.layer.borderWidth = 0.0f;
     }
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"loadPreviousData"];
     [_resetGameButton setEnabled: YES];
 }
 
@@ -201,19 +221,31 @@
     if ([[NSUserDefaults standardUserDefaults] integerForKey:@"level"] == 0)
     {
         [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"level"];
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"loadPreviousData"];
     }
     _curLevel = [[NSUserDefaults standardUserDefaults] integerForKey:@"level"];
-    _secondsCount = 260 - (_curLevel * 20);
-    int minutes = _secondsCount/60;
-    int seconds = _secondsCount - (minutes * 60);
-    NSString *timerOutput = [NSString stringWithFormat:@"%2d:%.2d", minutes, seconds];
-    _startTimeLabel.text = timerOutput;
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"loadPreviousData"])
+    {
+        _secondsCount = [[NSUserDefaults standardUserDefaults] integerForKey:@"currentTime"];
+        _openSpaces = [[NSUserDefaults standardUserDefaults] objectForKey:@"currentConfiguration"];
+        [self startButtonClick:[NSNumber numberWithInt:1]];
+    }
+    else
+    {
+        _secondsCount = 25 - (_curLevel * 20);
+        int minutes = _secondsCount/60;
+        int seconds = _secondsCount - (minutes * 60);
+        NSString *timerOutput = [NSString stringWithFormat:@"%2d:%.2d", minutes, seconds];
+        _startTimeLabel.text = timerOutput;
+        _openSpaces = [[NSMutableArray alloc] initWithObjects: _trueObject, _trueObject, _trueObject, _trueObject, _trueObject, _trueObject, _trueObject, _trueObject, _trueObject, _trueObject, _trueObject, _trueObject, _trueObject, _trueObject, _trueObject, nil];
+    }
     _squareEliminationDictionary = @{@"14": @"2", @"16": @"3", @"27": @"4", @"29": @"5", @"38": @"5", @"310": @"6", @"41": @"2", @"46": @"5", @"411": @"7", @"413": @"8", @"512": @"8", @"514": @"9", @"61": @"3", @"64": @"5", @"613": @"9", @"615": @"10", @"72": @"4", @"79": @"8", @"83": @"5", @"810": @"9", @"92": @"5", @"97": @"8", @"103": @"6", @"108": @"9", @"114": @"7", @"1113": @"12", @"125": @"8", @"1214": @"13", @"134": @"8", @"136": @"9", @"1311": @"12", @"1315": @"14", @"145": @"9", @"1412": @"13", @"156": @"10", @"1513": @"14"};
     _buttonList = [[NSArray alloc] initWithObjects: _button1, _button2, _button3, _button4, _button5, _button6, _button7, _button8, _button9, _button10, _button11, _button12, _button13, _button14, _button15, nil];
     _clickedButtonList = [[NSMutableArray alloc] init];
     _trueObject = [NSNumber numberWithBool:YES];
     _falseObject = [NSNumber numberWithBool:NO];
-    _openSpaces = [[NSMutableArray alloc] initWithObjects: _trueObject, _trueObject, _trueObject, _trueObject, _trueObject, _trueObject, _trueObject, _trueObject, _trueObject, _trueObject, _trueObject, _trueObject, _trueObject, _trueObject, _trueObject, nil];
+    _gameWon = NO;
+    //[self resetUserDefaults];
     [self resetButtons];
     [self startGame];
 }
@@ -256,4 +288,42 @@
     [self startGame];
 }
 
+- (void)resetUserDefaults
+{
+    [[NSUserDefaults standardUserDefaults] setObject:NULL forKey:@"currentConfiguration"];
+    [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"currentTime"];
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"loadPreviousData"];
+    [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"level"];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    if (self.isMovingFromParentViewController) {
+        if (!_gameWon)
+        {
+            [[NSUserDefaults standardUserDefaults] setObject:_openSpaces forKey:@"currentConfiguration"];
+            [[NSUserDefaults standardUserDefaults] setInteger:_secondsCount forKey:@"currentTime"];
+            [[NSUserDefaults standardUserDefaults] setBool:!_gameWon forKey:@"loadPreviousData"];
+        }
+    }
+}
+
+
+
+
+
 @end
+
+
+
+
+
+
+
+
+
+
+
+
+

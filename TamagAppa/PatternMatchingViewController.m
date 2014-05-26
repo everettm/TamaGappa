@@ -16,6 +16,7 @@
 @property int numButtonsPerRow;
 @property int numButtonsPerColumn;
 @property NSUserDefaults *defaults;
+@property int numWrongGuesses;
 
 @end
 
@@ -32,6 +33,7 @@
 - (void)showAppas
 {
     [self hideAppas];
+    _numberOfAppas.text = [NSString stringWithFormat:@"%i", _numAppas];
     self.view.userInteractionEnabled = NO;
     [_randInts removeAllObjects];
     for (int i = 1; i<= _numAppas; i++)
@@ -45,7 +47,7 @@
         [_buttonList[randInt] setImage:[UIImage imageNamed:@"Appa.png"]  forState:UIControlStateNormal];
         [_buttonList[randInt] setImage:[UIImage imageNamed:@"Appa.png"]  forState:UIControlStateDisabled];
     }
-    [self performSelector:@selector(hideAppas) withObject:nil afterDelay:1.8f];
+    [self performSelector:@selector(hideAppas) withObject:nil afterDelay:1.0f];
 }
 
 - (void)hideAppas
@@ -94,12 +96,23 @@
 {
     if(![_randInts containsObject:[NSNumber numberWithInt: button - 1]])
     {
-        _gameInfo.text = @"Sorry, that was wrong.";
-        [self performSelector:@selector(showAppas) withObject:nil afterDelay:2.0f];
-        if (_numAppas > 3)
+        NSArray *exes = [[NSArray alloc] initWithObjects: _redX1, _redX2, _redX3, nil];
+        [exes[_numWrongGuesses] setImage:[UIImage imageNamed:@"x"]];
+        _numWrongGuesses += 1;
+        if (_numWrongGuesses < 3)
         {
-            _numAppas -= 1;
-            [_defaults setInteger:_numAppas forKey:@"level"];
+            _gameInfo.text = @"Sorry, that was wrong.";
+            [self performSelector:@selector(showAppas) withObject:nil afterDelay:2.0f];
+            if (_numAppas > 3)
+            {
+                _numAppas -= 1;
+                [_defaults setInteger:_numAppas forKey:@"level"];
+            }
+        }
+        else
+        {
+            _gameInfo.text = @"You lose.";
+            self.view.userInteractionEnabled = NO;
         }
     }
     else
@@ -128,7 +141,7 @@
         }
         else
         {
-            [self performSelector:@selector(showAppas) withObject:nil afterDelay:2.0f];
+            [self performSelector:@selector(showAppas) withObject:nil afterDelay:0.5f];
             _numAppas += 1;
             [_defaults setInteger:_numAppas forKey:@"level"];
         }

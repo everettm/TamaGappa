@@ -10,6 +10,9 @@
 #import <QuartzCore/QuartzCore.h>
 
 @interface PatternMatchingViewController : UIViewController
+{
+    
+}
 @property (weak, nonatomic) IBOutlet UIButton *button1;
 @property (weak, nonatomic) IBOutlet UIButton *button2;
 @property (weak, nonatomic) IBOutlet UIButton *button3;
@@ -23,6 +26,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *button11;
 @property (weak, nonatomic) IBOutlet UIButton *button12;
 @property (weak, nonatomic) IBOutlet UILabel *gameInfo;
-@property (weak, nonatomic) IBOutlet UILabel *score;
+@property (weak, nonatomic) IBOutlet UILabel *numberOfAppas;
+@property (weak, nonatomic) IBOutlet UIImageView *redX1;
+@property (weak, nonatomic) IBOutlet UIImageView *redX2;
+@property (weak, nonatomic) IBOutlet UIImageView *redX3;
 
 @end
