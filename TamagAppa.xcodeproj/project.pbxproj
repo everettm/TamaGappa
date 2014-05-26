@@ -37,8 +37,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		68328A371932C990001D42EC /* EliminationGameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EliminationGameViewController.h; path = "../../../Downloads/TamaGappa-master/TamagAppa/EliminationGameViewController.h"; sourceTree = "<group>"; };
-		68328A381932C990001D42EC /* EliminationGameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EliminationGameViewController.m; path = "../../../Downloads/TamaGappa-master/TamagAppa/EliminationGameViewController.m"; sourceTree = "<group>"; };
+		68328A371932C990001D42EC /* EliminationGameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EliminationGameViewController.h; sourceTree = "<group>"; };
+		68328A381932C990001D42EC /* EliminationGameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EliminationGameViewController.m; sourceTree = "<group>"; };
 		683D6C0F191FF3A9002FA436 /* StatusBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusBarViewController.h; sourceTree = "<group>"; };
 		683D6C10191FF3A9002FA436 /* StatusBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusBarViewController.m; sourceTree = "<group>"; };
 		68D21DE5191FDD4E00CDEBE5 /* TamagAppa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TamagAppa.app; sourceTree = BUILT_PRODUCTS_DIR; };
