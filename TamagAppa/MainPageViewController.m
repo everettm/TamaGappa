@@ -197,11 +197,11 @@
     CGRect viewFrame = self.slidingStatusView.frame;
     
     if(statusPageOpen){
-        viewFrame.origin.x -= 146;
+        viewFrame.origin.x -= 234;
         statusPageOpen = false;
     }
     else{
-        viewFrame.origin.x += 146;
+        viewFrame.origin.x += 234;
         statusPageOpen = true;
     }
     
