@@ -62,22 +62,22 @@
 {
     [super viewDidLoad];
     UIImageView *backgroundImage = [[UIImageView alloc] initWithFrame:self.view.frame];
-    [backgroundImage setImage:[UIImage imageNamed:@"background.jpeg"]];
+    [backgroundImage setImage:[UIImage imageNamed:@"background"]];
     [self.view addSubview:backgroundImage];
     [self.view sendSubviewToBack:backgroundImage];
-    //        if ([_defaults integerForKey:@"level"] == 0)
-    //        {
-    //            [_defaults setInteger:1 forKey:@"level"];
-    //            [_defaults setInteger:3 forKey:@"row"];
-    //            [_defaults setInteger:4 forKey:@"column"];
-    //            NSLog(@"%i", [_defaults integerForKey:@"level"]);
-    //        }
-    //        NSLog(@"%i", [_defaults integerForKey:@"level"]);
-    //        _defaults = [NSUserDefaults standardUserDefaults];
-    //        _numAppas = [_defaults integerForKey:@"level"];
-    //        _numAppas += 2;
-    //        _numButtonsPerRow = [_defaults integerForKey:@"row"];
-    //        _numButtonsPerColumn = [_defaults integerForKey:@"column"];
+//        if ([_defaults integerForKey:@"level"] == 0)
+//        {
+//            [_defaults setInteger:1 forKey:@"level"];
+//            [_defaults setInteger:3 forKey:@"row"];
+//            [_defaults setInteger:4 forKey:@"column"];
+//            NSLog(@"%i", [_defaults integerForKey:@"level"]);
+//        }
+//        NSLog(@"%i", [_defaults integerForKey:@"level"]);
+//        _defaults = [NSUserDefaults standardUserDefaults];
+//        _numAppas = [_defaults integerForKey:@"level"];
+//        _numAppas += 2;
+//        _numButtonsPerRow = [_defaults integerForKey:@"row"];
+//        _numButtonsPerColumn = [_defaults integerForKey:@"column"];
     _numAppas = 3;
     _gameInfo.text = @"";
     _randInts = [[NSMutableArray alloc] init];
@@ -140,7 +140,7 @@
     
 }
 
-- (IBAction)buttonClicked:(id)sender
+- (IBAction)buttonClick:(id)sender
 {
     [sender setImage:[UIImage imageNamed:@"Appa.png"]  forState:UIControlStateNormal];
     [self checkValidity: [sender tag]];

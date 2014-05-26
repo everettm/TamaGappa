@@ -116,6 +116,8 @@
         [_resetGameButton setEnabled: NO];
         [_countdownTimer invalidate];
         _countdownTimer = nil;
+        self.view.userInteractionEnabled = NO;
+        
     }
     else
     {
@@ -155,7 +157,7 @@
         {
             _gameMessage.text = @"No more valid moves. Try again.";
         }
-        
+
     }
 }
 
@@ -193,22 +195,25 @@
 {
     [super viewDidLoad];
     UIImageView *backgroundImage = [[UIImageView alloc] initWithFrame:self.view.frame];
-    [backgroundImage setImage:[UIImage imageNamed:@"background.jpeg"]];
+    [backgroundImage setImage:[UIImage imageNamed:@"background"]];
     [self.view addSubview:backgroundImage];
     [self.view sendSubviewToBack:backgroundImage];
     if ([[NSUserDefaults standardUserDefaults] integerForKey:@"level"] == 0)
     {
-        [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"level"];
+        [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"level"];
     }
     _curLevel = [[NSUserDefaults standardUserDefaults] integerForKey:@"level"];
-    _secondsCount = 310 - (_curLevel * 10);
+    _secondsCount = 260 - (_curLevel * 20);
+    int minutes = _secondsCount/60;
+    int seconds = _secondsCount - (minutes * 60);
+    NSString *timerOutput = [NSString stringWithFormat:@"%2d:%.2d", minutes, seconds];
+    _startTimeLabel.text = timerOutput;
     _squareEliminationDictionary = @{@"14": @"2", @"16": @"3", @"27": @"4", @"29": @"5", @"38": @"5", @"310": @"6", @"41": @"2", @"46": @"5", @"411": @"7", @"413": @"8", @"512": @"8", @"514": @"9", @"61": @"3", @"64": @"5", @"613": @"9", @"615": @"10", @"72": @"4", @"79": @"8", @"83": @"5", @"810": @"9", @"92": @"5", @"97": @"8", @"103": @"6", @"108": @"9", @"114": @"7", @"1113": @"12", @"125": @"8", @"1214": @"13", @"134": @"8", @"136": @"9", @"1311": @"12", @"1315": @"14", @"145": @"9", @"1412": @"13", @"156": @"10", @"1513": @"14"};
     _buttonList = [[NSArray alloc] initWithObjects: _button1, _button2, _button3, _button4, _button5, _button6, _button7, _button8, _button9, _button10, _button11, _button12, _button13, _button14, _button15, nil];
     _clickedButtonList = [[NSMutableArray alloc] init];
     _trueObject = [NSNumber numberWithBool:YES];
     _falseObject = [NSNumber numberWithBool:NO];
     _openSpaces = [[NSMutableArray alloc] initWithObjects: _trueObject, _trueObject, _trueObject, _trueObject, _trueObject, _trueObject, _trueObject, _trueObject, _trueObject, _trueObject, _trueObject, _trueObject, _trueObject, _trueObject, _trueObject, nil];
-    [self setTimer];
     [self resetButtons];
     [self startGame];
 }
@@ -216,6 +221,13 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+}
+
+- (IBAction)startButtonClick:(id)sender {
+    [self.view sendSubviewToBack:_startMessage];
+    [self.view sendSubviewToBack:_startButton];
+    _startTimeLabel.text = @"";
+    [self setTimer];
 }
 
 - (IBAction)buttonClick:(id)sender
@@ -235,7 +247,7 @@
         clickedButton.layer.borderColor = [[UIColor greenColor] CGColor];
         [_clickedButtonList addObject: [NSNumber numberWithInt: [sender tag]]];
         if ([_clickedButtonList count] == 2)
-            [self checkValidity];
+        [self checkValidity];
     }
 }
 
