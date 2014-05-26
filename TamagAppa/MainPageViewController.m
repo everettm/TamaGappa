@@ -51,7 +51,6 @@
                                    selector:@selector(updateStatusBars:)
                                    userInfo:nil
                                     repeats:YES];
-
     
 }
 
@@ -62,54 +61,6 @@
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     self.slidingStatusView.backgroundColor = [UIColor colorWithPatternImage:image];
-    
-    UIGraphicsBeginImageContext(self.mainAppaView.frame.size);
-    [[UIImage imageNamed:@"appaNeutral.png"] drawInRect:self.mainAppaView.bounds];
-    image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    self.mainAppaView.backgroundColor = [UIColor colorWithPatternImage:image];
-    
-    //appaIcon
-    UIGraphicsBeginImageContext(self.appaIcon.frame.size);
-    [[UIImage imageNamed:@"appaIcon.png"] drawInRect:self.appaIcon.bounds];
-    image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    self.appaIcon.backgroundColor = [UIColor colorWithPatternImage:image];
-    
-    //_sleepButton
-    UIGraphicsBeginImageContext(_sleepButton.frame.size);
-    [[UIImage imageNamed:@"sleepButton.png"] drawInRect:_sleepButton.bounds];
-    image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    _sleepButton.backgroundColor = [UIColor colorWithPatternImage:image];
-    
-    //_feedButton
-    UIGraphicsBeginImageContext(_feedButton.frame.size);
-    [[UIImage imageNamed:@"feedButton.png"] drawInRect:_feedButton.bounds];
-    image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    _feedButton.backgroundColor = [UIColor colorWithPatternImage:image];
-    
-    //_playButton
-    UIGraphicsBeginImageContext(_playButton.frame.size);
-    [[UIImage imageNamed:@"playButton.png"] drawInRect:_playButton.bounds];
-    image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    _playButton.backgroundColor = [UIColor colorWithPatternImage:image];
-    
-    //_trashButton
-    UIGraphicsBeginImageContext(_trashButton.frame.size);
-    [[UIImage imageNamed:@"trashButton.png"] drawInRect:_trashButton.bounds];
-    image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    _trashButton.backgroundColor = [UIColor colorWithPatternImage:image];
-    
-    UIGraphicsBeginImageContext(_mainAppaView.frame.size);
-    [[UIImage imageNamed:@"appaNeutral.png"] drawInRect:_mainAppaView.bounds];
-    image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    self.mainAppaView.backgroundColor = [UIColor colorWithPatternImage:image];
-    
 }
 
 - (IBAction) foodImageMoved:(id) sender withEvent:(UIEvent *) event {
@@ -138,11 +89,14 @@
     CGPoint touchLocation = [touch locationInView:self.view];
     if (touch.phase == 3) {
         statusPageOpen = NO;
-        NSLog(@"%@", NSStringFromCGPoint(touchLocation));
-        NSLog(@"%@", NSStringFromCGRect(_appaFaceZone.frame));
         if (CGRectContainsPoint(_appaFaceZone.frame, touchLocation)) {
-            NSLog(@"Yay!");
-            [[Appa sharedInstance] feedAppa];
+            if (![[Appa sharedInstance] getSleepStatus]) {
+                NSLog(@"Yay!");
+                [[Appa sharedInstance] feedAppa];
+            }
+            else {
+                NSLog(@"Cheater!");
+            }
         }
         else {
             NSLog(@"Boo...");
