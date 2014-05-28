@@ -15,7 +15,6 @@
 @property int numAppas;
 @property int numButtonsPerRow;
 @property int numButtonsPerColumn;
-@property NSUserDefaults *defaults;
 @property int numWrongGuesses;
 
 @end
@@ -67,19 +66,16 @@
     [backgroundImage setImage:[UIImage imageNamed:@"background"]];
     [self.view addSubview:backgroundImage];
     [self.view sendSubviewToBack:backgroundImage];
-//        if ([_defaults integerForKey:@"level"] == 0)
-//        {
-//            [_defaults setInteger:1 forKey:@"level"];
-//            [_defaults setInteger:3 forKey:@"row"];
-//            [_defaults setInteger:4 forKey:@"column"];
-//            NSLog(@"%i", [_defaults integerForKey:@"level"]);
-//        }
-//        NSLog(@"%i", [_defaults integerForKey:@"level"]);
-//        _defaults = [NSUserDefaults standardUserDefaults];
-//        _numAppas = [_defaults integerForKey:@"level"];
-//        _numAppas += 2;
-//        _numButtonsPerRow = [_defaults integerForKey:@"row"];
-//        _numButtonsPerColumn = [_defaults integerForKey:@"column"];
+        if ([[NSUserDefaults standardUserDefaults] integerForKey:@"patternLevel"] == 0)
+        {
+            [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"patternLevel"];
+            [[NSUserDefaults standardUserDefaults] setInteger:3 forKey:@"row"];
+            [[NSUserDefaults standardUserDefaults] setInteger:4 forKey:@"column"];
+        }
+        _numAppas = [[NSUserDefaults standardUserDefaults] integerForKey:@"patternLevel"];
+        _numAppas += 2;
+        _numButtonsPerRow = [[NSUserDefaults standardUserDefaults] integerForKey:@"row"];
+        _numButtonsPerColumn = [[NSUserDefaults standardUserDefaults] integerForKey:@"column"];
     _numAppas = 3;
     _gameInfo.text = @"";
     _randInts = [[NSMutableArray alloc] init];
@@ -106,7 +102,7 @@
             if (_numAppas > 3)
             {
                 _numAppas -= 1;
-                [_defaults setInteger:_numAppas forKey:@"level"];
+                [[NSUserDefaults standardUserDefaults] setInteger:_numAppas forKey:@"level"];
             }
         }
         else
@@ -124,9 +120,9 @@
         if (_numAppas == 7)
         {
             _gameInfo.text = @"Level up!";
-            int currentLevel = [_defaults integerForKey:@"level"];
+            int currentLevel = [[NSUserDefaults standardUserDefaults] integerForKey:@"level"];
             currentLevel += 1;
-            [_defaults setInteger:currentLevel forKey:@"level"];
+            [[NSUserDefaults standardUserDefaults] setInteger:currentLevel forKey:@"level"];
             if (currentLevel % 2 == 0)
             {
                 _numButtonsPerRow += 1;
@@ -135,15 +131,15 @@
             {
                 _numButtonsPerColumn += 1;
             }
-            [_defaults setInteger:_numButtonsPerRow forKey:@"level"];
-            [_defaults setInteger:_numButtonsPerColumn  forKey:@"level"];
-            [_defaults setInteger:_numAppas forKey:@"level"];
+            [[NSUserDefaults standardUserDefaults] setInteger:_numButtonsPerRow forKey:@"level"];
+            [[NSUserDefaults standardUserDefaults] setInteger:_numButtonsPerColumn  forKey:@"level"];
+            [[NSUserDefaults standardUserDefaults] setInteger:_numAppas forKey:@"level"];
         }
         else
         {
             [self performSelector:@selector(showAppas) withObject:nil afterDelay:0.5f];
             _numAppas += 1;
-            [_defaults setInteger:_numAppas forKey:@"level"];
+            [[NSUserDefaults standardUserDefaults] setInteger:_numAppas forKey:@"level"];
         }
     }
     
