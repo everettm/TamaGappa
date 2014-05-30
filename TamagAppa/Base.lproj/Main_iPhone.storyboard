@@ -118,12 +118,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="homeScreen-bg" translatesAutoresizingMaskIntoConstraints="NO" id="maS-Hg-bJD">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="appa-default" translatesAutoresizingMaskIntoConstraints="NO" id="w9X-Cw-Ywl">
-                                <rect key="frame" x="0.0" y="128" width="320" height="377"/>
+                                <rect key="frame" x="0.0" y="229" width="320" height="231"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <view tag="5" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8lV-JI-ADL" customClass="UIButton">
-                                <rect key="frame" x="125" y="316" width="140" height="101"/>
+                                <rect key="frame" x="117" y="342" width="140" height="101"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
@@ -848,6 +852,7 @@ Good luck!</string>
         <image name="appaIcon" width="300" height="300"/>
         <image name="cleanUpButton" width="252" height="252"/>
         <image name="feedButton" width="252" height="252"/>
+        <image name="homeScreen-bg" width="608" height="768"/>
         <image name="playButton" width="252" height="252"/>
         <image name="sleepButton" width="252" height="252"/>
     </resources>
