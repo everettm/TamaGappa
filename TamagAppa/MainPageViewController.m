@@ -12,7 +12,7 @@
 @interface MainPageViewController (){
     UIButton *wedgeButton;
     NSArray *buttons;
-    UIImage *wedgeImage;
+    NSMutableDictionary *imageCache;
 }
 
 @end
@@ -35,12 +35,24 @@
     
     buttons = [[NSArray alloc] initWithObjects: _feedButton, _playButton, _sleepButton, _cleanUpButton, nil];
     wedgeButton = nil;
-    wedgeImage = nil;
     
     [_feedButton addTarget:self action:@selector(foodImageMoved:withEvent:) forControlEvents:UIControlEventTouchDragInside];
     [_feedButton addTarget:self action:@selector(foodImageMoved:withEvent:) forControlEvents:UIControlEventTouchDragOutside];
     [_feedButton addTarget:self action:@selector(checkPhase:withEvent:) forControlEvents:UIControlEventAllTouchEvents];
     
+}
+
+- (UIImage*)getImage:(NSString*)fileName
+{
+    UIImage *myImage = [imageCache objectForKey:fileName];
+    
+    if (nil == myImage)
+    {
+        NSString *imageFile = [NSString stringWithFormat:@"%@", fileName];
+        myImage = [UIImage imageNamed:imageFile];
+        [imageCache setObject:myImage forKey:fileName];
+    }
+    return myImage;
 }
 
 - (IBAction) foodImageMoved:(id) sender withEvent:(UIEvent *) event {
@@ -52,10 +64,8 @@
         wedgeButton =(UIButton*) [NSKeyedUnarchiver unarchiveObjectWithData:archivedData];
         
         wedgeButton.tag = 11;
-
-        wedgeImage = [[UIImage alloc] initWithCGImage:[[UIImage imageNamed:@"foodSliceButton"] CGImage]];
         
-        [wedgeButton setImage:wedgeImage forState:UIControlStateNormal];
+        [wedgeButton setImage:[self getImage:@"foodSliceButton"] forState:UIControlStateNormal];
         
         [self.view addSubview:wedgeButton];
     }
@@ -82,16 +92,16 @@
         [wedgeButton removeFromSuperview];
         wedgeButton = nil;
         if(![[Appa sharedInstance] getSleepStatus]){
-            self.mainAppaView.image = [UIImage imageNamed:@"appaNeutral.png"];
+            self.mainAppaView.image = [self getImage:@"appaNeutral"];
         }
     }
     else if (touch.phase == 1) {
         if(![[Appa sharedInstance] getSleepStatus]){
             if (CGRectContainsPoint(_appaFaceZone.frame, touchLocation)) {
-                self.mainAppaView.image = [UIImage imageNamed:@"appaEating.png"];
+                self.mainAppaView.image = [self getImage:@"appaEating"];
             }
             else {
-                self.mainAppaView.image = [UIImage imageNamed:@"appaNeutral.png"];
+                self.mainAppaView.image = [self getImage:@"appaNeutral"];
             }
         }
     }
@@ -100,13 +110,13 @@
 - (IBAction)sleepButtonPressed:(id)sender {
     if([[Appa sharedInstance] getSleepStatus]){
         [[Appa sharedInstance] wakeAppaUp];
-        [sender setImage:[UIImage imageNamed:@"sleepButton.png"] forState:UIControlStateNormal];
-        self.mainAppaView.image = [UIImage imageNamed:@"appaNeutral.png"];
+        [sender setImage:[self getImage:@"sleepButton"] forState:UIControlStateNormal];
+        self.mainAppaView.image = [self getImage:@"appaNeutral"];
     }
     else{
         [[Appa sharedInstance] putAppaToSleep];
-        [sender setImage:[UIImage imageNamed:@"wakeUpButton.png"] forState:UIControlStateNormal];
-        self.mainAppaView.image = [UIImage imageNamed:@"appaSleeping.png"];
+        [sender setImage:[self getImage:@"wakeUpButton"] forState:UIControlStateNormal];
+        self.mainAppaView.image = [self getImage:@"appaSleeping"];
     }
 }
 

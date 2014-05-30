@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="nFd-F7-Evh">
-                                <rect key="frame" x="20" y="294" width="208" height="5"/>
+                                <rect key="frame" x="20" y="292" width="208" height="5"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="5" id="sMr-mP-8Pz"/>
@@ -25,17 +25,16 @@
                                 <color key="trackTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </progressView>
                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="fU7-Ut-4rK">
-                                <rect key="frame" x="20" y="251" width="208" height="5"/>
+                                <rect key="frame" x="20" y="249" width="208" height="5"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="5" id="5zl-b8-4AI"/>
+                                    <constraint firstAttribute="height" constant="5" id="7wt-bQ-f3O"/>
                                 </constraints>
                                 <color key="trackTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </progressView>
                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="kWS-n7-KeO">
-                                <rect key="frame" x="20" y="204" width="208" height="5"/>
+                                <rect key="frame" x="20" y="202" width="208" height="5"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="5" id="UdP-Ud-8UW"/>
                                 </constraints>
