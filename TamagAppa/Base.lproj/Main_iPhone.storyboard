@@ -170,7 +170,7 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <segue destination="cwR-6r-pBQ" kind="push" id="phA-7Z-h3M"/>
+                                            <action selector="playButtonPressed:" destination="EWp-HO-Cc6" eventType="touchUpInside" id="vEH-uE-wh9"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HNb-yB-6wO">
@@ -198,11 +198,12 @@
                         <outlet property="mainAppaView" destination="w9X-Cw-Ywl" id="5IZ-29-sbg"/>
                         <outlet property="playButton" destination="GZw-0b-eAe" id="1sQ-do-CAy"/>
                         <outlet property="sleepButton" destination="q64-BK-nt3" id="3LV-nt-i2j"/>
+                        <segue destination="cwR-6r-pBQ" kind="push" identifier="mainViewToLevelSelect" id="T38-tQ-TIW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B8i-Ib-ZLg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="656" y="145"/>
+            <point key="canvasLocation" x="522" y="124"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="8UZ-Io-MGc">

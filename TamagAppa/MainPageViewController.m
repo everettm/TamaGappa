@@ -120,6 +120,18 @@
     }
 }
 
+- (IBAction)playButtonPressed:(id)sender {
+    if([[Appa sharedInstance] getSleepStatus]){
+        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:
+        nil message:@"Appa is Asleep! Wake him up in order to play!" delegate:self
+        cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+        [alertView show];
+    }
+    else {
+        [self performSegueWithIdentifier:@"mainViewToLevelSelect" sender:self];
+    }
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
