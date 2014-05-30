@@ -12,21 +12,11 @@
 
 @property (weak, nonatomic)IBOutlet UIButton* feedButton;
 @property (weak, nonatomic)IBOutlet UIButton* sleepButton;
-@property (weak, nonatomic)IBOutlet UIButton* trashButton;
+@property (weak, nonatomic)IBOutlet UIButton* cleanUpButton;
 @property (weak, nonatomic)IBOutlet UIButton* playButton;
 @property (weak, nonatomic)IBOutlet UIButton* appaFaceZone;
 
-@property (weak, nonatomic)IBOutlet UIView* slidingStatusView;
-@property (weak, nonatomic)IBOutlet UIImageView* appaIcon;
 @property (weak, nonatomic)IBOutlet UIImageView* mainAppaView;
-@property (weak, nonatomic)IBOutlet UILabel* levelLabel;
-@property (weak, nonatomic)IBOutlet UIProgressView* healthBar;
-@property (weak, nonatomic)IBOutlet UIProgressView* happinessBar;
-@property (weak, nonatomic)IBOutlet UIProgressView* hungerBar;
-@property (weak, nonatomic)IBOutlet UIProgressView* energyBar;
-@property (weak, nonatomic)IBOutlet UILabel* healthLabel;
-@property (weak, nonatomic)IBOutlet UILabel* happinessLabel;
-@property (weak, nonatomic)IBOutlet UILabel* hungerLabel;
-@property (weak, nonatomic)IBOutlet UILabel* energyLabel;
+
 
 @end

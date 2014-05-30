@@ -216,7 +216,8 @@
     {
         UIButton *buttonToReset = (UIButton*)[self.view viewWithTag:i];
         buttonToReset.selected = NO;
-        buttonToReset.layer.borderWidth = 0.0f;
+        buttonToReset.layer.borderWidth = 1.0f;
+        buttonToReset.layer.borderColor = [[UIColor blackColor] CGColor];
     }
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"loadPreviousData"];
     [_resetGameButton setEnabled: YES];
@@ -280,7 +281,8 @@
     if (clickedButton.selected)
     {
         clickedButton.selected = NO;
-        clickedButton.layer.borderWidth=0.0f;
+        clickedButton.layer.borderWidth=1.0f;
+        clickedButton.layer.borderColor = [[UIColor blackColor] CGColor];
         [_clickedButtonList removeAllObjects];
     }
     else
