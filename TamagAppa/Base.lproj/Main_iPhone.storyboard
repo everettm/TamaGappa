@@ -73,7 +73,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="appaIcon" translatesAutoresizingMaskIntoConstraints="NO" id="LnV-hh-duN">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Appa" translatesAutoresizingMaskIntoConstraints="NO" id="LnV-hh-duN">
                                 <rect key="frame" x="46" y="354" width="74" height="74"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -122,7 +122,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="appa-default" translatesAutoresizingMaskIntoConstraints="NO" id="w9X-Cw-Ywl">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="appaNeutral" translatesAutoresizingMaskIntoConstraints="NO" id="w9X-Cw-Ywl">
                                 <rect key="frame" x="0.0" y="229" width="320" height="231"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
@@ -132,11 +132,10 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5w0-3Q-4Z4">
-                                <rect key="frame" x="137" y="72" width="44" height="30"/>
+                                <rect key="frame" x="132" y="74" width="56" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Status">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
+                                <color key="backgroundColor" white="1" alpha="0.37" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="Status"/>
                                 <connections>
                                     <segue destination="qXl-Fa-Bup" kind="modal" modalTransitionStyle="partialCurl" id="k6P-6P-1bL"/>
                                 </connections>
@@ -848,8 +847,8 @@ Good luck!</string>
         </scene>
     </scenes>
     <resources>
-        <image name="appa-default" width="587" height="420"/>
-        <image name="appaIcon" width="300" height="300"/>
+        <image name="Appa" width="256" height="256"/>
+        <image name="appaNeutral" width="630" height="438"/>
         <image name="cleanUpButton" width="252" height="252"/>
         <image name="feedButton" width="252" height="252"/>
         <image name="homeScreen-bg" width="608" height="768"/>

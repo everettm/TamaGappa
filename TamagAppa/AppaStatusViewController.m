@@ -51,13 +51,13 @@
 
 -(void) updateColor:(UIProgressView*)statusBar{
     if(.80<statusBar.progress && statusBar.progress<=1.0){
-        statusBar.progressTintColor = [UIColor greenColor];
+        statusBar.progressTintColor = [UIColor colorWithRed:80.0/255.0 green:150.0/255.0 blue:40.0/255.0 alpha:1.0];
     }
     else if (.21<statusBar.progress && statusBar.progress<=.80){
-        statusBar.progressTintColor = [UIColor yellowColor];
+        statusBar.progressTintColor = [UIColor colorWithRed:225.0/255.0 green:200.0/255.0 blue:50.0/255.0 alpha:1.0];
     }
     else{
-        statusBar.progressTintColor = [UIColor redColor];
+        statusBar.progressTintColor = [UIColor colorWithRed:220.0/255.0 green:70.0/255.0 blue:30.0/255.0 alpha:1.0];
     }
 }
 

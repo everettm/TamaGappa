@@ -55,7 +55,6 @@
 
         wedgeImage = [[UIImage alloc] initWithCGImage:[[UIImage imageNamed:@"foodSliceButton"] CGImage]];
         
-        
         [wedgeButton setImage:wedgeImage forState:UIControlStateNormal];
         
         [self.view addSubview:wedgeButton];
@@ -82,7 +81,19 @@
         }
         [wedgeButton removeFromSuperview];
         wedgeButton = nil;
-
+        if(![[Appa sharedInstance] getSleepStatus]){
+            self.mainAppaView.image = [UIImage imageNamed:@"appaNeutral.png"];
+        }
+    }
+    else if (touch.phase == 1) {
+        if(![[Appa sharedInstance] getSleepStatus]){
+            if (CGRectContainsPoint(_appaFaceZone.frame, touchLocation)) {
+                self.mainAppaView.image = [UIImage imageNamed:@"appaEating.png"];
+            }
+            else {
+                self.mainAppaView.image = [UIImage imageNamed:@"appaNeutral.png"];
+            }
+        }
     }
 }
 
@@ -90,7 +101,7 @@
     if([[Appa sharedInstance] getSleepStatus]){
         [[Appa sharedInstance] wakeAppaUp];
         [sender setImage:[UIImage imageNamed:@"sleepButton.png"] forState:UIControlStateNormal];
-        self.mainAppaView.image = [UIImage imageNamed:@"appa-default.png"];
+        self.mainAppaView.image = [UIImage imageNamed:@"appaNeutral.png"];
     }
     else{
         [[Appa sharedInstance] putAppaToSleep];
