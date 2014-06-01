@@ -10,7 +10,6 @@
 #include <stdlib.h>
 
 @interface PatternMatchingViewController ()
-@property NSArray *buttonList;
 @property NSMutableArray *randInts;
 @property int numAppas;
 @property int numButtonsPerRow;
@@ -37,23 +36,23 @@
     [_randInts removeAllObjects];
     for (int i = 1; i<= _numAppas; i++)
     {
-        int randInt = arc4random() %12;
+        int randInt = arc4random() %12+4;
         while([_randInts containsObject:[NSNumber numberWithInt: randInt]])
         {
-            randInt = arc4random() %12;
+            randInt = arc4random() %12+4;
         }
         [_randInts addObject: [NSNumber numberWithInt: randInt]];
-        [_buttonList[randInt] setImage:[UIImage imageNamed:@"Appa.png"]  forState:UIControlStateNormal];
-        [_buttonList[randInt] setImage:[UIImage imageNamed:@"Appa.png"]  forState:UIControlStateDisabled];
+        [(UIButton*)[self.view viewWithTag:randInt] setImage:[UIImage imageNamed:@"Appa.png"]  forState:UIControlStateNormal];
+        [(UIButton*)[self.view viewWithTag:randInt] setImage:[UIImage imageNamed:@"Appa.png"]  forState:UIControlStateDisabled];
     }
     [self performSelector:@selector(hideAppas) withObject:nil afterDelay:1.0f];
 }
 
 - (void)hideAppas
 {
-    for (int i = 0; i < 12; i++)
+    for (int i = 4; i < 16; i++)
     {
-        [_buttonList[i] setImage:nil forState:UIControlStateNormal];
+        [(UIButton*)[self.view viewWithTag:i] setImage:nil forState:UIControlStateNormal];
     }
     _gameInfo.text = @"";
     self.view.userInteractionEnabled = YES;
@@ -72,14 +71,14 @@
             [[NSUserDefaults standardUserDefaults] setInteger:3 forKey:@"row"];
             [[NSUserDefaults standardUserDefaults] setInteger:4 forKey:@"column"];
         }
-        _numAppas = [[NSUserDefaults standardUserDefaults] integerForKey:@"patternLevel"];
-        _numAppas += 2;
-        _numButtonsPerRow = [[NSUserDefaults standardUserDefaults] integerForKey:@"row"];
-        _numButtonsPerColumn = [[NSUserDefaults standardUserDefaults] integerForKey:@"column"];
+    _numAppas = [[NSUserDefaults standardUserDefaults] integerForKey:@"patternLevel"];
+    _numAppas += 2;
+    _numButtonsPerRow = [[NSUserDefaults standardUserDefaults] integerForKey:@"row"];
+    _numButtonsPerColumn = [[NSUserDefaults standardUserDefaults] integerForKey:@"column"];
     _numAppas = 3;
     _gameInfo.text = @"";
     _randInts = [[NSMutableArray alloc] init];
-    _buttonList = [[NSArray alloc] initWithObjects: _button1, _button2, _button3, _button4, _button5, _button6, _button7, _button8, _button9, _button10, _button11, _button12, nil];
+    [self createButtons];
     [self showAppas];
 }
 
@@ -88,13 +87,40 @@
     [super didReceiveMemoryWarning];
 }
 
-- (void) checkValidity:(int)button
+- (void)createButtons
 {
-    if(![_randInts containsObject:[NSNumber numberWithInt: button - 1]])
+    int height = 320/_numButtonsPerRow - 10*(_numButtonsPerRow+1);
+    int width = height;
+    int xCoord = 15;
+    // 220, 320
+    int yCoord = 115;
+    // 115, 445, 400
+    for (int i = 4; i < (_numButtonsPerRow * _numButtonsPerColumn + 4); i++)
     {
-        NSArray *exes = [[NSArray alloc] initWithObjects: _redX1, _redX2, _redX3, nil];
-        [exes[_numWrongGuesses] setImage:[UIImage imageNamed:@"x"]];
-        _numWrongGuesses += 1;
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        [button addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+        button.layer.borderWidth = 1.0f;
+        button.layer.borderColor = [[UIColor blackColor] CGColor];
+        if ((i-4)%_numButtonsPerRow == 0)
+        {
+            xCoord = 15;
+            if (i != 4) { yCoord += 400/_numButtonsPerColumn; }
+        }
+        else
+        {
+            xCoord += 320/_numButtonsPerRow;
+        }
+        button.frame = CGRectMake(xCoord, yCoord, width, height);
+        [button setTag:i];
+        [self.view addSubview:button];
+    }
+}
+
+- (void)checkValidity:(int)button
+{
+    if(![_randInts containsObject:[NSNumber numberWithInt: button]])
+    {
+        [(UIImageView*)[self.view viewWithTag:_numWrongGuesses] setImage:[UIImage imageNamed:@"x"]];
         if (_numWrongGuesses < 3)
         {
             _gameInfo.text = @"Sorry, that was wrong.";
@@ -110,10 +136,11 @@
             _gameInfo.text = @"You lose.";
             self.view.userInteractionEnabled = NO;
         }
+        _numWrongGuesses += 1;
     }
     else
     {
-        [_randInts removeObject: [NSNumber numberWithInt: button - 1]];
+        [_randInts removeObject: [NSNumber numberWithInt: button]];
     }
     if ([_randInts count] == 0)
     {

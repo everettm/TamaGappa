@@ -287,21 +287,24 @@
 - (IBAction)buttonClick:(id)sender
 {
     UIButton *clickedButton = (UIButton*)sender;
-    if (clickedButton.selected)
+    if (_openSpaces[clickedButton.tag-1] == _falseObject || [_clickedButtonList count] == 1)
     {
-        clickedButton.selected = NO;
-        clickedButton.layer.borderWidth=1.0f;
-        clickedButton.layer.borderColor = [[UIColor blackColor] CGColor];
-        [_clickedButtonList removeAllObjects];
-    }
-    else
-    {
-        clickedButton.selected = YES;
-        clickedButton.layer.borderWidth = 1.0f;
-        clickedButton.layer.borderColor = [[UIColor greenColor] CGColor];
-        [_clickedButtonList addObject: [NSNumber numberWithInt: [sender tag]]];
-        if ([_clickedButtonList count] == 2)
-            [self checkValidity];
+        if (clickedButton.selected)
+        {
+            clickedButton.selected = NO;
+            clickedButton.layer.borderWidth=1.0f;
+            clickedButton.layer.borderColor = [[UIColor blackColor] CGColor];
+            [_clickedButtonList removeAllObjects];
+        }
+        else
+        {
+            clickedButton.selected = YES;
+            clickedButton.layer.borderWidth = 1.0f;
+            clickedButton.layer.borderColor = [[UIColor greenColor] CGColor];
+            [_clickedButtonList addObject: [NSNumber numberWithInt: [sender tag]]];
+            if ([_clickedButtonList count] == 2)
+                [self checkValidity];
+        }
     }
 }
 
