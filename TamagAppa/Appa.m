@@ -47,7 +47,7 @@
     maxHunger = 100 + level*0.5;
     maxHealth = 100 + level*0.5;
     
-    myTimer = [NSTimer scheduledTimerWithTimeInterval:0.1
+    myTimer = [NSTimer scheduledTimerWithTimeInterval:5.0
                                                target:self
                                              selector:@selector(updateStatus)
                                              userInfo:nil
@@ -84,6 +84,17 @@
 -(void) updateStatus{
     if(isAsleep){
         [self restoreStatus];
+        curHunger -= .5;
+        if(curHunger <= 0.5*maxHunger){
+            hungerMultiplier = 2.0;
+        }
+        else{
+            hungerMultiplier = 1.0;
+        }
+        if(curHunger <= 0){
+            curHunger = 0;
+        }
+
     }
     
     else{

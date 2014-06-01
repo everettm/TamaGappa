@@ -130,14 +130,14 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5w0-3Q-4Z4">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5w0-3Q-4Z4">
                                 <rect key="frame" x="132" y="74" width="56" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="0.37" colorSpace="calibratedWhite"/>
-                                <state key="normal" title="Status"/>
-                                <connections>
-                                    <segue destination="qXl-Fa-Bup" kind="modal" modalTransitionStyle="partialCurl" id="k6P-6P-1bL"/>
-                                </connections>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title="Status">
+                                    <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                             </button>
                             <view contentMode="center" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="I3h-TJ-GHh">
                                 <rect key="frame" x="0.0" y="503" width="320" height="65"/>
@@ -198,12 +198,14 @@
                         <outlet property="mainAppaView" destination="w9X-Cw-Ywl" id="5IZ-29-sbg"/>
                         <outlet property="playButton" destination="GZw-0b-eAe" id="1sQ-do-CAy"/>
                         <outlet property="sleepButton" destination="q64-BK-nt3" id="3LV-nt-i2j"/>
+                        <outlet property="statusButton" destination="5w0-3Q-4Z4" id="SOK-5d-NbR"/>
                         <segue destination="cwR-6r-pBQ" kind="push" identifier="mainViewToLevelSelect" id="T38-tQ-TIW"/>
+                        <segue destination="qXl-Fa-Bup" kind="modal" identifier="mainViewToStatus" modalTransitionStyle="partialCurl" id="0Xf-11-XDY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B8i-Ib-ZLg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="522" y="124"/>
+            <point key="canvasLocation" x="581" y="167"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="8UZ-Io-MGc">

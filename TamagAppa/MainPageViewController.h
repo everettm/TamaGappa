@@ -10,13 +10,13 @@
 
 @interface MainPageViewController : UIViewController
 
-@property (weak, nonatomic)IBOutlet UIButton* feedButton;
-@property (weak, nonatomic)IBOutlet UIButton* sleepButton;
-@property (weak, nonatomic)IBOutlet UIButton* cleanUpButton;
-@property (weak, nonatomic)IBOutlet UIButton* playButton;
-@property (weak, nonatomic)IBOutlet UIButton* appaFaceZone;
+@property (strong, nonatomic)IBOutlet UIButton* feedButton;
+@property (strong, nonatomic)IBOutlet UIButton* sleepButton;
+@property (strong, nonatomic)IBOutlet UIButton* cleanUpButton;
+@property (strong, nonatomic)IBOutlet UIButton* playButton;
+@property (strong, nonatomic)IBOutlet UIButton* appaFaceZone;
+@property (strong, nonatomic)IBOutlet UIButton* statusButton;
 
 @property (weak, nonatomic)IBOutlet UIImageView* mainAppaView;
-
 
 @end
