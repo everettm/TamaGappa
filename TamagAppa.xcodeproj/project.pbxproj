@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		682D1042193AF65B00F2398C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 682D1041193AF65B00F2398C /* QuartzCore.framework */; };
+		682D10D0193B0B9000F2398C /* MazeGameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 682D10CF193B0B9000F2398C /* MazeGameViewController.m */; };
+		682D10D3193B0C2500F2398C /* MazeScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 682D10D2193B0C2500F2398C /* MazeScene.m */; };
+		682D10D6193B0CB100F2398C /* GameOverScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 682D10D5193B0CB100F2398C /* GameOverScene.m */; };
 		68328A52193384F2001D42EC /* Appa.m in Sources */ = {isa = PBXBuildFile; fileRef = 68328A51193384F2001D42EC /* Appa.m */; };
 		6859E47D1933BE9E00A63BC0 /* EliminationGameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6859E47A1933BE9E00A63BC0 /* EliminationGameViewController.m */; };
 		6859E47E1933BE9E00A63BC0 /* PatternMatchingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6859E47C1933BE9E00A63BC0 /* PatternMatchingViewController.m */; };
@@ -40,6 +43,12 @@
 
 /* Begin PBXFileReference section */
 		682D1041193AF65B00F2398C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		682D10CE193B0B9000F2398C /* MazeGameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MazeGameViewController.h; sourceTree = "<group>"; };
+		682D10CF193B0B9000F2398C /* MazeGameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MazeGameViewController.m; sourceTree = "<group>"; };
+		682D10D1193B0C2500F2398C /* MazeScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MazeScene.h; sourceTree = "<group>"; };
+		682D10D2193B0C2500F2398C /* MazeScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MazeScene.m; sourceTree = "<group>"; };
+		682D10D4193B0CB100F2398C /* GameOverScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOverScene.h; sourceTree = "<group>"; };
+		682D10D5193B0CB100F2398C /* GameOverScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameOverScene.m; sourceTree = "<group>"; };
 		68328A50193384F2001D42EC /* Appa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Appa.h; sourceTree = "<group>"; };
 		68328A51193384F2001D42EC /* Appa.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Appa.m; sourceTree = "<group>"; };
 		6859E4791933BE9E00A63BC0 /* EliminationGameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EliminationGameViewController.h; sourceTree = "<group>"; };
@@ -130,8 +139,14 @@
 			children = (
 				68328A50193384F2001D42EC /* Appa.h */,
 				68328A51193384F2001D42EC /* Appa.m */,
+				682D10D4193B0CB100F2398C /* GameOverScene.h */,
+				682D10D5193B0CB100F2398C /* GameOverScene.m */,
 				68D21DF7191FDD4E00CDEBE5 /* AppDelegate.h */,
 				68D21DF8191FDD4E00CDEBE5 /* AppDelegate.m */,
+				682D10D1193B0C2500F2398C /* MazeScene.h */,
+				682D10D2193B0C2500F2398C /* MazeScene.m */,
+				682D10CE193B0B9000F2398C /* MazeGameViewController.h */,
+				682D10CF193B0B9000F2398C /* MazeGameViewController.m */,
 				6859E4791933BE9E00A63BC0 /* EliminationGameViewController.h */,
 				6859E47A1933BE9E00A63BC0 /* EliminationGameViewController.m */,
 				6859E47B1933BE9E00A63BC0 /* PatternMatchingViewController.h */,
@@ -273,13 +288,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				682D10D6193B0CB100F2398C /* GameOverScene.m in Sources */,
 				6859E47E1933BE9E00A63BC0 /* PatternMatchingViewController.m in Sources */,
+				682D10D0193B0B9000F2398C /* MazeGameViewController.m in Sources */,
 				68EF67CA192EB7620006D664 /* MainPageViewController.m in Sources */,
 				68D9503119382AC50086905C /* AppaStatusViewController.m in Sources */,
 				68328A52193384F2001D42EC /* Appa.m in Sources */,
 				68D21DF9191FDD4E00CDEBE5 /* AppDelegate.m in Sources */,
 				6859E47D1933BE9E00A63BC0 /* EliminationGameViewController.m in Sources */,
 				68D21DF5191FDD4E00CDEBE5 /* main.m in Sources */,
+				682D10D3193B0C2500F2398C /* MazeScene.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
