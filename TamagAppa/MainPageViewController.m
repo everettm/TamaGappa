@@ -40,6 +40,7 @@
     [_statusButton addTarget:self action:@selector(statusButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self setTopMenuButtonAttrs:_statusButton];
     
+    [_feedButton addTarget:self action:@selector(feedButtonPressed:withEvent:) forControlEvents:UIControlEventTouchDown];
     [_feedButton addTarget:self action:@selector(foodImageMoved:withEvent:) forControlEvents:UIControlEventTouchDragInside];
     [_feedButton addTarget:self action:@selector(foodImageMoved:withEvent:) forControlEvents:UIControlEventTouchDragOutside];
     [_feedButton addTarget:self action:@selector(checkPhase:withEvent:) forControlEvents:UIControlEventAllTouchEvents];
@@ -74,6 +75,20 @@
     }
     
     [self.view viewWithTag:11].center = point;
+}
+
+- (IBAction) feedButtonPressed:(id) sender withEvent:(UIEvent *) event {
+    NSData *archivedData = [NSKeyedArchiver archivedDataWithRootObject:(UIButton*)sender];
+    
+    wedgeButton =(UIButton*) [NSKeyedUnarchiver unarchiveObjectWithData:archivedData];
+    
+    wedgeButton.tag = 11;
+    
+    [wedgeButton setImage:[self getImage:@"foodSliceButton"] forState:UIControlStateNormal];
+    
+    [self.view addSubview:wedgeButton];
+    wedgeButton.center = [[[event allTouches] anyObject] locationInView:self.view];
+    
 }
 
 - (IBAction)sleepButtonPressed:(id)sender {
