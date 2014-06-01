@@ -12,5 +12,20 @@
 @interface PatternMatchingViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UILabel *gameInfo;
 @property (weak, nonatomic) IBOutlet UILabel *numberOfAppas;
+@property NSMutableArray *randInts;
+@property (nonatomic, assign) int numAppas;
+@property (nonatomic, assign) int numButtonsPerRow;
+@property (nonatomic, assign) int numButtonsPerColumn;
+@property (nonatomic, assign) int numWrongGuesses;
+
+- (void)showAppas;
+- (void)hideAppas;
+- (void)viewDidLoad;
+- (void)resetUserDefaults;
+- (void)createButtons;
+- (void)checkValidity:(int)button;
+- (IBAction)instructionsButtonClick:(id)sender;
+- (IBAction)buttonClick:(id)sender;
+- (void)viewWillDisappear:(BOOL)animated;
 
 @end

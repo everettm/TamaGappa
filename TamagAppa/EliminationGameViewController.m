@@ -13,6 +13,7 @@
 //
 
 #import "EliminationGameViewController.h"
+#import "Appa.h"
 
 @interface EliminationGameViewController ()
 @property NSMutableArray *clickedButtonList;
@@ -321,14 +322,22 @@
     [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"eliminationLevel"];
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
+- (void)viewWillDisappear:(BOOL)animated
+{
     [super viewWillDisappear:animated];
-    if (self.isMovingFromParentViewController) {
+    if (self.isMovingFromParentViewController)
+    {
         if (!_gameWon)
         {
             [[NSUserDefaults standardUserDefaults] setObject:_openSpaces forKey:@"currentConfiguration"];
             [[NSUserDefaults standardUserDefaults] setInteger:_secondsCount forKey:@"currentTime"];
             [[NSUserDefaults standardUserDefaults] setBool:!_gameWon forKey:@"eliminationLoadPrevData"];
+        }
+        if (([[NSUserDefaults standardUserDefaults] integerForKey:@"eliminationLoadPrevData"] + [[NSUserDefaults standardUserDefaults] integerForKey:@"patternLoadPrevData"]) % 5 == 0)
+        {
+            int curLevel = [[NSUserDefaults standardUserDefaults] integerForKey:@"level"];
+            curLevel += 1;
+            [[NSUserDefaults standardUserDefaults] setInteger:curLevel forKey:@"level"];
         }
     }
 }

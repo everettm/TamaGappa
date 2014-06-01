@@ -201,5 +201,4 @@
     return _sharedObject;
 }
 
-
 @end
