@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *startTimeLabel;
 @property (weak, nonatomic) IBOutlet UITextView *startMessage;
 @property (weak, nonatomic) IBOutlet UIButton *revertALevelButton;
+@property (weak, nonatomic) IBOutlet UITextView *startGameTextField;
 
 
 @end

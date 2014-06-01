@@ -15,7 +15,6 @@
 #import "EliminationGameViewController.h"
 
 @interface EliminationGameViewController ()
-@property NSArray *buttonList;
 @property NSMutableArray *clickedButtonList;
 @property NSMutableArray *openSpaces;
 @property NSMutableArray *squareEliminationArray;
@@ -62,7 +61,7 @@
         [_countdownTimer invalidate];
         _countdownTimer = NULL;
         _gameMessage.text = @"You lose.";
-        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"loadPreviousData"];
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"eliminationLoadPrevData"];
         self.view.userInteractionEnabled = NO;
         _timeLeftCountdown.text = @" 0:00";
     }
@@ -73,13 +72,22 @@
 {
     _gameMessage.text = @"";
     [_clickedButtonList removeAllObjects];
-    if ([[NSUserDefaults standardUserDefaults] integerForKey:@"eliminationLevel"] == 1) { [_revertALevelButton setEnabled:NO]; }
-    else { [_revertALevelButton setEnabled:YES]; }
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"loadPreviousData"] == YES)
+    if ([[NSUserDefaults standardUserDefaults] integerForKey:@"eliminationLevel"] == 1)
+    {
+        [_revertALevelButton setEnabled:NO];
+        [_revertALevelButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    }
+    else
+    {
+        [_revertALevelButton setEnabled:YES];
+        [_revertALevelButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    }
+    BOOL prevData = [[NSUserDefaults standardUserDefaults] boolForKey:@"eliminationLoadPrevData"];
+    if (prevData)
     {
         for (int i = 1; i <= 15; i++)
         {
-            if (_openSpaces[i] == _falseObject)
+            if (_openSpaces[i-1] == _falseObject)
             {
                 [(UIButton*)[self.view viewWithTag:i] setImage:[UIImage imageNamed:@"Appa.png"]  forState:UIControlStateNormal];
             }
@@ -105,7 +113,7 @@
                 _openSpaces[i-1] = _trueObject;
             }
         }
-
+        
     }
 }
 
@@ -131,7 +139,7 @@
 - (void) checkForGameOver
 {
     int numOpenSpaces = 0;
-    BOOL validMovesLeft = FALSE;
+    BOOL validMovesLeft;
     for (int i = 0; i < [_openSpaces count]; i++)
     {
         if (_openSpaces[i] == _trueObject) { numOpenSpaces += 1; }
@@ -142,7 +150,7 @@
         _gameWon = YES;
         _curLevel += 1;
         [[NSUserDefaults standardUserDefaults] setInteger:_curLevel forKey:@"eliminationLevel"];
-        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"loadPreviousData"];
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"eliminationLoadPrevData"];
         [_resetGameButton setEnabled: NO];
         [_countdownTimer invalidate];
         _countdownTimer = nil;
@@ -151,43 +159,21 @@
     }
     else
     {
-        for (int i = 0; i < 15; i++)
+        for (int i = 1; i <= 15; i++)
         {
-            if (_openSpaces[i] == _falseObject)
+            if (_openSpaces[i-1] == _falseObject)
             {
-                for (int j = 0; j < 15; j++)
+                for (int j = 1; j <= 15; j++)
                 {
-                    int button1Click = i + 1;
-                    int button2Click = j + 1;
-                    if (button2Click < 10) { button1Click *= 10; }
-                    else { button1Click *= 100; }
-                    int dictKey = button1Click + button2Click;
-                    NSString *dictKeyID = [NSString stringWithFormat:@"%i", dictKey];
-                    int squareToBeEliminated = [[_squareEliminationDictionary objectForKey:dictKeyID] integerValue] - 1;
-                    if (squareToBeEliminated != -1)
-                    {
-                        if (_openSpaces[i] == _falseObject && _openSpaces[j] == _trueObject)
-                        {
-                            if (_openSpaces[squareToBeEliminated] == _falseObject)
-                            {
-                                
-                                validMovesLeft = TRUE;
-                                return;
-                            }
-                        }
-                    }
+                    validMovesLeft = [self checkValidityWithDictionary: i: j];
+                    if (validMovesLeft) { return; }
                 }
             }
-            if (validMovesLeft == TRUE)
-            {
-                return;
-            }
         }
-        if (validMovesLeft == FALSE)
+        if (!validMovesLeft)
         {
             _gameMessage.text = @"No more valid moves.";
         }
-
     }
 }
 
@@ -197,9 +183,10 @@
     {
         _clickedButton1 = [_clickedButtonList[0] intValue];
         _clickedButton2 = [_clickedButtonList[1] intValue];
+        BOOL validMove = [self checkValidityWithDictionary:_clickedButton1: _clickedButton2];
         [_clickedButtonList removeAllObjects];
-        [self resetButtons];
-        if (_openSpaces[_clickedButton1-1] == _trueObject || _openSpaces[_clickedButton2-1] == _falseObject)
+        [self resetButtons:NO];
+        if (_openSpaces[_clickedButton1-1] == _trueObject || _openSpaces[_clickedButton2-1] == _falseObject || !validMove)
         {
             return;
         }
@@ -210,7 +197,28 @@
     }
 }
 
-- (void) resetButtons
+- (BOOL) checkValidityWithDictionary:(int)button1Click :(int)button2Click
+{
+    if (_openSpaces[button1Click - 1] == _falseObject && _openSpaces[button2Click - 1] == _trueObject)
+    {
+        if (button2Click < 10) { button1Click *= 10; }
+        else { button1Click *= 100; }
+        int dictKey = button1Click + button2Click;
+        NSString *dictKeyID = [NSString stringWithFormat:@"%i", dictKey];
+        int squareToBeEliminated = [[_squareEliminationDictionary objectForKey:dictKeyID] integerValue] - 1;
+        if (squareToBeEliminated != -1)
+        {
+            if (_openSpaces[squareToBeEliminated] == _falseObject)
+            {
+                
+                return YES;
+            }
+        }
+    }
+    return NO;
+}
+
+- (void) resetButtons:(BOOL)reset
 {
     for (int i = 1; i <= 15; i++)
     {
@@ -219,14 +227,17 @@
         buttonToReset.layer.borderWidth = 1.0f;
         buttonToReset.layer.borderColor = [[UIColor blackColor] CGColor];
     }
-    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"loadPreviousData"];
+    if (reset) { [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"eliminationLoadPrevData"]; }
     [_resetGameButton setEnabled: YES];
 }
 
 - (void)viewDidLoad
 {
+    _clickedButtonList = [[NSMutableArray alloc] init];
+    _trueObject = [NSNumber numberWithBool:YES];
+    _falseObject = [NSNumber numberWithBool:NO];
+    _gameWon = NO;
     [super viewDidLoad];
-    //self.view.userInteractionEnabled = NO;
     UIImageView *backgroundImage = [[UIImageView alloc] initWithFrame:self.view.frame];
     [backgroundImage setImage:[UIImage imageNamed:@"background"]];
     [self.view addSubview:backgroundImage];
@@ -234,31 +245,29 @@
     if ([[NSUserDefaults standardUserDefaults] integerForKey:@"eliminationLevel"] == 0)
     {
         [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"eliminationLevel"];
-        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"loadPreviousData"];
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"eliminationLoadPrevData"];
     }
     _curLevel = [[NSUserDefaults standardUserDefaults] integerForKey:@"eliminationLevel"];
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"loadPreviousData"])
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"eliminationLoadPrevData"])
     {
         _secondsCount = [[NSUserDefaults standardUserDefaults] integerForKey:@"currentTime"];
         _openSpaces = [[[NSUserDefaults standardUserDefaults] objectForKey:@"currentConfiguration"] mutableCopy];
-        [self startButtonClick:[NSNumber numberWithInt:1]];
     }
     else
     {
         _secondsCount = 260 - (_curLevel * 20);
-        int minutes = _secondsCount/60;
-        int seconds = _secondsCount - (minutes * 60);
-        NSString *timerOutput = [NSString stringWithFormat:@"%2d:%.2d", minutes, seconds];
-        _startTimeLabel.text = timerOutput;
-        _openSpaces = [[NSMutableArray alloc] initWithObjects: _trueObject, _trueObject, _trueObject, _trueObject, _trueObject, _trueObject, _trueObject, _trueObject, _trueObject, _trueObject, _trueObject, _trueObject, _trueObject, _trueObject, _trueObject, nil];
+        _openSpaces = [[NSMutableArray alloc] init];
+        for (int i = 0; i < 15; i++)
+        {
+            [_openSpaces addObject: _trueObject];
+        }
     }
+    int minutes = _secondsCount/60;
+    int seconds = _secondsCount - (minutes * 60);
+    NSString *timerOutput = [NSString stringWithFormat:@"%2d:%.2d", minutes, seconds];
+    _startTimeLabel.text = timerOutput;
     _squareEliminationDictionary = @{@"14": @"2", @"16": @"3", @"27": @"4", @"29": @"5", @"38": @"5", @"310": @"6", @"41": @"2", @"46": @"5", @"411": @"7", @"413": @"8", @"512": @"8", @"514": @"9", @"61": @"3", @"64": @"5", @"613": @"9", @"615": @"10", @"72": @"4", @"79": @"8", @"83": @"5", @"810": @"9", @"92": @"5", @"97": @"8", @"103": @"6", @"108": @"9", @"114": @"7", @"1113": @"12", @"125": @"8", @"1214": @"13", @"134": @"8", @"136": @"9", @"1311": @"12", @"1315": @"14", @"145": @"9", @"1412": @"13", @"156": @"10", @"1513": @"14"};
-    _clickedButtonList = [[NSMutableArray alloc] init];
-    _trueObject = [NSNumber numberWithBool:YES];
-    _falseObject = [NSNumber numberWithBool:NO];
-    _gameWon = NO;
-    //[self resetUserDefaults];
-    [self resetButtons];
+    [self resetButtons:NO];
     [self startGame];
 }
 
@@ -292,12 +301,12 @@
         clickedButton.layer.borderColor = [[UIColor greenColor] CGColor];
         [_clickedButtonList addObject: [NSNumber numberWithInt: [sender tag]]];
         if ([_clickedButtonList count] == 2)
-        [self checkValidity];
+            [self checkValidity];
     }
 }
 
 - (IBAction)resetGameButtonClick:(id)sender {
-    [self resetButtons];
+    [self resetButtons:YES];
     [self startGame];
 }
 
@@ -305,30 +314,36 @@
 {
     [[NSUserDefaults standardUserDefaults] setObject:NULL forKey:@"currentConfiguration"];
     [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"currentTime"];
-    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"loadPreviousData"];
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"eliminationLoadPrevData"];
     [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"eliminationLevel"];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    
     if (self.isMovingFromParentViewController) {
         if (!_gameWon)
         {
             [[NSUserDefaults standardUserDefaults] setObject:_openSpaces forKey:@"currentConfiguration"];
             [[NSUserDefaults standardUserDefaults] setInteger:_secondsCount forKey:@"currentTime"];
-            [[NSUserDefaults standardUserDefaults] setBool:!_gameWon forKey:@"loadPreviousData"];
+            [[NSUserDefaults standardUserDefaults] setBool:!_gameWon forKey:@"eliminationLoadPrevData"];
         }
     }
 }
 
 - (IBAction)goBackLevelButtonClick:(id)sender {
+    _curLevel -= 1;
     int curLevel = [[NSUserDefaults standardUserDefaults] integerForKey:@"eliminationLevel"];
     [[NSUserDefaults standardUserDefaults] setInteger: curLevel-1 forKey:@"eliminationLevel"];
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"eliminationLoadPrevData"];
+    _secondsCount = 260 - (_curLevel * 20);
     [self startGame];
 }
 
-
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    [_startGameTextField resignFirstResponder];
+    return NO;
+}
 
 
 @end
