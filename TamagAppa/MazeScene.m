@@ -34,10 +34,6 @@ static inline CGPoint CGPointMultiplyScalar(const CGPoint a, const CGFloat b)
     SKAction *actionMoveUp;
     SKAction *actionMoveDown;
     
-    NSTimeInterval _lastUpdateTime;
-    NSTimeInterval _dt;
-    NSTimeInterval _lastMissileAdded;
-    
     UISwipeGestureRecognizer *swipeRightGesture;
     UISwipeGestureRecognizer *swipeLeftGesture;
     UISwipeGestureRecognizer *swipeUpGesture;
@@ -46,8 +42,12 @@ static inline CGPoint CGPointMultiplyScalar(const CGPoint a, const CGFloat b)
 
 -(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
+        // 320 X 568
         self.backgroundColor = [SKColor whiteColor];
-        [self addShip];
+        self.scaleMode = SKSceneScaleModeAspectFit;
+        self.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:self.frame];
+        [self addAppa];
+        [self addWall];
         
         //Making self delegate of physics World
         self.physicsWorld.gravity = CGVectorMake(0,0);
@@ -75,22 +75,21 @@ static inline CGPoint CGPointMultiplyScalar(const CGPoint a, const CGFloat b)
 }
 
 
--(void)addShip
-{
+-(void)addAppa {
     //initalizing spaceship node
     bison = [SKSpriteNode spriteNodeWithImageNamed:@"Appa"];
-    [bison setScale:0.25];
-//    bison.zRotation = - M_PI / 2;
+    [bison setScale:0.095];
     
     //Adding SpriteKit physicsBody for collision detection
     bison.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:bison.size];
+    NSLog(@"width = %f, height = %f", bison.size.width, bison.size.height);
     bison.physicsBody.categoryBitMask = bisonCategory;
     bison.physicsBody.dynamic = YES;
     bison.physicsBody.contactTestBitMask = obstacleCategory;
     bison.physicsBody.collisionBitMask = 0;
     bison.physicsBody.usesPreciseCollisionDetection = YES;
-    bison.name = @"ship";
-    bison.position = CGPointMake(125,450);
+    bison.name = @"bison";
+    bison.position = CGPointMake(160,284);
 //    bison.position = CGPointMake(320,568);
     actionMoveLeft = [SKAction moveByX:-30 y:0 duration:.2];
     actionMoveRight = [SKAction moveByX:30 y:0 duration:.2];
@@ -100,45 +99,25 @@ static inline CGPoint CGPointMultiplyScalar(const CGPoint a, const CGFloat b)
     [self addChild:bison];
 }
 
--(void)addMissile
-{
-    //initalizing spaceship node
-    SKSpriteNode *missile;
-    missile = [SKSpriteNode spriteNodeWithImageNamed:@"feedButton"];
-    [missile setScale:0.15];
+-(void)addWall {
+    CGRect rect = CGRectMake(0, 0, 10, 80);
     
-    //Adding SpriteKit physicsBody for collision detection
-    missile.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:missile.size];
-    missile.physicsBody.categoryBitMask = obstacleCategory;
-    missile.physicsBody.dynamic = YES;
-    missile.physicsBody.contactTestBitMask = bisonCategory;
-    missile.physicsBody.collisionBitMask = 0;
-    missile.physicsBody.usesPreciseCollisionDetection = YES;
-    missile.name = @"missile";
+    SKNode *wallNode = [[SKSpriteNode alloc] initWithColor:[UIColor redColor] size:CGSizeMake(10,80)];
+    wallNode.position = CGPointMake(200 + rect.size.width * 0.5,
+                                    300 - rect.size.height * 0.5);
     
-    //selecting random y position for missile
-    int r = arc4random() % 300;
-    missile.position = CGPointMake(self.frame.size.width + 20,r);
-    
-    [self addChild:missile];
+    wallNode.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:rect.size];
+    wallNode.physicsBody.dynamic = NO;
+    wallNode.physicsBody.categoryBitMask = obstacleCategory;
+    [self addChild:wallNode];
 }
 
 
-
-
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    UITouch *touch = [touches anyObject];
-    CGPoint touchLocation = [touch locationInNode:self.scene];
-    if(touchLocation.x >bison.position.x){
-//        if(bison.position.x < 270){
-//            [bison runAction:actionMoveLeft];
-//        }
-    }else{
-//        if(bison.position.x > 50){
-//            [bison runAction:actionMoveRight];
-//        }
-    }
-}
+//- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+//    UITouch *touch = [touches anyObject];
+//    CGPoint touchLocation = [touch locationInNode:self.scene];
+//    // add in button?
+//}
 
 -(void) handleSwipeRight:( UISwipeGestureRecognizer *) recognizer {
     if(bison.position.x < 270){
@@ -164,47 +143,9 @@ static inline CGPoint CGPointMultiplyScalar(const CGPoint a, const CGFloat b)
     }
 }
 
-- (void)moveObstacle
-{
-    NSArray *nodes = self.children;//1
-    
-    for(SKNode * node in nodes){
-        if (![node.name  isEqual: @"bg"] && ![node.name  isEqual: @"ship"]) {
-            SKSpriteNode *ob = (SKSpriteNode *) node;
-            CGPoint obVelocity = CGPointMake(-OBJECT_VELOCITY, 0);
-            CGPoint amtToMove = CGPointMultiplyScalar(obVelocity,_dt);
-            
-            ob.position = CGPointAdd(ob.position, amtToMove);
-            if(ob.position.x < -100)
-            {
-                [ob removeFromParent];
-            }
-        }
-    }
-}
-
--(void)update:(CFTimeInterval)currentTime {
-    
-    if (_lastUpdateTime)
-    {
-        _dt = currentTime - _lastUpdateTime;
-    }
-    else
-    {
-        _dt = 0;
-    }
-    _lastUpdateTime = currentTime;
-    
-    if( currentTime - _lastMissileAdded > 1)
-    {
-        _lastMissileAdded = currentTime + 1;
-        [self addMissile];
-    }
-    
-    [self moveObstacle];
+- (void) update:(NSTimeInterval)currentTime{
     
 }
-
 
 - (void)didBeginContact:(SKPhysicsContact *)contact
 {
@@ -223,10 +164,13 @@ static inline CGPoint CGPointMultiplyScalar(const CGPoint a, const CGFloat b)
     if ((firstBody.categoryBitMask & bisonCategory) != 0 &&
         (secondBody.categoryBitMask & obstacleCategory) != 0)
     {
-        [bison removeFromParent];
-        SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
-        SKScene * gameOverScene = [[GameOverScene alloc] initWithSize:self.size];
-        [self.view presentScene:gameOverScene transition: reveal];
+        NSLog(@"AAAH");
+        [bison removeAllActions];
+        bison.speed=0;
+//        [bison removeFromParent];
+//        SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
+//        SKScene * gameOverScene = [[GameOverScene alloc] initWithSize:self.size];
+//        [self.view presentScene:gameOverScene transition: reveal];
         
     }
 }

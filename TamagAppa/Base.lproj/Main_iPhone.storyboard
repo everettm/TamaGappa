@@ -274,6 +274,16 @@
                                     <segue destination="TNf-m2-FIC" kind="push" id="mer-gf-B0N"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OPV-uB-xrX">
+                                <rect key="frame" x="118" y="446" width="84" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="AppaCopter">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="rGq-pq-ADK" kind="push" id="V94-OA-n1t"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -282,6 +292,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ojg-9l-Oua" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1137" y="152"/>
+        </scene>
+        <!--Appa Copter View Controller-->
+        <scene sceneID="eqL-Uu-hIM">
+            <objects>
+                <viewController id="rGq-pq-ADK" customClass="AppaCopterViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="gVD-ji-PLV"/>
+                        <viewControllerLayoutGuide type="bottom" id="hu8-H2-CA5"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="bZg-QW-PxZ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="C2o-Wi-O3K"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7Xg-9E-sJ9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1142" y="1576"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="PQ0-UW-2Wh">
