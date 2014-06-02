@@ -212,20 +212,6 @@
 
 }
 
--(void) playWithAppa{
-    //curHappiness += 50;
-    curHappiness += (maxHappiness/4);
-    if(curHappiness >= maxHappiness) {
-        curHappiness = maxHappiness;
-    }
-    
-    curEnergy -= (maxEnergy/3);
-    if(curEnergy <= 0){
-        curEnergy = 0;
-    }
-    
-}
-
 -(void) putAppaToSleep{
     isAsleep = true;
     
