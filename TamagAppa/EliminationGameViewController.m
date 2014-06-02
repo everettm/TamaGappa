@@ -44,7 +44,7 @@
 - (void)startGame
 {
     _gameMessage.text = @"";
-    _numTriesLeftLabel.text = @"%i", _numTriesLeft;
+    _numTriesLeftLabel.text = [NSString stringWithFormat:@"%i", _numTriesLeft];
     [_clickedButtonList removeAllObjects];
     if ([[NSUserDefaults standardUserDefaults] integerForKey:@"eliminationLevel"] == 1)
     {
@@ -142,7 +142,7 @@
                 }
             }
         }
-        _numTriesLeftLabel = @"%i", _numTriesLeft;
+        _numTriesLeftLabel.text = [NSString stringWithFormat:@"%i", _numTriesLeft];
         if (!validMovesLeft)
         {
             _gameMessage.text = @"No more valid moves.";
@@ -227,6 +227,7 @@
     _curLevel = [[NSUserDefaults standardUserDefaults] integerForKey:@"eliminationLevel"];
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"eliminationLoadPrevData"])
     {
+        //[[NSUserDefaults standardUserDefaults] setInteger:10 forKey:@"numTriesLeft"];
         _numTriesLeft = [[NSUserDefaults standardUserDefaults] integerForKey:@"numTriesLeft"];
         _openSpaces = [[[NSUserDefaults standardUserDefaults] objectForKey:@"currentConfiguration"] mutableCopy];
     }
@@ -241,6 +242,7 @@
     }
     _numTriesLeftStartLabel.text = [NSString stringWithFormat:@"%i", _numTriesLeft];
     _squareEliminationDictionary = @{@"14": @"2", @"16": @"3", @"27": @"4", @"29": @"5", @"38": @"5", @"310": @"6", @"41": @"2", @"46": @"5", @"411": @"7", @"413": @"8", @"512": @"8", @"514": @"9", @"61": @"3", @"64": @"5", @"613": @"9", @"615": @"10", @"72": @"4", @"79": @"8", @"83": @"5", @"810": @"9", @"92": @"5", @"97": @"8", @"103": @"6", @"108": @"9", @"114": @"7", @"1113": @"12", @"125": @"8", @"1214": @"13", @"134": @"8", @"136": @"9", @"1311": @"12", @"1315": @"14", @"145": @"9", @"1412": @"13", @"156": @"10", @"1513": @"14"};
+    _startGameTextField.editable = NO;
     [self resetButtons:NO];
     [self startGame];
 }
@@ -289,7 +291,7 @@
 - (void)resetUserDefaults
 {
     [[NSUserDefaults standardUserDefaults] setObject:NULL forKey:@"currentConfiguration"];
-    [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"currentTime"];
+    [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"numTriesLeft"];
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"eliminationLoadPrevData"];
     [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"eliminationLevel"];
 }
@@ -300,7 +302,7 @@
         if (!_gameWon)
         {
             [[NSUserDefaults standardUserDefaults] setObject:_openSpaces forKey:@"currentConfiguration"];
-            [[NSUserDefaults standardUserDefaults] setInteger:_numTriesLeft forKey:@"currentTime"];
+            [[NSUserDefaults standardUserDefaults] setInteger:_numTriesLeft forKey:@"numTriesLeft"];
             [[NSUserDefaults standardUserDefaults] setBool:!_gameWon forKey:@"eliminationLoadPrevData"];
         }
     }
@@ -317,7 +319,7 @@
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
-    [_startGameTextField resignFirstResponder];
+    //[_startGameTextField resignFirstResponder];
     return NO;
 }
 
