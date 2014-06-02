@@ -50,7 +50,7 @@
     
     hour = 3600;
     
-    myTimer = [NSTimer scheduledTimerWithTimeInterval:5.0
+    myTimer = [NSTimer scheduledTimerWithTimeInterval:.1
                                                target:self
                                              selector:@selector(updateStatus)
                                              userInfo:nil
@@ -87,7 +87,7 @@
 -(void) updateStatus{
     if(isAsleep){
         [self restoreStatus];
-        curHunger -= .5;
+        curHunger -= (maxHunger/hour)*[self toThePowerOf:.98 :(float)level];
         if(curHunger <= 0.5*maxHunger){
             hungerMultiplier = 2.0;
         }
@@ -97,12 +97,16 @@
         if(curHunger <= 0){
             curHunger = 0;
         }
-
+        
+        curHealth = ((curEnergy + curHappiness + curHunger)/3)*[self toThePowerOf:.98 :(float)level];
+        if(curHealth <= 0){
+            curHealth = 0;
+        }
+        
     }
     
     else{
-        curHappiness -= ((maxHappiness/hour)*[self toThePowerOf:.98 :(float)level]);
-//        curHappiness -= .5;
+        curHappiness -= (maxHappiness/hour*3)*[self toThePowerOf:.98 :(float)level];
         if(curHappiness <= 0.5*maxHappiness){
             happinessMultiplier = 2.0;
         }
@@ -113,8 +117,7 @@
             curHappiness = 0;
         }
         
-        curHunger -= maxHunger/hour*[self toThePowerOf:.98 :(float)level];
-//        curHunger -= .5;
+        curHunger -= ((maxHunger/hour*3)*[self toThePowerOf:.98 :(float)level]);
         if(curHunger <= 0.5*maxHunger){
             hungerMultiplier = 2.0;
         }
@@ -125,14 +128,13 @@
             curHunger = 0;
         }
         
-        curEnergy -= (maxEnergy/hour)*happinessMultiplier*hungerMultiplier*[self toThePowerOf:.98 :(float)level];
-//        curEnergy -= .5;
+        curEnergy -= (maxEnergy/hour*3)*happinessMultiplier*hungerMultiplier*[self toThePowerOf:.98 :(float)level];
         if(curEnergy <= 0){
             curEnergy = 0;
         }
         
-        curHealth -= (maxHealth/hour)*hungerMultiplier*[self toThePowerOf:.98 :(float)level];
-//        curHealth -= .5;
+//        curHealth -= (maxHealth/hour)*hungerMultiplier*[self toThePowerOf:.98 :(float)level];
+        curHealth = ((curEnergy + curHappiness + curHunger)/3)*[self toThePowerOf:.98 :(float)level];
         if(curHealth <= 0){
             curHealth = 0;
         }
@@ -141,8 +143,8 @@
 
 -(void) restoreStatus{
     curEnergy += maxEnergy/1800;
-    curHappiness += maxHappiness/1800;
-    curHealth += maxHealth/1800;
+//    curHappiness += maxHappiness/1800;
+    //curHealth += maxHealth/1800;
 //    curEnergy += 2;
 //    curHappiness += 2;
 //    curHealth += 2;
@@ -161,15 +163,35 @@
 }
 
 -(void) feedAppa{
-    curHunger += 30;
+    //curHunger += 30;
+    curHunger += (maxHunger/4);
     
     if(curHunger >= maxHunger){
         curHunger = maxHunger;
     }
+    
+    curHappiness += (maxHappiness/6);
+    if(curHappiness >= maxHappiness){
+        curHappiness = maxHappiness;
+    }
+    
 }
+
+//-(void) playWithAppa{
+//    //curHappiness += 50;
+//    curHappiness += (maxHappiness/4);
+//    if(curHappiness >= maxHappiness) {
+//        curHappiness = maxHappiness;
+//    }
+//}
 
 -(void) putAppaToSleep{
     isAsleep = true;
+    
+    curHappiness += (maxHappiness/4);
+    if(curHappiness >= maxHappiness){
+        curHappiness = maxHappiness;
+    }
 }
 
 -(void) wakeAppaUp{
