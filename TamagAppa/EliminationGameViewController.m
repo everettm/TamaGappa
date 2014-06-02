@@ -44,6 +44,7 @@
 - (void)startGame
 {
     _gameMessage.text = @"";
+    _numTriesLeftLabel.text = @"%i", _numTriesLeft;
     [_clickedButtonList removeAllObjects];
     if ([[NSUserDefaults standardUserDefaults] integerForKey:@"eliminationLevel"] == 1)
     {
@@ -141,9 +142,14 @@
                 }
             }
         }
+        _numTriesLeftLabel = @"%i", _numTriesLeft;
         if (!validMovesLeft)
         {
             _gameMessage.text = @"No more valid moves.";
+        }
+        if (_numTriesLeft == 0)
+        {
+            _gameMessage.text = @"You lose.";
         }
     }
 }

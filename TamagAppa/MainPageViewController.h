@@ -11,6 +11,7 @@
 @interface MainPageViewController : UIViewController
 
 @property (strong, nonatomic)IBOutlet UIButton* feedButton;
+@property (strong, nonatomic)IBOutlet UIButton* poopButton;
 @property (strong, nonatomic)IBOutlet UIButton* sleepButton;
 @property (strong, nonatomic)IBOutlet UIButton* cleanUpButton;
 @property (strong, nonatomic)IBOutlet UIButton* playButton;
