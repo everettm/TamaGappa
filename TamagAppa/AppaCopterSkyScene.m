@@ -63,13 +63,6 @@ static inline CGFloat skRand(CGFloat low, CGFloat high) {
     _score = 0;
 
     [self spawnClouds];
-    
-//    SKAction* makeClouds = [SKAction sequence:@[
-//                                                [SKAction performSelector:@selector(addCloud) onTarget:self],
-//                                                [SKAction waitForDuration:0.95*_level withRange:0.15]]];
-    
-//    [self runAction: [SKAction repeatActionForever:makeClouds]];
-
 }
 
 -(void)restartGame{

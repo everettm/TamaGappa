@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		680D0D75193C812B00846A8A /* AppaCopterSkyScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 680D0D74193C812B00846A8A /* AppaCopterSkyScene.m */; };
+		680D0D77193C840E00846A8A /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 680D0D76193C840E00846A8A /* SpriteKit.framework */; };
 		681A7C1E193BC6C1006D0C44 /* AppaCopterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 681A7C1D193BC6C1006D0C44 /* AppaCopterViewController.m */; };
 		681A7C21193BC792006D0C44 /* FlyingAppa.m in Sources */ = {isa = PBXBuildFile; fileRef = 681A7C20193BC792006D0C44 /* FlyingAppa.m */; };
 		682D1042193AF65B00F2398C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 682D1041193AF65B00F2398C /* QuartzCore.framework */; };
@@ -44,6 +46,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		680D0D73193C812B00846A8A /* AppaCopterSkyScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppaCopterSkyScene.h; sourceTree = "<group>"; };
+		680D0D74193C812B00846A8A /* AppaCopterSkyScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppaCopterSkyScene.m; sourceTree = "<group>"; };
+		680D0D76193C840E00846A8A /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
 		681A7C1C193BC6C1006D0C44 /* AppaCopterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppaCopterViewController.h; sourceTree = "<group>"; };
 		681A7C1D193BC6C1006D0C44 /* AppaCopterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppaCopterViewController.m; sourceTree = "<group>"; };
 		681A7C1F193BC792006D0C44 /* FlyingAppa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlyingAppa.h; sourceTree = "<group>"; };
@@ -89,6 +94,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				680D0D77193C840E00846A8A /* SpriteKit.framework in Frameworks */,
 				682D1042193AF65B00F2398C /* QuartzCore.framework in Frameworks */,
 				68D21DEB191FDD4E00CDEBE5 /* CoreGraphics.framework in Frameworks */,
 				68D21DED191FDD4E00CDEBE5 /* UIKit.framework in Frameworks */,
@@ -131,6 +137,7 @@
 		68D21DE7191FDD4E00CDEBE5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				680D0D76193C840E00846A8A /* SpriteKit.framework */,
 				682D1041193AF65B00F2398C /* QuartzCore.framework */,
 				68D21DE8191FDD4E00CDEBE5 /* Foundation.framework */,
 				68D21DEA191FDD4E00CDEBE5 /* CoreGraphics.framework */,
@@ -154,6 +161,8 @@
 				68D21DF7191FDD4E00CDEBE5 /* AppDelegate.h */,
 				68D21DF8191FDD4E00CDEBE5 /* AppDelegate.m */,
 				682D10D1193B0C2500F2398C /* MazeScene.h */,
+				680D0D73193C812B00846A8A /* AppaCopterSkyScene.h */,
+				680D0D74193C812B00846A8A /* AppaCopterSkyScene.m */,
 				682D10D2193B0C2500F2398C /* MazeScene.m */,
 				682D10CE193B0B9000F2398C /* MazeGameViewController.h */,
 				682D10CF193B0B9000F2398C /* MazeGameViewController.m */,
@@ -299,6 +308,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				682D10D6193B0CB100F2398C /* GameOverScene.m in Sources */,
+				680D0D75193C812B00846A8A /* AppaCopterSkyScene.m in Sources */,
 				6859E47E1933BE9E00A63BC0 /* PatternMatchingViewController.m in Sources */,
 				681A7C21193BC792006D0C44 /* FlyingAppa.m in Sources */,
 				682D10D0193B0B9000F2398C /* MazeGameViewController.m in Sources */,

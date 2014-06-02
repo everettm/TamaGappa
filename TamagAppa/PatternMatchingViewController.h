@@ -13,10 +13,13 @@
 @property (weak, nonatomic) IBOutlet UILabel *gameInfo;
 @property (weak, nonatomic) IBOutlet UILabel *numberOfAppas;
 @property NSMutableArray *randInts;
+@property NSMutableArray *spacesWithAppas;
 @property (nonatomic, assign) int numAppas;
 @property (nonatomic, assign) int numButtonsPerRow;
 @property (nonatomic, assign) int numButtonsPerColumn;
 @property (nonatomic, assign) int numWrongGuesses;
+@property (nonatomic, assign) BOOL trueObject;
+@property (nonatomic, assign) BOOL falseObject;
 
 - (void)showAppas;
 - (void)hideAppas;

@@ -656,13 +656,13 @@ Good luck!</string>
                     <navigationItem key="navigationItem" id="6cH-uP-kuj"/>
                     <connections>
                         <outlet property="gameMessage" destination="PmS-KU-TaC" id="5Y2-cF-TGG"/>
+                        <outlet property="numTriesLeftLabel" destination="4U7-Aa-rza" id="yeD-9b-iKg"/>
+                        <outlet property="numTriesLeftStartLabel" destination="Br1-66-MJK" id="1wt-Re-BQ5"/>
                         <outlet property="resetGameButton" destination="Yx8-jj-hnp" id="s3W-N9-C1D"/>
                         <outlet property="revertALevelButton" destination="zAR-qz-mEp" id="Ynl-nq-0Kv"/>
                         <outlet property="startButton" destination="pLt-3a-6wv" id="7p5-7E-eDl"/>
                         <outlet property="startGameTextField" destination="XaF-qO-Nv0" id="Pe6-QV-r5D"/>
                         <outlet property="startMessage" destination="XaF-qO-Nv0" id="CEu-vo-yyd"/>
-                        <outlet property="startTimeLabel" destination="Br1-66-MJK" id="ZuS-Wn-gV4"/>
-                        <outlet property="timeLeftCountdown" destination="4U7-Aa-rza" id="5vQ-1g-DTr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3fB-YO-Mht" userLabel="First Responder" sceneMemberID="firstResponder"/>
