@@ -13,7 +13,6 @@
 //
 
 #import "EliminationGameViewController.h"
-#import "Appa.h"
 
 @interface EliminationGameViewController ()
 @property NSMutableArray *clickedButtonList;
@@ -24,10 +23,9 @@
 @property NSDictionary *squareEliminationDictionary;
 @property int clickedButton1;
 @property int clickedButton2;
-@property NSTimer *countdownTimer;
-@property int secondsCount;
 @property int curLevel;
 @property BOOL gameWon;
+@property int numTriesLeft;
 
 @end
 
@@ -40,32 +38,6 @@
         // Custom initialization
     }
     return self;
-}
-
-// Sets the timer, and calls start timer
-- (void)setTimer
-{
-    _countdownTimer = [NSTimer scheduledTimerWithTimeInterval: 1.0 target:self selector:@selector(startTimer) userInfo: NULL repeats: YES];
-}
-
-// Starts the timer, and initializes the countdown
-// If the countdown reaches 0, lets the user know they have lost
-- (void)startTimer
-{
-    int minutes = _secondsCount/60;
-    int seconds = _secondsCount - (minutes * 60);
-    NSString *timerOutput = [NSString stringWithFormat:@"%2d:%.2d", minutes, seconds];
-    _secondsCount -= 1;
-    _timeLeftCountdown.text = timerOutput;
-    if (_secondsCount == 0)
-    {
-        [_countdownTimer invalidate];
-        _countdownTimer = NULL;
-        _gameMessage.text = @"You lose.";
-        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"eliminationLoadPrevData"];
-        self.view.userInteractionEnabled = NO;
-        _timeLeftCountdown.text = @" 0:00";
-    }
 }
 
 // Starts the game. Loads the previous spaces for the apps, if necessary. Otherwise, starts the blank space in a random space.
@@ -153,8 +125,6 @@
         [[NSUserDefaults standardUserDefaults] setInteger:_curLevel forKey:@"eliminationLevel"];
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"eliminationLoadPrevData"];
         [_resetGameButton setEnabled: NO];
-        [_countdownTimer invalidate];
-        _countdownTimer = nil;
         self.view.userInteractionEnabled = NO;
         
     }
@@ -251,22 +221,19 @@
     _curLevel = [[NSUserDefaults standardUserDefaults] integerForKey:@"eliminationLevel"];
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"eliminationLoadPrevData"])
     {
-        _secondsCount = [[NSUserDefaults standardUserDefaults] integerForKey:@"currentTime"];
+        _numTriesLeft = [[NSUserDefaults standardUserDefaults] integerForKey:@"numTriesLeft"];
         _openSpaces = [[[NSUserDefaults standardUserDefaults] objectForKey:@"currentConfiguration"] mutableCopy];
     }
     else
     {
-        _secondsCount = 260 - (_curLevel * 20);
+        _numTriesLeft = 11 - _curLevel;
         _openSpaces = [[NSMutableArray alloc] init];
         for (int i = 0; i < 15; i++)
         {
             [_openSpaces addObject: _trueObject];
         }
     }
-    int minutes = _secondsCount/60;
-    int seconds = _secondsCount - (minutes * 60);
-    NSString *timerOutput = [NSString stringWithFormat:@"%2d:%.2d", minutes, seconds];
-    _startTimeLabel.text = timerOutput;
+    _numTriesLeftStartLabel.text = [NSString stringWithFormat:@"%i", _numTriesLeft];
     _squareEliminationDictionary = @{@"14": @"2", @"16": @"3", @"27": @"4", @"29": @"5", @"38": @"5", @"310": @"6", @"41": @"2", @"46": @"5", @"411": @"7", @"413": @"8", @"512": @"8", @"514": @"9", @"61": @"3", @"64": @"5", @"613": @"9", @"615": @"10", @"72": @"4", @"79": @"8", @"83": @"5", @"810": @"9", @"92": @"5", @"97": @"8", @"103": @"6", @"108": @"9", @"114": @"7", @"1113": @"12", @"125": @"8", @"1214": @"13", @"134": @"8", @"136": @"9", @"1311": @"12", @"1315": @"14", @"145": @"9", @"1412": @"13", @"156": @"10", @"1513": @"14"};
     [self resetButtons:NO];
     [self startGame];
@@ -281,8 +248,7 @@
     self.view.userInteractionEnabled = YES;
     [self.view sendSubviewToBack:_startMessage];
     [self.view sendSubviewToBack:_startButton];
-    _startTimeLabel.text = @"";
-    [self setTimer];
+    _numTriesLeftStartLabel.text = @"";
 }
 
 - (IBAction)buttonClick:(id)sender
@@ -322,22 +288,14 @@
     [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"eliminationLevel"];
 }
 
-- (void)viewWillDisappear:(BOOL)animated
-{
+- (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    if (self.isMovingFromParentViewController)
-    {
+    if (self.isMovingFromParentViewController) {
         if (!_gameWon)
         {
             [[NSUserDefaults standardUserDefaults] setObject:_openSpaces forKey:@"currentConfiguration"];
-            [[NSUserDefaults standardUserDefaults] setInteger:_secondsCount forKey:@"currentTime"];
+            [[NSUserDefaults standardUserDefaults] setInteger:_numTriesLeft forKey:@"currentTime"];
             [[NSUserDefaults standardUserDefaults] setBool:!_gameWon forKey:@"eliminationLoadPrevData"];
-        }
-        if (([[NSUserDefaults standardUserDefaults] integerForKey:@"eliminationLoadPrevData"] + [[NSUserDefaults standardUserDefaults] integerForKey:@"patternLoadPrevData"]) % 5 == 0)
-        {
-            int curLevel = [[NSUserDefaults standardUserDefaults] integerForKey:@"level"];
-            curLevel += 1;
-            [[NSUserDefaults standardUserDefaults] setInteger:curLevel forKey:@"level"];
         }
     }
 }
@@ -347,7 +305,7 @@
     int curLevel = [[NSUserDefaults standardUserDefaults] integerForKey:@"eliminationLevel"];
     [[NSUserDefaults standardUserDefaults] setInteger: curLevel-1 forKey:@"eliminationLevel"];
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"eliminationLoadPrevData"];
-    _secondsCount = 260 - (_curLevel * 20);
+    _numTriesLeft = 11 - _curLevel;
     [self startGame];
 }
 
