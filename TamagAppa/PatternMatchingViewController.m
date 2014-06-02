@@ -95,9 +95,10 @@
 
 - (void)resetUserDefaults
 {
-//    [patternSettings removeObjectForKey:@"patternLevel"];
-//    [patternSettings removeObjectForKey:@"row"];
-//    [patternSettings removeObjectForKey:@"column"];
+
+    //    [patternSettings removeObjectForKey:@"patternLevel"];
+    //    [patternSettings removeObjectForKey:@"row"];
+    //    [patternSettings removeObjectForKey:@"column"];
     [patternSettings setInteger:1 forKey:@"patternLevel"];
     [patternSettings setInteger:3 forKey:@"row"];
     [patternSettings setInteger:4 forKey:@"column"];

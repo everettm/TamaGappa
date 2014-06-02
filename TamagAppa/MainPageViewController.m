@@ -36,20 +36,25 @@
 	// Do any additional setup after loading the view.
     
     wedgeButton = nil;
+    poopButtonDrag = nil;
     skyColor = [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0];
     
     [_statusButton addTarget:self action:@selector(statusButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self setTopMenuButtonAttrs:_statusButton];
     
+    
+    [_poopButton addTarget:self action:@selector(poopButtonPressed:withEvent:) forControlEvents:UIControlEventTouchDown];
+    NSLog(@"Not entirely sure when this should print...");
+    [_poopButton addTarget:self action:@selector(poopButtonMoved:withEvent:) forControlEvents:UIControlEventTouchDragInside];
+    NSLog(@"I think these should just print right away...");
+    [_poopButton addTarget:self action:@selector(poopButtonMoved:withEvent:) forControlEvents:UIControlEventTouchDragOutside];
+    NSLog(@"Now I'm just wasting time...");
+    [_poopButton addTarget:self action:@selector(checkPhasePoop:withEvent:) forControlEvents:UIControlEventAllTouchEvents];
+
     [_feedButton addTarget:self action:@selector(feedButtonPressed:withEvent:) forControlEvents:UIControlEventTouchDown];
     [_feedButton addTarget:self action:@selector(foodImageMoved:withEvent:) forControlEvents:UIControlEventTouchDragInside];
     [_feedButton addTarget:self action:@selector(foodImageMoved:withEvent:) forControlEvents:UIControlEventTouchDragOutside];
     [_feedButton addTarget:self action:@selector(checkPhase:withEvent:) forControlEvents:UIControlEventAllTouchEvents];
-    
-    [_poopButton addTarget:self action:@selector(poopButtonPressed:withEvent:) forControlEvents:UIControlEventTouchDown];
-    [_poopButton addTarget:self action:@selector(poopButtonMoved:withEvent:) forControlEvents:UIControlEventTouchDragInside];
-    [_poopButton addTarget:self action:@selector(poopButtonMoved:withEvent:) forControlEvents:UIControlEventTouchDragOutside];
-    [_poopButton addTarget:self action:@selector(checkPhase:withEvent:) forControlEvents:UIControlEventAllTouchEvents];
     
 }
 
@@ -65,11 +70,12 @@
     return myImage;
 }
 
-- (IBAction) foodImageMoved:(id) sender withEvent:(UIEvent *) event {
+- (IBAction)foodImageMoved:(id) sender withEvent:(UIEvent *) event {
+    NSLog(@"This is getting called...But why?");
     CGPoint point = [[[event allTouches] anyObject] locationInView:self.view];
     if (![self.view viewWithTag:11]) {
         NSData *archivedData = [NSKeyedArchiver archivedDataWithRootObject:(UIButton*)sender];
-        wedgeButton =(UIButton*) [NSKeyedUnarchiver unarchiveObjectWithData:archivedData];
+        wedgeButton = (UIButton*)[NSKeyedUnarchiver unarchiveObjectWithData:archivedData];
         wedgeButton.tag = 11;
         [wedgeButton setImage:[self getImage:@"foodSliceButton"] forState:UIControlStateNormal];
         [self.view addSubview:wedgeButton];
@@ -77,14 +83,14 @@
     [self.view viewWithTag:11].center = point;
 }
 
-- (IBAction) feedButtonPressed:(id) sender withEvent:(UIEvent *) event {
+
+- (IBAction)feedButtonPressed:(id) sender withEvent:(UIEvent *) event {
     int randInt = arc4random() % 5;
-    NSLog(@"%i", randInt);
     if (randInt == 0) {
         [self showPoop];
     }
     NSData *archivedData = [NSKeyedArchiver archivedDataWithRootObject:(UIButton*)sender];
-    wedgeButton =(UIButton*) [NSKeyedUnarchiver unarchiveObjectWithData:archivedData];
+    wedgeButton = (UIButton*)[NSKeyedUnarchiver unarchiveObjectWithData:archivedData];
     wedgeButton.tag = 11;
     [wedgeButton setImage:[self getImage:@"foodSliceButton"] forState:UIControlStateNormal];
     [self.view addSubview:wedgeButton];
@@ -107,8 +113,8 @@
 - (IBAction)playButtonPressed:(id)sender {
     if([[Appa sharedInstance] getSleepStatus]){
         UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:
-        nil message:@"Appa is Asleep! Wake him up in order to play!" delegate:self
-        cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+                                  nil message:@"Appa is Asleep! Wake him up in order to play!" delegate:self
+                                                 cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
         [alertView show];
     }
     else {
@@ -117,9 +123,10 @@
     }
 }
 
-- (IBAction) poopButtonMoved:(id) sender withEvent:(UIEvent *) event {
+- (IBAction)poopButtonMoved:(id) sender withEvent:(UIEvent *) event {
+    NSLog(@"POOP BUTTON IS MOVING!!");
     CGPoint point = [[[event allTouches] anyObject] locationInView:self.view];
-    if (![self.view viewWithTag:12]) {
+    if (![self.view viewWithTag:77]) {
         NSData *archivedData = [NSKeyedArchiver archivedDataWithRootObject:(UIButton*)sender];
         poopButtonDrag =(UIButton*) [NSKeyedUnarchiver unarchiveObjectWithData:archivedData];
         poopButtonDrag.tag = 12;
@@ -130,9 +137,10 @@
 }
 
 - (IBAction)poopButtonPressed:(id) sender withEvent:(UIEvent *) event {
+    NSLog(@"Poop Button has been Pressed!!");
     NSData *archivedData = [NSKeyedArchiver archivedDataWithRootObject:(UIButton*)sender];
-    poopButtonDrag =(UIButton*) [NSKeyedUnarchiver unarchiveObjectWithData:archivedData];
-    poopButtonDrag.tag = 12;
+    poopButtonDrag = (UIButton*)[NSKeyedUnarchiver unarchiveObjectWithData:archivedData];
+    poopButtonDrag.tag = 77;
     [poopButtonDrag setImage:[self getImage:@"littleAppaPoop"] forState:UIControlStateNormal];
     [self.view addSubview:poopButtonDrag];
     poopButtonDrag.center = [[[event allTouches] anyObject] locationInView:self.view];
@@ -148,7 +156,6 @@
     [self.view addSubview:_poopButton];
 }
 
-
 - (IBAction)statusButtonPressed:(id)sender {
     [self performSegueWithIdentifier:@"mainViewToStatus" sender:self];
 }
@@ -161,21 +168,14 @@
 }
 
 - (void) checkPhase:(id) sender withEvent:(UIEvent *) event {
-    NSSet *touches = [event allTouches];
-    UITouch *touch = [touches anyObject];
+    NSSet* touches = [event allTouches];
+    UITouch* touch = [touches anyObject];
     CGPoint touchLocation = [touch locationInView:self.view];
     if (touch.phase == 3) {
         if (CGRectContainsPoint(_appaFaceZone.frame, touchLocation)) {
             if (![[Appa sharedInstance] getSleepStatus]) {
-                NSLog(@"Yay!");
                 [[Appa sharedInstance] feedAppa];
             }
-            else {
-                NSLog(@"Cheater!");
-            }
-        }
-        else {
-            NSLog(@"Boo...");
         }
         [wedgeButton removeFromSuperview];
         wedgeButton = nil;
@@ -195,6 +195,48 @@
     }
 }
 
+- (void) checkPhasePoop:(id) sender withEvent:(UIEvent *) event {
+    NSSet* touches = [event allTouches];
+    UITouch* touch = [touches anyObject];
+    NSLog(@"IN HERE");
+    CGPoint touchLocation = [touch locationInView:self.view];
+    if (touch.phase == 3) {
+        if (CGRectContainsPoint(_cleanUpButton.frame, touchLocation)) {
+            NSLog(@"WORKING!!");
+        }
+        [_poopButton removeFromSuperview];
+        [poopButtonDrag removeFromSuperview];
+        poopButtonDrag = nil;
+    }
+    else if (touch.phase == 1) {
+        NSLog(@"Wtf is this code?");
+    }
+}
+
+
+
+-(void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    _originalPosition = self.view.center;
+    _touchOffset = CGPointMake(self.view.center.x,self.view.center.y);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -203,7 +245,7 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     if (self.isMovingFromParentViewController) {
-        [[Appa sharedInstance] saveState];
+        [[Appa sharedInstance]saveState];
     }
 }
 

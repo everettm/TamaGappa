@@ -656,8 +656,8 @@ Good luck!</string>
                     <navigationItem key="navigationItem" id="6cH-uP-kuj"/>
                     <connections>
                         <outlet property="gameMessage" destination="PmS-KU-TaC" id="5Y2-cF-TGG"/>
-                        <outlet property="numTriesLeftLabel" destination="4U7-Aa-rza" id="cBL-wx-Urc"/>
-                        <outlet property="numTriesLeftStartLabel" destination="Br1-66-MJK" id="5QD-Ri-9Hn"/>
+                        <outlet property="numTriesLeftLabel" destination="4U7-Aa-rza" id="yeD-9b-iKg"/>
+                        <outlet property="numTriesLeftStartLabel" destination="Br1-66-MJK" id="1wt-Re-BQ5"/>
                         <outlet property="resetGameButton" destination="Yx8-jj-hnp" id="s3W-N9-C1D"/>
                         <outlet property="revertALevelButton" destination="zAR-qz-mEp" id="Ynl-nq-0Kv"/>
                         <outlet property="startButton" destination="pLt-3a-6wv" id="aHZ-bi-G8s"/>

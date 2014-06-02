@@ -17,6 +17,8 @@
 @property (strong, nonatomic)IBOutlet UIButton* playButton;
 @property (strong, nonatomic)IBOutlet UIButton* appaFaceZone;
 @property (strong, nonatomic)IBOutlet UIButton* statusButton;
+@property CGPoint originalPosition;
+@property CGPoint touchOffset;
 
 @property (weak, nonatomic)IBOutlet UIImageView* mainAppaView;
 

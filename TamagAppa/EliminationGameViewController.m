@@ -44,7 +44,9 @@
 - (void)startGame
 {
     _gameMessage.text = @"";
-    _numTriesLeftLabel.text = [NSString stringWithFormat:@"%i", _numTriesLeft];
+
+    _numTriesLeftLabel.text = [NSString stringWithFormat:@"%i",_numTriesLeft];
+
     [_clickedButtonList removeAllObjects];
     if ([[NSUserDefaults standardUserDefaults] integerForKey:@"eliminationLevel"] == 1)
     {
@@ -227,7 +229,9 @@
     _curLevel = [[NSUserDefaults standardUserDefaults] integerForKey:@"eliminationLevel"];
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"eliminationLoadPrevData"])
     {
+
         //[[NSUserDefaults standardUserDefaults] setInteger:10 forKey:@"numTriesLeft"];
+
         _numTriesLeft = [[NSUserDefaults standardUserDefaults] integerForKey:@"numTriesLeft"];
         _openSpaces = [[[NSUserDefaults standardUserDefaults] objectForKey:@"currentConfiguration"] mutableCopy];
     }
@@ -302,7 +306,9 @@
         if (!_gameWon)
         {
             [[NSUserDefaults standardUserDefaults] setObject:_openSpaces forKey:@"currentConfiguration"];
+
             [[NSUserDefaults standardUserDefaults] setInteger:_numTriesLeft forKey:@"numTriesLeft"];
+
             [[NSUserDefaults standardUserDefaults] setBool:!_gameWon forKey:@"eliminationLoadPrevData"];
         }
     }
@@ -325,16 +331,3 @@
 
 
 @end
-
-
-
-
-
-
-
-
-
-
-
-
-

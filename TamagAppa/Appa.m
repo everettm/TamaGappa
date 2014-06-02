@@ -133,7 +133,6 @@
             curEnergy = 0;
         }
         
-//        curHealth -= (maxHealth/hour)*hungerMultiplier*[self toThePowerOf:.98 :(float)level];
         curHealth = ((curEnergy + curHappiness + curHunger)/3)*[self toThePowerOf:.98 :(float)level];
         if(curHealth <= 0){
             curHealth = 0;
@@ -143,11 +142,11 @@
 
 -(void) restoreStatus{
     curEnergy += maxEnergy/1800;
-//    curHappiness += maxHappiness/1800;
+    //    curHappiness += maxHappiness/1800;
     //curHealth += maxHealth/1800;
-//    curEnergy += 2;
-//    curHappiness += 2;
-//    curHealth += 2;
+    //    curEnergy += 2;
+    //    curHappiness += 2;
+    //    curHealth += 2;
     
     if(curEnergy >= maxEnergy){
         curEnergy = maxEnergy;
@@ -168,14 +167,16 @@
         
         curHappiness -= maxHappiness/5;
         if(curHappiness <=0){
-                curHappiness = 0;
-            }
+            curHappiness = 0;
+        }
+
         curHealth -= maxHealth/5;
         if(curHealth <= 0){
             curHealth = 0;
         }
         
     }
+    
     else {
         curHunger += (maxHunger/4);
         
@@ -209,6 +210,20 @@
         curEnergy = 0;
     }
 
+}
+
+-(void) playWithAppa{
+    //curHappiness += 50;
+    curHappiness += (maxHappiness/4);
+    if(curHappiness >= maxHappiness) {
+        curHappiness = maxHappiness;
+    }
+    
+    curEnergy -= (maxEnergy/3);
+    if(curEnergy <= 0){
+        curEnergy = 0;
+    }
+    
 }
 
 -(void) putAppaToSleep{
