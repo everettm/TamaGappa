@@ -28,6 +28,7 @@
 -(int)getLevel;
 -(bool)getSleepStatus;
 -(void)feedAppa;
+-(void)playWithAppa;
 -(void)putAppaToSleep;
 -(void)wakeAppaUp;
 -(void)restoreStatus;

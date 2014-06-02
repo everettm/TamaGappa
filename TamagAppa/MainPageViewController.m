@@ -112,6 +112,7 @@
         [alertView show];
     }
     else {
+        [[Appa sharedInstance] playWithAppa];
         [self performSegueWithIdentifier:@"mainViewToLevelSelect" sender:self];
     }
 }
