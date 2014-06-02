@@ -31,7 +31,7 @@
 -(void)putAppaToSleep;
 -(void)wakeAppaUp;
 -(void)restoreStatus;
-+(void)saveState;
+-(void)saveState;
 -(void)loadState;
 +(Appa*)sharedInstance;
 

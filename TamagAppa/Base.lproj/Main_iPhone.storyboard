@@ -307,6 +307,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="C2o-Wi-O3K"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Xg-9E-sJ9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

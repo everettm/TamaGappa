@@ -170,7 +170,7 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     if (self.isMovingFromParentViewController) {
-        [Appa saveState];
+        [[Appa sharedInstance] saveState];
     }
 }
 

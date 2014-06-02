@@ -12,5 +12,7 @@
 @interface AppaCopterViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UIButton *flyingAppa;
 @property (strong, nonatomic) IBOutlet UILongPressGestureRecognizer *theMagicButton;
+@property (weak, nonatomic) IBOutlet UIButton *rightButton;
+@property (weak, nonatomic) IBOutlet UIButton *leftButton;
 
 @end
