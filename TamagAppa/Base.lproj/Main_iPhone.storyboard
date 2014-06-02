@@ -301,7 +301,7 @@
                         <viewControllerLayoutGuide type="top" id="gVD-ji-PLV"/>
                         <viewControllerLayoutGuide type="bottom" id="hu8-H2-CA5"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="bZg-QW-PxZ">
+                    <view key="view" contentMode="scaleToFill" id="bZg-QW-PxZ" customClass="SKView">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>

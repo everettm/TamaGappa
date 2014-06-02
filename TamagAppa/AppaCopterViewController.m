@@ -28,41 +28,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    animateHelper = 1;
-    [self performSelectorInBackground:@selector(constantlyAnimate) withObject:nil];
-    //    [[FlyingAppa alloc] initWithNothing];
     
 }
 
--(void)constantlyAnimate{
-    CGRect viewFrame = _flyingAppa.frame;
-    while(true){
-        viewFrame.origin.x += animateHelper;
-        [UIView animateWithDuration:0.1
-                              delay:0.0
-                            options:UIViewAnimationOptionCurveLinear
-                         animations:^{
-                             _flyingAppa.frame = viewFrame;
-                         }
-                         completion:^(BOOL finished){}];
-    }
-}
 
-//-(void)flyUp{
-//    animateHelper = 1;
-//    if (_theMagicButton.state == UIGestureRecognizerStateEnded) {
-//        NSLog(@"Button is released?");
-//        animateHelper = -1;
-//    }
-//}
 
-- (IBAction)flyUp:(id)sender {
-    animateHelper = 1;
-    if (_theMagicButton.state == UIGestureRecognizerStateEnded) {
-        NSLog(@"Button is released?");
-        animateHelper = -1;
-    }
-}
+
+
 
 - (void)didReceiveMemoryWarning
 {

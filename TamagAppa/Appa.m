@@ -12,6 +12,7 @@
     bool isAsleep;
     float happinessMultiplier;
     float hungerMultiplier;
+    float hour;
     NSUserDefaults* appaSettings;
 }
 @synthesize level;
@@ -46,6 +47,8 @@
     maxEnergy = 100 + level*0.5;
     maxHunger = 100 + level*0.5;
     maxHealth = 100 + level*0.5;
+    
+    hour = 3600;
     
     myTimer = [NSTimer scheduledTimerWithTimeInterval:5.0
                                                target:self
@@ -98,8 +101,8 @@
     }
     
     else{
-        //        curHappiness -= (maxHappiness/10800);
-        curHappiness -= .5;
+        curHappiness -= ((maxHappiness/hour)*[self toThePowerOf:.98 :(float)level]);
+//        curHappiness -= .5;
         if(curHappiness <= 0.5*maxHappiness){
             happinessMultiplier = 2.0;
         }
@@ -110,8 +113,8 @@
             curHappiness = 0;
         }
         
-        //        curHunger -= maxHunger/21600;
-        curHunger -= .5;
+        curHunger -= maxHunger/hour*[self toThePowerOf:.98 :(float)level];
+//        curHunger -= .5;
         if(curHunger <= 0.5*maxHunger){
             hungerMultiplier = 2.0;
         }
@@ -122,14 +125,14 @@
             curHunger = 0;
         }
         
-        //        curEnergy -= (maxEnergy/21600)*happinessMultiplier*hungerMultiplier;
-        curEnergy -= .5;
+        curEnergy -= (maxEnergy/hour)*happinessMultiplier*hungerMultiplier*[self toThePowerOf:.98 :(float)level];
+//        curEnergy -= .5;
         if(curEnergy <= 0){
             curEnergy = 0;
         }
         
-        //        curHealth -= (maxHealth/21600)*hungerMultiplier;
-        curHealth -= .5;
+        curHealth -= (maxHealth/hour)*hungerMultiplier*[self toThePowerOf:.98 :(float)level];
+//        curHealth -= .5;
         if(curHealth <= 0){
             curHealth = 0;
         }
@@ -137,12 +140,12 @@
 }
 
 -(void) restoreStatus{
-    //    curEnergy += maxEnergy/1800;
-    //    curHappiness += maxHappiness/1800;
-    //    curHealth += maxHealth/1800;
-    curEnergy += 2;
-    curHappiness += 2;
-    curHealth += 2;
+    curEnergy += maxEnergy/1800;
+    curHappiness += maxHappiness/1800;
+    curHealth += maxHealth/1800;
+//    curEnergy += 2;
+//    curHappiness += 2;
+//    curHealth += 2;
     
     if(curEnergy >= maxEnergy){
         curEnergy = maxEnergy;
@@ -190,6 +193,15 @@
     curEnergy = [appaSettings floatForKey:@"curEnergy"];
     level = [appaSettings integerForKey:@"level"];
     isAsleep = [appaSettings boolForKey:@"isAsleep"];
+}
+
+-(float)toThePowerOf:(float)x :(float)y{
+    if(y==0){
+        return 1;
+    }
+    else{
+        return x * [self toThePowerOf:x :y-1];
+    }
 }
 
 + (Appa*)sharedInstance{

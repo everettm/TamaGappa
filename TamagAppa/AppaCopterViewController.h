@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <SpriteKit/SpriteKit.h>
 
 @interface AppaCopterViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UIButton *flyingAppa;
