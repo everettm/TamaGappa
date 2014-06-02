@@ -26,13 +26,17 @@
 @synthesize numButtonsPerRow;
 @synthesize numButtonsPerColumn;
 @synthesize numWrongGuesses;
+@synthesize trueObject;
+@synthesize falseObject;
+@synthesize spacesWithAppas;
 
 - (void)showAppas
 {
     [self hideAppas];
-    [randInts removeAllObjects];
     numberOfAppas.text = [NSString stringWithFormat:@"%i", numAppas];
     self.view.userInteractionEnabled = NO;
+    [randInts removeAllObjects];
+    [spacesWithAppas removeAllObjects];
     for (int i = 1; i<= numAppas; i++)
     {
         int randInt = arc4random() %(numButtonsPerRow*numButtonsPerColumn)+4;
@@ -65,6 +69,8 @@
     [backgroundImage setImage:[UIImage imageNamed:@"background"]];
     [self.view addSubview:backgroundImage];
     [self.view sendSubviewToBack:backgroundImage];
+    //[self resetUserDefaults];
+    NSLog(@"%i", [patternSettings integerForKey:@"patternLevel"]);
     if ([patternSettings integerForKey:@"patternLevel"] == 0)
     {
         [patternSettings setInteger:1 forKey:@"patternLevel"];
@@ -74,18 +80,25 @@
     numAppas = [patternSettings integerForKey:@"patternLevel"] + 2;
     numButtonsPerRow = [patternSettings integerForKey:@"row"];
     numButtonsPerColumn = [patternSettings integerForKey:@"column"];
+    for (int i = 0; i < numButtonsPerRow * numButtonsPerColumn; i ++)
+    {
+        
+    }
     //numAppas = 3;
     gameInfo.text = @"";
     randInts = [[NSMutableArray alloc] init];
-    for (int i = 1; i < 4; i++) { [(UIImageView*)[self.view viewWithTag:i] setImage:[UIImage imageNamed:@"grayX"]]; }
-    //[self resetUserDefaults];
+    spacesWithAppas = [[NSMutableArray alloc] init];
+    for (int i = 1; i <= 3; i++) { [(UIImageView*)[self.view viewWithTag:i] setImage:[UIImage imageNamed:@"grayX"]]; }
     [self createButtons];
     [self showAppas];
 }
 
 - (void)resetUserDefaults
 {
-    [patternSettings setInteger:0 forKey:@"patternLevel"];
+//    [patternSettings removeObjectForKey:@"patternLevel"];
+//    [patternSettings removeObjectForKey:@"row"];
+//    [patternSettings removeObjectForKey:@"column"];
+    [patternSettings setInteger:1 forKey:@"patternLevel"];
     [patternSettings setInteger:3 forKey:@"row"];
     [patternSettings setInteger:4 forKey:@"column"];
 }
@@ -123,54 +136,57 @@
 
 - (void)checkValidity:(int)button
 {
-    if(![randInts containsObject:[NSNumber numberWithInt: button]])
+    if (![spacesWithAppas containsObject:[NSNumber numberWithInt: button]])
     {
-        numWrongGuesses += 1;
-        [(UIImageView*)[self.view viewWithTag:numWrongGuesses] setImage:[UIImage imageNamed:@"redX"]];
-        if (numWrongGuesses < 3)
+        if(![randInts containsObject:[NSNumber numberWithInt: button]])
         {
-            gameInfo.text = @"Sorry, that was wrong.";
-            self.view.userInteractionEnabled = NO;
-            [self performSelector:@selector(showAppas) withObject:nil afterDelay:2.0f];
-            if (numAppas > 3)
+            numWrongGuesses += 1;
+            [(UIImageView*)[self.view viewWithTag:numWrongGuesses] setImage:[UIImage imageNamed:@"redX"]];
+            if (numWrongGuesses < 3)
             {
-                numAppas -= 1;
-            }
-        }
-        else
-        {
-            gameInfo.text = @"You lose.";
-            self.view.userInteractionEnabled = NO;
-        }
-    }
-    else
-    {
-        [randInts removeObject: [NSNumber numberWithInt: button]];
-    }
-    if ([randInts count] == 0)
-    {
-        if (numAppas == [patternSettings integerForKey:@"patternLevel"] + 1)
-        //if (numAppas == (numButtonsPerRow * numButtonsPerColumn)/2 + 1)
-        {
-            gameInfo.text = @"Level up!";
-            int currentLevel = [patternSettings integerForKey:@"patternLevel"];
-            currentLevel += 1;
-            [patternSettings setInteger:currentLevel forKey:@"patternLevel"];
-            if (currentLevel % 2 == 0)
-            {
-                numButtonsPerRow += 1;
+                gameInfo.text = @"Sorry, that was wrong.";
+                self.view.userInteractionEnabled = NO;
+                [self performSelector:@selector(showAppas) withObject:nil afterDelay:2.0f];
+                if (numAppas > 3)
+                {
+                    numAppas -= 1;
+                }
             }
             else
             {
-                numButtonsPerColumn += 1;
+                gameInfo.text = @"You lose.";
+                self.view.userInteractionEnabled = NO;
             }
-            [patternSettings setInteger:numButtonsPerRow forKey:@"row"];
-            [patternSettings setInteger:numButtonsPerColumn forKey:@"column"];
         }
         else
         {
-            [self performSelector:@selector(showAppas) withObject:nil afterDelay:0.5f];
-            numAppas += 1;
+            [randInts removeObject: [NSNumber numberWithInt: button]];
+            [spacesWithAppas addObject: [NSNumber numberWithInt: button]];
+        }
+        if ([randInts count] == 0)
+        {
+            if (numAppas == (numButtonsPerRow * numButtonsPerColumn)/2 + 1)
+            {
+                gameInfo.text = @"Level up!";
+                int currentLevel = [patternSettings integerForKey:@"patternLevel"];
+                currentLevel += 1;
+                [patternSettings setInteger:currentLevel forKey:@"patternLevel"];
+                if (currentLevel % 2 == 0)
+                {
+                    numButtonsPerRow += 1;
+                }
+                else
+                {
+                    numButtonsPerColumn += 1;
+                }
+                [patternSettings setInteger:numButtonsPerRow forKey:@"row"];
+                [patternSettings setInteger:numButtonsPerColumn forKey:@"column"];
+            }
+            else
+            {
+                [self performSelector:@selector(showAppas) withObject:nil afterDelay:0.5f];
+                numAppas += 1;
+            }
         }
     }
     
@@ -194,7 +210,8 @@
     {
         [patternSettings setInteger:numButtonsPerRow forKey:@"row"];
         [patternSettings setInteger:numButtonsPerColumn  forKey:@"column"];
-        [patternSettings setInteger:numAppas forKey:@"numAppas"];
+        //[patternSettings setObject:spacesWithAppas forKey:@"spacesWithAppas"];
+        //[patternSettings setObject:randInts forKey:@"spacesWithRandomAppas"];
         if (([patternSettings integerForKey:@"eliminationLoadPrevData"] + [patternSettings integerForKey:@"patternLoadPrevData"]) % 5 == 0)
         {
             int curLevel = [patternSettings integerForKey:@"level"];

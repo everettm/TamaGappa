@@ -13,6 +13,7 @@
 @interface MainPageViewController (){
     UIColor *skyColor;
     UIButton *wedgeButton;
+    UIButton *poopButtonDrag;
     NSMutableDictionary *imageCache;
 }
 
@@ -45,6 +46,11 @@
     [_feedButton addTarget:self action:@selector(foodImageMoved:withEvent:) forControlEvents:UIControlEventTouchDragOutside];
     [_feedButton addTarget:self action:@selector(checkPhase:withEvent:) forControlEvents:UIControlEventAllTouchEvents];
     
+    [_poopButton addTarget:self action:@selector(poopButtonPressed:withEvent:) forControlEvents:UIControlEventTouchDown];
+    [_poopButton addTarget:self action:@selector(poopButtonMoved:withEvent:) forControlEvents:UIControlEventTouchDragInside];
+    [_poopButton addTarget:self action:@selector(poopButtonMoved:withEvent:) forControlEvents:UIControlEventTouchDragOutside];
+    [_poopButton addTarget:self action:@selector(checkPhase:withEvent:) forControlEvents:UIControlEventAllTouchEvents];
+    
 }
 
 - (UIImage*)getImage:(NSString*)fileName {
@@ -62,33 +68,27 @@
 - (IBAction) foodImageMoved:(id) sender withEvent:(UIEvent *) event {
     CGPoint point = [[[event allTouches] anyObject] locationInView:self.view];
     if (![self.view viewWithTag:11]) {
-        
         NSData *archivedData = [NSKeyedArchiver archivedDataWithRootObject:(UIButton*)sender];
-        
         wedgeButton =(UIButton*) [NSKeyedUnarchiver unarchiveObjectWithData:archivedData];
-        
         wedgeButton.tag = 11;
-        
         [wedgeButton setImage:[self getImage:@"foodSliceButton"] forState:UIControlStateNormal];
-        
         [self.view addSubview:wedgeButton];
     }
-    
     [self.view viewWithTag:11].center = point;
 }
 
 - (IBAction) feedButtonPressed:(id) sender withEvent:(UIEvent *) event {
+    int randInt = arc4random() % 5;
+    NSLog(@"%i", randInt);
+    if (randInt == 0) {
+        [self showPoop];
+    }
     NSData *archivedData = [NSKeyedArchiver archivedDataWithRootObject:(UIButton*)sender];
-    
     wedgeButton =(UIButton*) [NSKeyedUnarchiver unarchiveObjectWithData:archivedData];
-    
     wedgeButton.tag = 11;
-    
     [wedgeButton setImage:[self getImage:@"foodSliceButton"] forState:UIControlStateNormal];
-    
     [self.view addSubview:wedgeButton];
     wedgeButton.center = [[[event allTouches] anyObject] locationInView:self.view];
-    
 }
 
 - (IBAction)sleepButtonPressed:(id)sender {
@@ -97,7 +97,7 @@
         [sender setImage:[self getImage:@"sleepButton"] forState:UIControlStateNormal];
         self.mainAppaView.image = [self getImage:@"appaNeutral"];
     }
-    else{
+    else {
         [[Appa sharedInstance] putAppaToSleep];
         [sender setImage:[self getImage:@"wakeUpButton"] forState:UIControlStateNormal];
         self.mainAppaView.image = [self getImage:@"appaSleeping"];
@@ -112,9 +112,42 @@
         [alertView show];
     }
     else {
+        [[Appa sharedInstance] playWithAppa];
         [self performSegueWithIdentifier:@"mainViewToLevelSelect" sender:self];
     }
 }
+
+- (IBAction) poopButtonMoved:(id) sender withEvent:(UIEvent *) event {
+    CGPoint point = [[[event allTouches] anyObject] locationInView:self.view];
+    if (![self.view viewWithTag:12]) {
+        NSData *archivedData = [NSKeyedArchiver archivedDataWithRootObject:(UIButton*)sender];
+        poopButtonDrag =(UIButton*) [NSKeyedUnarchiver unarchiveObjectWithData:archivedData];
+        poopButtonDrag.tag = 12;
+        [poopButtonDrag setImage:[self getImage:@"littleAppaPoop"] forState:UIControlStateNormal];
+        [self.view addSubview:poopButtonDrag];
+    }
+    [self.view viewWithTag:12].center = point;
+}
+
+- (IBAction)poopButtonPressed:(id) sender withEvent:(UIEvent *) event {
+    NSData *archivedData = [NSKeyedArchiver archivedDataWithRootObject:(UIButton*)sender];
+    poopButtonDrag =(UIButton*) [NSKeyedUnarchiver unarchiveObjectWithData:archivedData];
+    poopButtonDrag.tag = 12;
+    [poopButtonDrag setImage:[self getImage:@"littleAppaPoop"] forState:UIControlStateNormal];
+    [self.view addSubview:poopButtonDrag];
+    poopButtonDrag.center = [[[event allTouches] anyObject] locationInView:self.view];
+}
+
+- (void)showPoop {
+    int xCoord = arc4random() % 290;
+    int yCoord = arc4random() % 80 + 400;
+    _poopButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [_poopButton addTarget:self action:@selector(poopButtonPressed:withEvent:) forControlEvents:UIControlEventTouchUpInside];
+    [_poopButton setImage:[UIImage imageNamed:@"littleAppaPoop"] forState:UIControlStateNormal];
+    _poopButton.frame = CGRectMake(xCoord, yCoord, 30, 30);
+    [self.view addSubview:_poopButton];
+}
+
 
 - (IBAction)statusButtonPressed:(id)sender {
     [self performSegueWithIdentifier:@"mainViewToStatus" sender:self];
@@ -147,7 +180,7 @@
         [wedgeButton removeFromSuperview];
         wedgeButton = nil;
         if(![[Appa sharedInstance] getSleepStatus]){
-            self.mainAppaView.image = [self getImage:@"appaNeutral"];
+        self.mainAppaView.image = [self getImage:@"appaNeutral"];
         }
     }
     else if (touch.phase == 1) {
