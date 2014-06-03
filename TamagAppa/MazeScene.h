@@ -8,6 +8,6 @@
 
 #import <SpriteKit/SpriteKit.h>
 
-@interface MazeScene : SKScene <UIGestureRecognizerDelegate> <SKPhysicsContactDelegate>
+@interface MazeScene : SKScene <UIGestureRecognizerDelegate, SKPhysicsContactDelegate>
 
 @end

@@ -143,6 +143,11 @@
                                 <rect key="frame" x="0.0" y="503" width="320" height="65"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
+                                    <view alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ewb-fU-Dky">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q64-BK-nt3">
                                         <rect key="frame" x="20" y="10" width="47" height="47"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -173,15 +178,18 @@
                                             <action selector="playButtonPressed:" destination="EWp-HO-Cc6" eventType="touchUpInside" id="vEH-uE-wh9"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HNb-yB-6wO">
-                                        <rect key="frame" x="246" y="9" width="54" height="50"/>
+                                    <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HNb-yB-6wO">
+                                        <rect key="frame" x="246" y="10" width="54" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" image="cleanUpButton">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="cleanUpButtonPressed:" destination="EWp-HO-Cc6" eventType="touchUpInside" id="ewr-pG-k9c"/>
+                                        </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.89803928136825562" green="0.87450987100601196" blue="0.81960791349411011" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="backgroundColor" red="0.8980392814" green="0.87450987099999999" blue="0.81960791349999995" alpha="1" colorSpace="deviceRGB"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -190,6 +198,7 @@
                     <connections>
                         <outlet property="appaFaceZone" destination="8lV-JI-ADL" id="Zsb-4A-aC2"/>
                         <outlet property="cleanUpButton" destination="HNb-yB-6wO" id="Fin-oj-w54"/>
+                        <outlet property="dimView" destination="Ewb-fU-Dky" id="Gpz-t4-YCn"/>
                         <outlet property="feedButton" destination="OMq-kV-KX1" id="EPK-d8-fyR"/>
                         <outlet property="happinessBar" destination="nFd-F7-Evh" id="Yko-EX-f9J"/>
                         <outlet property="healthBar" destination="kWS-n7-KeO" id="zvE-Ik-pmQ"/>
@@ -199,6 +208,7 @@
                         <outlet property="playButton" destination="GZw-0b-eAe" id="1sQ-do-CAy"/>
                         <outlet property="sleepButton" destination="q64-BK-nt3" id="3LV-nt-i2j"/>
                         <outlet property="statusButton" destination="5w0-3Q-4Z4" id="SOK-5d-NbR"/>
+                        <outlet property="toolBar" destination="I3h-TJ-GHh" id="30A-aq-X0b"/>
                         <segue destination="cwR-6r-pBQ" kind="push" identifier="mainViewToLevelSelect" id="T38-tQ-TIW"/>
                         <segue destination="qXl-Fa-Bup" kind="modal" identifier="mainViewToStatus" modalTransitionStyle="partialCurl" id="0Xf-11-XDY"/>
                     </connections>
@@ -716,6 +726,17 @@ Good luck!</string>
                                 <rect key="frame" x="91" y="69" width="35" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tFM-zr-qiq">
+                                <rect key="frame" x="227" y="72" width="81" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Instructions">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="FUM-5x-cXm" kind="push" id="o7s-TS-6PL"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>

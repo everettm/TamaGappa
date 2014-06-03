@@ -11,14 +11,13 @@
 @interface MainPageViewController : UIViewController
 
 @property (strong, nonatomic)IBOutlet UIButton* feedButton;
-@property (strong, nonatomic)IBOutlet UIButton* poopButton;
 @property (strong, nonatomic)IBOutlet UIButton* sleepButton;
 @property (strong, nonatomic)IBOutlet UIButton* cleanUpButton;
 @property (strong, nonatomic)IBOutlet UIButton* playButton;
 @property (strong, nonatomic)IBOutlet UIButton* appaFaceZone;
 @property (strong, nonatomic)IBOutlet UIButton* statusButton;
-@property CGPoint originalPosition;
-@property CGPoint touchOffset;
+@property (strong, nonatomic)IBOutlet UIView* toolBar;
+@property (strong, nonatomic)IBOutlet UIView* dimView;
 
 @property (weak, nonatomic)IBOutlet UIImageView* mainAppaView;
 

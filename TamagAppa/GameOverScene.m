@@ -1,9 +1,9 @@
 //
-//  GameOverScene.m
-//  GameTutorial
+// GameOverScene.m
+// GameTutorial
 //
-//  Created by MEGHA GULATI on 11/13/13.
-//  Copyright (c) 2013 MEGHA GULATI. All rights reserved.
+// Created by MEGHA GULATI on 11/13/13.
+// Copyright (c) 2013 MEGHA GULATI. All rights reserved.
 //
 
 #import "GameOverScene.h"
@@ -38,7 +38,7 @@
         [retryButton setScale:.5];
         
         [self addChild:retryButton];
-
+        
         
     }
     return self;
@@ -57,7 +57,7 @@
         MazeScene * scene = [MazeScene sceneWithSize:self.view.bounds.size];
         scene.scaleMode = SKSceneScaleModeAspectFill;
         [self.view presentScene:scene transition: reveal];
-
+        
     }
 }
 @end
