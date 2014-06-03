@@ -104,6 +104,7 @@
     [patternSettings setInteger:4 forKey:@"column"];
 }
 
+
 - (void)createButtons
 {
     double height = 300/numButtonsPerRow;

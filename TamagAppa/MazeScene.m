@@ -64,10 +64,10 @@ static inline CGPoint CGPointMultiplyScalar(const CGPoint a, const CGFloat b)
         [self addVerticalWallWithxPos:3 yPos:1];
         [self addHorizontalWallWithxPos:5 yPos:2];
         
-//        int i = 0;
-//        int j = 0;
-//        for (i = 1; i < 6; i++) {
-//            for (j = 1; j < 6; j++) {
+//        for (int i = 1; i < 6; i++) {
+//            [self addHorizontalWallWithxPos:i yPos:6];
+//            [self addVerticalWallWithxPos:0 yPos:i];
+//            for (int j = 1; j < 6; j++) {
 //                [self addVerticalWallWithxPos:i yPos:j];
 //                [self addHorizontalWallWithxPos:i yPos:j];
 //            }
