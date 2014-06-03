@@ -46,8 +46,8 @@
     [self setTopMenuButtonAttrs:_statusButton];
 
     [_feedButton addTarget:self action:@selector(feedButtonPressed:withEvent:) forControlEvents:UIControlEventTouchDown];
-    [_feedButton addTarget:self action:@selector(foodImageDragging:withEvent:) forControlEvents:UIControlEventTouchDragInside];
-    [_feedButton addTarget:self action:@selector(foodImageDragging:withEvent:) forControlEvents:UIControlEventTouchDragOutside];
+    [_feedButton addTarget:self action:@selector(feedImageDragging:withEvent:) forControlEvents:UIControlEventTouchDragInside];
+    [_feedButton addTarget:self action:@selector(feedImageDragging:withEvent:) forControlEvents:UIControlEventTouchDragOutside];
     [_feedButton addTarget:self action:@selector(checkPhase:withEvent:) forControlEvents:UIControlEventAllTouchEvents];
     
 }
@@ -65,7 +65,7 @@
 }
 
 
-- (IBAction)feedButtonPressed:(id) sender withEvent:(UIEvent *) event {
+- (IBAction)feedButtonPressed:(id)sender withEvent:(UIEvent *) event {
     NSData *archivedData = [NSKeyedArchiver archivedDataWithRootObject:(UIButton*)sender];
     wedgeButton = (UIButton*)[NSKeyedUnarchiver unarchiveObjectWithData:archivedData];
     wedgeButton.tag = 11;
@@ -100,7 +100,7 @@
     }
 }
 
-- (IBAction)foodImageDragging:(id) sender withEvent:(UIEvent *) event {
+- (IBAction)feedImageDragging:(id)sender withEvent:(UIEvent *) event {
     CGPoint point = [[[event allTouches] anyObject] locationInView:self.view];
     if (![self.view viewWithTag:11]) {
         NSData *archivedData = [NSKeyedArchiver archivedDataWithRootObject:(UIButton*)sender];
@@ -110,6 +110,21 @@
         [self.view addSubview:wedgeButton];
     }
     [self.view viewWithTag:11].center = point;
+}
+
+- (IBAction)statusButtonPressed:(id)sender {
+    [self performSegueWithIdentifier:@"mainViewToStatus" sender:self];
+}
+
+- (IBAction)imageToCleanUpDragging:(id)sender withEvent:(UIEvent *) event {
+    [_dimView setAlpha:.5];
+    [_sleepButton setHighlighted:YES];
+    [_feedButton setHighlighted:YES];
+    [_playButton setHighlighted:YES];
+    [_cleanUpButton setUserInteractionEnabled:YES];
+    CGPoint point = [[[event allTouches] anyObject] locationInView:self.view];
+    UIButton* myButton = (UIButton*)sender;
+    myButton.center = point;
 }
 
 - (void)showPoop {
@@ -130,7 +145,7 @@
     [self.view addSubview:poopButton];
 }
 
--(void)showFoodWaste {
+- (void)showFoodWaste {
     int yCoord = arc4random() % 30 + 400;
     UIButton *foodWasteButton = [UIButton buttonWithType:UIButtonTypeCustom];
     
@@ -162,18 +177,7 @@
     
 }
 
--(IBAction)imageToCleanUpDragging:(id) sender withEvent:(UIEvent *) event {
-    [_dimView setAlpha:.5];
-    [_sleepButton setHighlighted:YES];
-    [_feedButton setHighlighted:YES];
-    [_playButton setHighlighted:YES];
-    [_cleanUpButton setUserInteractionEnabled:YES];
-    CGPoint point = [[[event allTouches] anyObject] locationInView:self.view];
-    UIButton* myButton = (UIButton*)sender;
-    myButton.center = point;
-}
-
-- (void) imageToCleanUpDragEnd:(id) sender withEvent:(UIEvent*) event {
+- (void)imageToCleanUpDragEnd:(id)sender withEvent:(UIEvent*) event {
     
     [_dimView setAlpha:0];
     [_sleepButton setHighlighted:NO];
@@ -202,18 +206,14 @@
     }
 }
 
-- (IBAction)statusButtonPressed:(id)sender {
-    [self performSegueWithIdentifier:@"mainViewToStatus" sender:self];
-}
-
-- (void) setTopMenuButtonAttrs:(UIButton*)button {
+- (void)setTopMenuButtonAttrs:(UIButton*)button {
     [button setTitleColor:skyColor forState:UIControlStateNormal];
     [[button layer] setBorderWidth:0.5f];
     [[button layer] setBorderColor:skyColor.CGColor];
     [button setAlpha:0.7f];
 }
 
-- (void) checkPhase:(id)sender withEvent:(UIEvent *) event {
+- (void)checkPhase:(id)sender withEvent:(UIEvent *) event {
     NSSet* touches = [event allTouches];
     UITouch* touch = [touches anyObject];
     CGPoint touchLocation = [touch locationInView:self.view];

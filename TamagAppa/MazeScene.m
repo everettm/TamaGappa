@@ -5,6 +5,7 @@
 // Created by Lab User on 6/1/14.
 // Copyright (c) 2014 Team G. All rights reserved.
 //
+// view dimensions: (320,568)
 
 #import "MazeScene.h"
 #import "GameOverScene.h"
@@ -13,7 +14,9 @@ static const uint32_t bisonCategory = 0x1 << 0;
 static const uint32_t obstacleCategory = 0x1 << 1;
 
 static const float BG_VELOCITY = 100.0;
-static const float OBJECT_VELOCITY = 160.0;
+static const float OBJECT_VELOCITY = 200.0;
+static const float TILE_SIZE = 40.0;
+static const float WALL_WIDTH = 1;
 
 static inline CGPoint CGPointAdd(const CGPoint a, const CGPoint b)
 {
@@ -29,25 +32,49 @@ static inline CGPoint CGPointMultiplyScalar(const CGPoint a, const CGFloat b)
 @implementation MazeScene {
     
     SKSpriteNode *bison;
-    SKAction *actionMoveLeft;
-    SKAction *actionMoveRight;
-    SKAction *actionMoveUp;
-    SKAction *actionMoveDown;
+    SKSpriteNode *mazeBox;
     
     NSTimeInterval _lastUpdateTime;
     NSTimeInterval _dt;
-    NSTimeInterval _lastMissileAdded;
+    NSTimeInterval _lastnewWallAdded;
     
     UISwipeGestureRecognizer *swipeRightGesture;
     UISwipeGestureRecognizer *swipeLeftGesture;
     UISwipeGestureRecognizer *swipeUpGesture;
     UISwipeGestureRecognizer *swipeDownGesture;
+    
+    int bisonXvel;
+    int bisonYvel;
+    int mazeDimensions;
 }
 
 -(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
+        mazeDimensions = 5;
         self.backgroundColor = [SKColor whiteColor];
-        [self addShip];
+        [self addMazeBox];
+        [self addBison];
+        
+        [self addHorizontalWallWithxPos:2 yPos:5];
+        [self addVerticalWallWithxPos:3 yPos:5];
+        [self addHorizontalWallWithxPos:5 yPos:4];
+        [self addVerticalWallWithxPos:1 yPos:3];
+        [self addHorizontalWallWithxPos:3 yPos:3];
+        [self addHorizontalWallWithxPos:2 yPos:2];
+        [self addVerticalWallWithxPos:3 yPos:1];
+        [self addHorizontalWallWithxPos:5 yPos:2];
+        
+//        int i = 0;
+//        int j = 0;
+//        for (i = 1; i < 6; i++) {
+//            for (j = 1; j < 6; j++) {
+//                [self addVerticalWallWithxPos:i yPos:j];
+//                [self addHorizontalWallWithxPos:i yPos:j];
+//            }
+//        }
+
+        bisonXvel = 0;
+        bisonYvel = 0;
         
         //Making self delegate of physics World
         self.physicsWorld.gravity = CGVectorMake(0,0);
@@ -75,12 +102,12 @@ static inline CGPoint CGPointMultiplyScalar(const CGPoint a, const CGFloat b)
 }
 
 
--(void)addShip
+-(void)addBison
 {
     //initalizing spaceship node
     bison = [SKSpriteNode spriteNodeWithImageNamed:@"Appa"];
-    [bison setScale:0.25];
-    // bison.zRotation = - M_PI / 2;
+    [bison setScale:0.11];
+    NSLog(@"%@", NSStringFromCGRect(bison.frame));
     
     //Adding SpriteKit physicsBody for collision detection
     bison.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:bison.size];
@@ -90,97 +117,86 @@ static inline CGPoint CGPointMultiplyScalar(const CGPoint a, const CGFloat b)
     bison.physicsBody.collisionBitMask = 0;
     bison.physicsBody.usesPreciseCollisionDetection = YES;
     bison.name = @"ship";
-    bison.position = CGPointMake(125,450);
-    // bison.position = CGPointMake(320,568);
-    actionMoveLeft = [SKAction moveByX:-30 y:0 duration:.2];
-    actionMoveRight = [SKAction moveByX:30 y:0 duration:.2];
-    actionMoveUp = [SKAction moveByX:0 y:30 duration:.2];
-    actionMoveDown = [SKAction moveByX:0 y:-30 duration:.2];
-    
+    bison.position = CGPointMake(70,194);
     [self addChild:bison];
+    [self setBisonStartingTileX:1 Y:5];
 }
 
--(void)addMissile
-{
-    //initalizing spaceship node
-    SKSpriteNode *missile;
-    missile = [SKSpriteNode spriteNodeWithImageNamed:@"feedButton"];
-    [missile setScale:0.15];
-    
-    //Adding SpriteKit physicsBody for collision detection
-    missile.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:missile.size];
-    missile.physicsBody.categoryBitMask = obstacleCategory;
-    missile.physicsBody.dynamic = YES;
-    missile.physicsBody.contactTestBitMask = bisonCategory;
-    missile.physicsBody.collisionBitMask = 0;
-    missile.physicsBody.usesPreciseCollisionDetection = YES;
-    missile.name = @"missile";
-    
-    //selecting random y position for missile
-    int r = arc4random() % 300;
-    missile.position = CGPointMake(self.frame.size.width + 20,r);
-    
-    [self addChild:missile];
+-(void)setBisonStartingTileX: (int)xPos Y:(int)yPos {
+    bison.position = CGPointMake(mazeBox.frame.origin.x + xPos*TILE_SIZE - TILE_SIZE/2, mazeBox.frame.origin.y + yPos*TILE_SIZE - TILE_SIZE/2);
 }
 
+-(void)addMazeBox {
+    int boxDim = mazeDimensions*TILE_SIZE + mazeDimensions*WALL_WIDTH;
+    
+    mazeBox = [SKSpriteNode spriteNodeWithColor:[SKColor blackColor] size:CGSizeMake(boxDim, boxDim)];
+    mazeBox.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:CGRectMake(-(boxDim / 2), -(boxDim / 2), boxDim, boxDim)];
+    mazeBox.position = CGPointMake(self.frame.size.width / 2, self.frame.size.height / 2);
+    NSLog(@"%@",NSStringFromCGRect(mazeBox.frame));
+    [self addChild:mazeBox];
+}
 
+-(void)addVerticalWallWithxPos: (int)xVal yPos: (int)yVal {
+    SKSpriteNode *newWall = [SKSpriteNode spriteNodeWithColor:[UIColor redColor] size:CGSizeMake(WALL_WIDTH, TILE_SIZE)];
+    
+    // physics stuff
+    newWall.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:newWall.size];
+    newWall.physicsBody.categoryBitMask = obstacleCategory;
+    newWall.physicsBody.friction = 0;
+    newWall.physicsBody.dynamic = NO;
+    newWall.physicsBody.contactTestBitMask = bisonCategory;
+    newWall.physicsBody.collisionBitMask = obstacleCategory;
+    newWall.physicsBody.usesPreciseCollisionDetection = YES;
+    newWall.name = @"wall";
+    
+    newWall.anchorPoint = CGPointMake(0,0);
+    newWall.position = CGPointMake(TILE_SIZE*xVal + mazeBox.frame.origin.x + WALL_WIDTH*(xVal-1), TILE_SIZE*(yVal-1) + mazeBox.frame.origin.y + (WALL_WIDTH)*(yVal));
+    [self addChild:newWall];
+}
 
-
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    UITouch *touch = [touches anyObject];
-    CGPoint touchLocation = [touch locationInNode:self.scene];
-    if(touchLocation.x >bison.position.x){
-        // if(bison.position.x < 270){
-        // [bison runAction:actionMoveLeft];
-        // }
-    }else{
-        // if(bison.position.x > 50){
-        // [bison runAction:actionMoveRight];
-        // }
-    }
+-(void)addHorizontalWallWithxPos: (int)xVal yPos: (int)yVal {
+    SKSpriteNode *newWall = [SKSpriteNode spriteNodeWithColor:[UIColor redColor] size:CGSizeMake(TILE_SIZE,WALL_WIDTH)];
+    
+    // physics stuff
+    newWall.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:newWall.size];
+    newWall.physicsBody.categoryBitMask = obstacleCategory;
+    newWall.physicsBody.friction = 0;
+    newWall.physicsBody.dynamic = NO;
+    newWall.physicsBody.contactTestBitMask = bisonCategory;
+    newWall.physicsBody.collisionBitMask = bisonCategory;
+    newWall.physicsBody.usesPreciseCollisionDetection = YES;
+    newWall.name = @"wall";
+    
+    newWall.anchorPoint = CGPointMake(0,0);
+    newWall.position = CGPointMake(TILE_SIZE*(xVal-1) + mazeBox.frame.origin.x + WALL_WIDTH*(xVal-1), TILE_SIZE*(yVal-1) + mazeBox.frame.origin.y + (WALL_WIDTH)*(yVal-1));
+    [self addChild:newWall];
 }
 
 -(void) handleSwipeRight:( UISwipeGestureRecognizer *) recognizer {
-    if(bison.position.x < 270){
-        [bison runAction:actionMoveRight];
-    }
+    bisonXvel = OBJECT_VELOCITY;
+    bisonYvel = 0;
 }
 
 -(void) handleSwipeLeft:( UISwipeGestureRecognizer *) recognizer {
-    if(bison.position.x > 50){
-        [bison runAction:actionMoveLeft];
-    }
+    bisonXvel = -OBJECT_VELOCITY;
+    bisonYvel = 0;
 }
 
 -(void) handleSwipeUp:( UISwipeGestureRecognizer *) recognizer {
-    if(bison.position.y < 500){
-        [bison runAction:actionMoveUp];
-    }
+    bisonYvel = OBJECT_VELOCITY;
+    bisonXvel = 0;
 }
 
 -(void) handleSwipeDown:( UISwipeGestureRecognizer *) recognizer {
-    if(bison.position.y > 50){
-        [bison runAction:actionMoveDown];
-    }
+    bisonYvel = -OBJECT_VELOCITY;
+    bisonXvel = 0;
 }
 
-- (void)moveObstacle
-{
-    NSArray *nodes = self.children;//1
-    
-    for(SKNode * node in nodes){
-        if (![node.name isEqual: @"bg"] && ![node.name isEqual: @"ship"]) {
-            SKSpriteNode *ob = (SKSpriteNode *) node;
-            CGPoint obVelocity = CGPointMake(-OBJECT_VELOCITY, 0);
-            CGPoint amtToMove = CGPointMultiplyScalar(obVelocity,_dt);
-            
-            ob.position = CGPointAdd(ob.position, amtToMove);
-            if(ob.position.x < -100)
-            {
-                [ob removeFromParent];
-            }
-        }
-    }
+- (void)moveBison {
+    SKSpriteNode *ob = (SKSpriteNode *) bison;
+    CGPoint obVelocity = CGPointMake(bisonXvel, bisonYvel);
+    CGPoint amtToMove = CGPointMultiplyScalar(obVelocity,_dt);
+    ob.position = CGPointAdd(ob.position, amtToMove);
 }
 
 -(void)update:(CFTimeInterval)currentTime {
@@ -195,13 +211,7 @@ static inline CGPoint CGPointMultiplyScalar(const CGPoint a, const CGFloat b)
     }
     _lastUpdateTime = currentTime;
     
-    if( currentTime - _lastMissileAdded > 1)
-    {
-        _lastMissileAdded = currentTime + 1;
-        [self addMissile];
-    }
-    
-    [self moveObstacle];
+    [self moveBison];
     
 }
 
@@ -223,11 +233,24 @@ static inline CGPoint CGPointMultiplyScalar(const CGPoint a, const CGFloat b)
     if ((firstBody.categoryBitMask & bisonCategory) != 0 &&
         (secondBody.categoryBitMask & obstacleCategory) != 0)
     {
-        [bison removeFromParent];
-        SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
-        SKScene * gameOverScene = [[GameOverScene alloc] initWithSize:self.size];
-        [self.view presentScene:gameOverScene transition: reveal];
-        
+//        if (bisonXvel != 0) {
+//            if (bisonXvel > 0) {
+//                bison.position = CGPointMake(bison.position.x - 10, bison.position.y);
+//            }
+//            else {
+//                bison.position = CGPointMake(bison.position.x + 10, bison.position.y);
+//            }
+//        }
+//        else if (bisonYvel != 0) {
+//            if (bisonYvel > 0) {
+//                bison.position = CGPointMake(bison.position.x, bison.position.y - 10);
+//            }
+//            else {
+//                bison.position = CGPointMake(bison.position.x, bison.position.y + 10);
+//            }
+//        }
+        bisonXvel = 0;
+        bisonYvel = 0;
     }
 }
 
