@@ -153,8 +153,9 @@
     [foodWasteButton setFrame:wedgeButton.frame];
     
     CGRect newFrame = foodWasteButton.frame;
-    newFrame.origin.y = yCoord;
-    
+    if (yCoord > newFrame.origin.y) {
+        newFrame.origin.y = yCoord;
+    }
     [wedgeButton removeFromSuperview];
     wedgeButton = nil;
     [self.view addSubview:foodWasteButton];
@@ -230,7 +231,13 @@
             wedgeButton = nil;
         }
         else {
-            [self showFoodWaste];
+            if (touchLocation.y >= 475) {
+                [wedgeButton removeFromSuperview];
+                wedgeButton = nil;
+            }
+            else {
+                [self showFoodWaste];
+            }
         }
         if(![[Appa sharedInstance] getSleepStatus]){
             self.mainAppaView.image = [self getImage:@"appaNeutral"];
