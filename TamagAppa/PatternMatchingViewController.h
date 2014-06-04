@@ -12,6 +12,7 @@
 @interface PatternMatchingViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UILabel *gameInfo;
 @property (weak, nonatomic) IBOutlet UILabel *numberOfAppas;
+@property (weak, nonatomic) IBOutlet UIButton *goBackALevelButton;
 @property NSMutableArray *randInts;
 @property NSMutableArray *spacesWithAppas;
 @property (nonatomic, assign) int numAppas;

@@ -40,10 +40,7 @@
     for (int i = 1; i<= numAppas; i++)
     {
         int randInt = arc4random() %(numButtonsPerRow*numButtonsPerColumn)+4;
-        while([randInts containsObject:[NSNumber numberWithInt: randInt]])
-        {
-            randInt = arc4random() %(numButtonsPerRow*numButtonsPerColumn)+4;
-        }
+        while([randInts containsObject:[NSNumber numberWithInt: randInt]]) { randInt = arc4random() %(numButtonsPerRow*numButtonsPerColumn)+4; }
         [randInts addObject: [NSNumber numberWithInt: randInt]];
         [(UIButton*)[self.view viewWithTag:randInt] setImage:[UIImage imageNamed:@"Appa.png"]  forState:UIControlStateNormal];
         [(UIButton*)[self.view viewWithTag:randInt] setImage:[UIImage imageNamed:@"Appa.png"]  forState:UIControlStateDisabled];
@@ -53,10 +50,7 @@
 
 - (void)hideAppas
 {
-    for (int i = 4; i < numButtonsPerRow * numButtonsPerColumn + 4; i++)
-    {
-        [(UIButton*)[self.view viewWithTag:i] setImage:nil forState:UIControlStateNormal];
-    }
+    for (int i = 4; i < numButtonsPerRow * numButtonsPerColumn + 4; i++) { [(UIButton*)[self.view viewWithTag:i] setImage:nil forState:UIControlStateNormal]; }
     gameInfo.text = @"";
     self.view.userInteractionEnabled = YES;
 }
@@ -84,7 +78,6 @@
     {
         
     }
-    //numAppas = 3;
     gameInfo.text = @"";
     randInts = [[NSMutableArray alloc] init];
     spacesWithAppas = [[NSMutableArray alloc] init];
@@ -95,10 +88,6 @@
 
 - (void)resetUserDefaults
 {
-
-    //    [patternSettings removeObjectForKey:@"patternLevel"];
-    //    [patternSettings removeObjectForKey:@"row"];
-    //    [patternSettings removeObjectForKey:@"column"];
     [patternSettings setInteger:1 forKey:@"patternLevel"];
     [patternSettings setInteger:3 forKey:@"row"];
     [patternSettings setInteger:4 forKey:@"column"];
@@ -126,10 +115,7 @@
             xCoord = xBuffer;
             if (i != 4) { yCoord += height + yBuffer; }
         }
-        else
-        {
-            xCoord += width + xBuffer;
-        }
+        else { xCoord += width + xBuffer; }
         button.frame = CGRectMake(xCoord, yCoord, width, height);
         [button setTag:i];
         [self.view addSubview:button];
@@ -170,16 +156,11 @@
                 int currentLevel = [patternSettings integerForKey:@"patternLevel"];
                 currentLevel += 1;
                 [patternSettings setInteger:currentLevel forKey:@"patternLevel"];
-                if (currentLevel % 2 == 0)
-                {
-                    numButtonsPerRow += 1;
-                }
-                else
-                {
-                    numButtonsPerColumn += 1;
-                }
+                if (currentLevel % 2 == 0) { numButtonsPerRow += 1; }
+                else { numButtonsPerColumn += 1; }
                 [patternSettings setInteger:numButtonsPerRow forKey:@"row"];
                 [patternSettings setInteger:numButtonsPerColumn forKey:@"column"];
+                [patternSettings setBool:NO forKey:@"patternLoadPrevLevel"];
             }
             else
             {
@@ -207,17 +188,33 @@
     [super viewWillDisappear:animated];
     if (self.isMovingFromParentViewController)
     {
+        [patternSettings setBool:YES forKey:@"patternLoadPrevLevel"];
         [patternSettings setInteger:numButtonsPerRow forKey:@"row"];
         [patternSettings setInteger:numButtonsPerColumn  forKey:@"column"];
-        //[patternSettings setObject:spacesWithAppas forKey:@"spacesWithAppas"];
-        //[patternSettings setObject:randInts forKey:@"spacesWithRandomAppas"];
-        if (([patternSettings integerForKey:@"eliminationLoadPrevData"] + [patternSettings integerForKey:@"patternLoadPrevData"]) % 5 == 0)
+        [patternSettings setObject:spacesWithAppas forKey:@"spacesWithAppas"];
+        [patternSettings setObject:randInts forKey:@"spacesWithRandomAppas"];
+        if (([patternSettings integerForKey:@"patternLevel"] + [patternSettings integerForKey:@"eliminationLevel"]) % 5 == 0)
         {
             int curLevel = [patternSettings integerForKey:@"level"];
             curLevel += 1;
             [patternSettings setInteger:curLevel forKey:@"level"];
         }
     }
+}
+
+- (IBAction)goBackLevelButtonClick:(id)sender
+{
+    int currentLevel = [patternSettings integerForKey:@"patternLevel"];
+    currentLevel -= 1;
+    numAppas = 11 - currentLevel;
+    
+    [patternSettings setInteger:currentLevel forKey:@"patternLevel"];
+    [patternSettings setBool:NO forKey:@"patternLoadPrevData"];
+    if (currentLevel % 2 == 0) { numButtonsPerColumn -= 1; }
+    else { numButtonsPerRow -= 1; }
+    [patternSettings setInteger:numButtonsPerRow forKey:@"row"];
+    [patternSettings setInteger:numButtonsPerColumn forKey:@"column"];
+    [self showAppas];
 }
 
 @end
