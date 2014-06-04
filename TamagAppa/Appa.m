@@ -35,7 +35,7 @@
     }
     
     else{
-        level = 0;
+        level = 1;
         curHappiness = 100 + level*0.5;
         curEnergy = 100 + level*0.5;
         curHunger = 100 + level*0.5;
