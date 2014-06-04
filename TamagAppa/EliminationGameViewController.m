@@ -216,10 +216,7 @@
     trueObject = [NSNumber numberWithBool:YES];
     falseObject = [NSNumber numberWithBool:NO];
     gameWon = NO;
-    UIImageView *backgroundImage = [[UIImageView alloc] initWithFrame:self.view.frame];
-    [backgroundImage setImage:[UIImage imageNamed:@"background"]];
-    [self.view addSubview:backgroundImage];
-    [self.view sendSubviewToBack:backgroundImage];
+
     if ([eliminationSettings integerForKey:@"eliminationLevel"] == 0)
     {
         [eliminationSettings setInteger:1 forKey:@"eliminationLevel"];
