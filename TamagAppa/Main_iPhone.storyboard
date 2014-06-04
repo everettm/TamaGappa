@@ -782,6 +782,14 @@ Good luck!</string>
                                     <segue destination="FUM-5x-cXm" kind="push" id="o7s-TS-6PL"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.49999999999999961" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Level 0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ake-0I-EBz">
+                                <rect key="frame" x="122" y="104" width="77" height="26"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.8980392814" green="0.87450987099999999" blue="0.81960791349999995" alpha="1" colorSpace="deviceRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -789,6 +797,7 @@ Good luck!</string>
                     <connections>
                         <outlet property="gameInfo" destination="RFV-et-G9G" id="uRn-pm-jn0"/>
                         <outlet property="goBackALevelButton" destination="RyX-S8-pMw" id="P7g-Eu-gOt"/>
+                        <outlet property="levelLabel" destination="ake-0I-EBz" id="JXe-5K-NqF"/>
                         <outlet property="numberOfAppas" destination="WtO-bz-bBL" id="6te-Vb-FIX"/>
                     </connections>
                 </viewController>
