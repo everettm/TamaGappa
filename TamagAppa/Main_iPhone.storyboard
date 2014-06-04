@@ -608,7 +608,7 @@ Good luck!</string>
                                 <rect key="frame" x="63" y="197" width="194" height="167"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.8980392814" green="0.87450987099999999" blue="0.81960791349999995" alpha="1" colorSpace="deviceRGB"/>
-                                <string key="text">Level  0
+                                <string key="text">
 
 You have
 
@@ -685,8 +685,8 @@ Good luck!</string>
                                     <action selector="goBackLevelButtonClick:" destination="Del-CY-HR6" eventType="touchUpInside" id="0xM-Ok-kk7"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EI5-SZ-j2Y">
-                                <rect key="frame" x="175" y="204" width="20" height="21"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Level 0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EI5-SZ-j2Y">
+                                <rect key="frame" x="126" y="204" width="68" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.8980392814" green="0.87450987099999999" blue="0.81960791349999995" alpha="1" colorSpace="deviceRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>

@@ -240,7 +240,7 @@
     }
     if (numTriesLeft == 0) { numTriesLeft = 1; }
     numTriesLeftStartLabel.text = [NSString stringWithFormat:@"%i", numTriesLeft];
-    levelLabel.text = [NSString stringWithFormat:@"%i", curLevel];
+    levelLabel.text = [NSString stringWithFormat:@"Level %i", curLevel];
     squareEliminationDictionary = @{@"14": @"2", @"16": @"3", @"27": @"4", @"29": @"5", @"38": @"5", @"310": @"6", @"41": @"2", @"46": @"5", @"411": @"7", @"413": @"8", @"512": @"8", @"514": @"9", @"61": @"3", @"64": @"5", @"613": @"9", @"615": @"10", @"72": @"4", @"79": @"8", @"83": @"5", @"810": @"9", @"92": @"5", @"97": @"8", @"103": @"6", @"108": @"9", @"114": @"7", @"1113": @"12", @"125": @"8", @"1214": @"13", @"134": @"8", @"136": @"9", @"1311": @"12", @"1315": @"14", @"145": @"9", @"1412": @"13", @"156": @"10", @"1513": @"14"};
     startGameTextField.editable = NO;
     //[self resetUserDefaults];
