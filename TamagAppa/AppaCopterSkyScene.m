@@ -23,6 +23,7 @@ static inline CGFloat skRand(CGFloat low, CGFloat high) {
 @property NSTimer* cloudSpawnTimer;
 @property int level;
 @property int score;
+@property int numeLives;
 @end
 
 @implementation AppaCopterSkyScene
@@ -56,6 +57,17 @@ static inline CGFloat skRand(CGFloat low, CGFloat high) {
     [self addChild:scoreNode];
     [self addChild:levelNode];
     [self addChild:levelUp];
+    
+    SKSpriteNode* life1 = [self newAppaLifeIndicator];
+    life1.name = @"life1";
+    life1.position = CGPointMake(115, self.size.height-85);
+    SKSpriteNode* life2 = [self newAppaLifeIndicator];
+    life2.name = @"life2";
+    life2.position = CGPointMake(135, self.size.height-85);
+    life2.zPosition = 5;
+    
+    [self addChild:life1];
+    [self addChild:life2];
 }
 
 -(void)startGame{
@@ -97,8 +109,8 @@ static inline CGFloat skRand(CGFloat low, CGFloat high) {
 
 -(SKSpriteNode*)newAppa{
     
-    SKSpriteNode* appa = [SKSpriteNode spriteNodeWithImageNamed:@"Appa.png"];
-    appa.size = CGSizeMake(100, 100);
+    SKSpriteNode* appa = [SKSpriteNode spriteNodeWithImageNamed:@"appa-top.png"];
+    appa.size = CGSizeMake(40, 100);
     appa.name = @"appa";
     
     CGFloat offsetX = appa.frame.size.width * appa.anchorPoint.x;
@@ -127,6 +139,12 @@ static inline CGFloat skRand(CGFloat low, CGFloat high) {
     appa.position = CGPointMake(CGRectGetMidX(self.frame), 50);
     
     return appa;
+}
+
+-(SKSpriteNode*)newAppaLifeIndicator{
+    SKSpriteNode* lifeAppa = [SKSpriteNode spriteNodeWithImageNamed:@"appa-top.png"];
+    lifeAppa.size = CGSizeMake(10, 25);
+    return lifeAppa;
 }
 
 
@@ -159,7 +177,7 @@ static inline CGFloat skRand(CGFloat low, CGFloat high) {
     sIndicator.name = @"sIndicator";
     sIndicator.text = [NSString stringWithFormat:@"Score: %i", _score];
     sIndicator.fontSize = 18;
-    sIndicator.position = CGPointMake(self.size.width-77, self.size.height-90);
+    sIndicator.position = CGPointMake(self.size.width-60, self.size.height-90);
     return sIndicator;
 }
 
