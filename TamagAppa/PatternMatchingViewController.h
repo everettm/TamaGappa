@@ -21,6 +21,7 @@
 @property (nonatomic, assign) int numWrongGuesses;
 @property (nonatomic, assign) BOOL trueObject;
 @property (nonatomic, assign) BOOL falseObject;
+@property (weak, nonatomic) IBOutlet UILabel *levelLabel;
 
 - (void)showAppas;
 - (void)hideAppas;

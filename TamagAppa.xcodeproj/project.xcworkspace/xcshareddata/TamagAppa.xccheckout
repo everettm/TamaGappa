@@ -5,36 +5,36 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>14C0290E-4250-4873-9F85-7F1D25A15359</string>
+	<string>086ADEB3-69A5-4A46-955E-B71BAF9C34F9</string>
 	<key>IDESourceControlProjectName</key>
 	<string>TamagAppa</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>5A17C27E-287F-4436-9072-4C4CC19183AF</key>
-		<string>https://github.com/everettm/tamagappa.git</string>
+		<key>0AE41009-5531-4ADC-8D6F-A188402840FD</key>
+		<string>https://github.com/everettm/TamaGappa.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>TamagAppa.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>5A17C27E-287F-4436-9072-4C4CC19183AF</key>
+		<key>0AE41009-5531-4ADC-8D6F-A188402840FD</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/everettm/tamagappa.git</string>
+	<string>https://github.com/everettm/TamaGappa.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>5A17C27E-287F-4436-9072-4C4CC19183AF</string>
+	<string>0AE41009-5531-4ADC-8D6F-A188402840FD</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>5A17C27E-287F-4436-9072-4C4CC19183AF</string>
+			<string>0AE41009-5531-4ADC-8D6F-A188402840FD</string>
 			<key>IDESourceControlWCCName</key>
-			<string>tamagappa</string>
+			<string>TamaGappa</string>
 		</dict>
 	</array>
 </dict>

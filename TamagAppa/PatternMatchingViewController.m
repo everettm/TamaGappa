@@ -30,6 +30,7 @@
 @synthesize falseObject;
 @synthesize spacesWithAppas;
 @synthesize goBackALevelButton;
+@synthesize levelLabel;
 
 - (void)showAppas
 {
@@ -93,6 +94,7 @@
         
     }
     gameInfo.text = @"";
+    levelLabel.text = [NSString stringWithFormat:@"Level %i", [patternSettings integerForKey:@"patternLevel"]];
     randInts = [[NSMutableArray alloc] init];
     spacesWithAppas = [[NSMutableArray alloc] init];
     for (int i = 1; i <= 3; i++) { [(UIImageView*)[self.view viewWithTag:i] setImage:[UIImage imageNamed:@"grayX"]]; }
@@ -123,13 +125,13 @@
 - (void)createButtons
 {
     double height = 300/numButtonsPerRow;
-    double width = 360/numButtonsPerColumn;
+    double width = 340/numButtonsPerColumn;
     if (width < height) { height = width; }
     else { width = height; }
     double xCoord = 0;
-    double yCoord = 115;
+    double yCoord = 135;
     double xBuffer = (320 - (width * numButtonsPerRow))/(numButtonsPerRow + 1);
-    double yBuffer = (380 - (height * numButtonsPerColumn))/(numButtonsPerColumn + 1);
+    double yBuffer = (360 - (height * numButtonsPerColumn))/(numButtonsPerColumn + 1);
     for (int i = 4; i < (numButtonsPerRow * numButtonsPerColumn + 4); i++)
     {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -167,6 +169,9 @@
             {
                 gameInfo.text = @"You lose.";
                 self.view.userInteractionEnabled = NO;
+                numWrongGuesses = 0;
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"You lose." message:@"Do you want to try again?" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
+                [alert show];
             }
         }
         else
@@ -186,10 +191,10 @@
                 else { numButtonsPerColumn += 1; }
                 [patternSettings setInteger:numButtonsPerRow forKey:@"row"];
                 [patternSettings setInteger:numButtonsPerColumn forKey:@"column"];
-                [patternSettings setBool:NO forKey:@"patternLoadPrevLevel"];
+                numWrongGuesses = 0;
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Level up!" message:@"Do you want to keep playing?" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
                 [alert show];
-                [self viewDidAppear:YES];
+                //[self viewDidAppear:YES];
                 if (([patternSettings integerForKey:@"patternLevel"] + [patternSettings integerForKey:@"eliminationLevel"]) % 5 == 0)
                 {
                     int curLevel = [patternSettings integerForKey:@"level"];
@@ -243,17 +248,31 @@
     [patternSettings setInteger:currentLevel forKey:@"patternLevel"];
     [patternSettings setBool:NO forKey:@"patternLoadPrevData"];
     for (int i = 4; i < (numButtonsPerRow * numButtonsPerColumn + 4); i++) { [(UIButton*)[self.view viewWithTag:i] removeFromSuperview]; }
+    for (int i = 1; i <= 3; i++) { [(UIImageView*)[self.view viewWithTag:i] setImage:[UIImage imageNamed:@"grayX"]]; }
     if (currentLevel % 2 == 0) { numButtonsPerColumn -= 1; }
     else { numButtonsPerRow -= 1; }
     [patternSettings setInteger:numButtonsPerRow forKey:@"row"];
     [patternSettings setInteger:numButtonsPerColumn forKey:@"column"];
-    [self viewDidLoad];
+    numAppas = currentLevel + 2;
+    levelLabel.text = [NSString stringWithFormat:@"Level %i", [patternSettings integerForKey:@"patternLevel"]];
+    [self createButtons];
+    [self showAppas];
 }
 
 - (void)alertView:(UIAlertView *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
+    for (int i = 1; i <= 3; i++) { [(UIImageView*)[self.view viewWithTag:i] setImage:[UIImage imageNamed:@"grayX"]]; }
     for (int i = 4; i < (numButtonsPerRow * numButtonsPerColumn + 4); i++) { [(UIButton*)[self.view viewWithTag:i] removeFromSuperview]; }
-    if (buttonIndex == 0) { [self viewDidLoad]; }
+    [patternSettings setBool:NO forKey:@"patternLoadPrevLevel"];
+    [patternSettings synchronize];
+    if (buttonIndex == 0)
+    {
+        numAppas = [patternSettings integerForKey:@"patternLevel"] + 2;
+        [self createButtons];
+        [self viewDidAppear:YES];
+        levelLabel.text = [NSString stringWithFormat:@"Level %i", [patternSettings integerForKey:@"patternLevel"]];
+        //[self viewDidLoad];
+    }
     else { [self.navigationController popViewControllerAnimated:YES]; }
 }
 

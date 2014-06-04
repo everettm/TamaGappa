@@ -61,8 +61,9 @@
         [revertALevelButton setEnabled:YES];
         [revertALevelButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     }
-    BOOL prevData = [eliminationSettings boolForKey:@"eliminationLoadPrevData"];
-    if (prevData)
+    //[eliminationSettings setBool:NO forKey:@"eliminationLoadPrevData"];
+    //[eliminationSettings synchronize];
+    if ([eliminationSettings boolForKey:@"eliminationLoadPrevData"])
     {
         for (int i = 1; i <= 15; i++)
         {
@@ -123,7 +124,7 @@
     {
         if (openSpaces[i] == trueObject) { numOpenSpaces += 1; }
     }
-    if (numOpenSpaces == 2)
+    if (numOpenSpaces == 14)
     {
         gameWon = YES;
         curLevel += 1;
@@ -157,7 +158,15 @@
         if (!validMovesLeft)
         {
             gameMessage.text = @"No more valid moves.";
-            if (numTriesLeft == 1) { gameMessage.text = @"You lose."; }
+            if (numTriesLeft == 1)
+            {
+                [eliminationSettings setBool:NO forKey:@"eliminationLoadPrevData"];
+                [eliminationSettings synchronize];
+                //[openSpaces removeAllObjects];
+                //[eliminationSettings ]
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"You lose." message:@"Do you want to try again?" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
+                [alert show];
+            }
         }
     }
 }
@@ -224,7 +233,6 @@
     trueObject = [NSNumber numberWithBool:YES];
     falseObject = [NSNumber numberWithBool:NO];
     gameWon = NO;
-
     if ([eliminationSettings integerForKey:@"eliminationLevel"] == 0)
     {
         [eliminationSettings setInteger:1 forKey:@"eliminationLevel"];
@@ -246,7 +254,17 @@
             [openSpaces addObject: trueObject];
         }
     }
-    if (numTriesLeft == 0) { numTriesLeft = 1; }
+    if (numTriesLeft == 0 || numTriesLeft == 1)
+    {
+        numTriesLeft = 1;
+        [resetGameButton setEnabled:NO];
+        [resetGameButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    }
+    else
+    {
+        [resetGameButton setEnabled:YES];
+        [resetGameButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    }
     numTriesLeftStartLabel.text = [NSString stringWithFormat:@"%i", numTriesLeft];
     levelLabel.text = [NSString stringWithFormat:@"Level %i", curLevel];
     squareEliminationDictionary = @{@"14": @"2", @"16": @"3", @"27": @"4", @"29": @"5", @"38": @"5", @"310": @"6", @"41": @"2", @"46": @"5", @"411": @"7", @"413": @"8", @"512": @"8", @"514": @"9", @"61": @"3", @"64": @"5", @"613": @"9", @"615": @"10", @"72": @"4", @"79": @"8", @"83": @"5", @"810": @"9", @"92": @"5", @"97": @"8", @"103": @"6", @"108": @"9", @"114": @"7", @"1113": @"12", @"125": @"8", @"1214": @"13", @"134": @"8", @"136": @"9", @"1311": @"12", @"1315": @"14", @"145": @"9", @"1412": @"13", @"156": @"10", @"1513": @"14"};
@@ -331,7 +349,7 @@
     [eliminationSettings setBool:NO forKey:@"eliminationLoadPrevData"];
     numTriesLeft = 11 - curLevel;
     levelLabel.text = [NSString stringWithFormat:@"%i", curLevel];
-    [self startGame];
+    [self viewDidLoad];
 }
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
