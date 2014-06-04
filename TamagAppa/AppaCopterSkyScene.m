@@ -24,6 +24,7 @@ static inline CGFloat skRand(CGFloat low, CGFloat high) {
 @property NSTimer* moveRightTimer;
 @property NSTimer* moveLeftTimer;
 @property NSTimer* cloudSpawnTimer;
+@property NSTimer* backgroundTimer;
 @property int level;
 @property int score;
 @property int numLives;
@@ -39,6 +40,9 @@ static inline CGFloat skRand(CGFloat low, CGFloat high) {
 }
 
 -(void)createSceneContents{
+    
+    [self initiateBackground];
+    
     [self startGame];
     self.physicsWorld.gravity = CGVectorMake(0.0f, -2.45f);
     self.physicsWorld.contactDelegate = self;
@@ -71,6 +75,43 @@ static inline CGFloat skRand(CGFloat low, CGFloat high) {
     
     [self addChild:life1];
     [self addChild:life2];
+}
+
+-(void)initiateBackground{
+    SKSpriteNode* bg1 = [SKSpriteNode spriteNodeWithImageNamed:@"skyBackdrop.png"];
+    bg1.anchorPoint = CGPointZero;
+    bg1.position = CGPointMake(0, 0);
+    bg1.name = @"bg1";
+    [self addChild:bg1];
+    
+    SKSpriteNode* bg2 = [SKSpriteNode spriteNodeWithImageNamed:@"skyBackdrop.png"];
+    bg2.anchorPoint = CGPointZero;
+    bg2.position = CGPointMake(0, bg1.size.height-1);
+    bg2.name = @"bg2";
+    [self addChild:bg2];
+    
+    _backgroundTimer = [NSTimer scheduledTimerWithTimeInterval:0.1
+                                                        target:self
+                                                      selector:@selector(animateBackground)
+                                                      userInfo:nil
+                                                       repeats:YES];
+}
+
+-(void)animateBackground{
+    
+    SKSpriteNode* bg1 = (SKSpriteNode*)[self childNodeWithName:@"bg1"];
+    SKSpriteNode* bg2 = (SKSpriteNode*)[self childNodeWithName:@"bg2"];
+    
+    bg1.position = CGPointMake(bg1.position.x, bg1.position.y-10);
+    bg2.position = CGPointMake(bg2.position.x, bg2.position.y-10);
+    
+    if (bg1.position.y < -bg1.size.height){
+        bg1.position = CGPointMake(bg1.position.x, bg2.position.y + bg2.size.height);
+    }
+    
+    if (bg2.position.y < -bg2.size.height) {
+        bg2.position = CGPointMake(bg2.position.x, bg1.position.y + bg1.size.height);
+    }
 }
 
 -(void)startGame{
@@ -230,12 +271,16 @@ static inline CGFloat skRand(CGFloat low, CGFloat high) {
 
 -(void)moveAppaLeft{
     SKSpriteNode* appa = (SKSpriteNode*)[self childNodeWithName:@"appa"];
-    [appa runAction:[SKAction moveByX:-15 y:0 duration:0.1]];
+    if(appa.position.x > 0){
+        [appa runAction:[SKAction moveByX:-15 y:0 duration:0.1]];
+    }
 }
 
 -(void)moveAppaRight{
     SKSpriteNode* appa = (SKSpriteNode*)[self childNodeWithName:@"appa"];
-    [appa runAction:[SKAction moveByX:15 y:0 duration:0.1]];
+    if(appa.position.x < self.size.width){
+        [appa runAction:[SKAction moveByX:15 y:0 duration:0.1]];
+    }
 }
 
 -(void)updateScore{

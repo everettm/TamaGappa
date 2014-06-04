@@ -94,7 +94,7 @@
 -(void) updateStatus{
     if(isAsleep){
         [self restoreStatus];
-        [self updateHungerBy:(maxHunger/hour)*[self toThePowerOf:.98 :(float)level]];
+        [self updateHungerBy:(maxHunger/3*hour)*[self toThePowerOf:.98 :(float)level]];
         
         [self calculateMultipliers];
         
@@ -103,7 +103,7 @@
     }
     
     else {
-        [self updateHappinessBy: -(maxHappiness/hour)*[self toThePowerOf:.98 :(float)level]*(amountOfWasteMess + amountOfFoodMess)];
+        [self updateHappinessBy: -(maxHappiness/3*hour)*[self toThePowerOf:.98 :(float)level]*(amountOfWasteMess + amountOfFoodMess)];
 
         [self updateHungerBy:-((maxHunger/hour*3)*[self toThePowerOf:.98 :(float)level])];
         [self calculateMultipliers];
