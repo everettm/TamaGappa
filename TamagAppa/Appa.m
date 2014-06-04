@@ -162,6 +162,7 @@
 }
 
 -(void) feedAppa{
+    NSLog(@"%f, %f, %f, %f", curHunger, curEnergy, curHappiness, curHealth);
     if(curHunger >= maxHunger - 5){
         curHunger = maxHunger;
         
@@ -174,7 +175,6 @@
         if(curHealth <= 0){
             curHealth = 0;
         }
-        
     }
     
     else {
@@ -185,16 +185,15 @@
         }
         
         
-        curHappiness += (maxHappiness/1);
+        curHappiness += (maxHappiness/5);
         if(curHappiness >= maxHappiness){
             curHappiness = maxHappiness;
         }
         
-        curEnergy += (maxEnergy/1);
+        curEnergy += (maxEnergy/5);
         if(curEnergy >= maxEnergy){
             curEnergy = maxEnergy;
         }
-    
     }
 }
 
