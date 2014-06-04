@@ -149,10 +149,7 @@
                 gameInfo.text = @"Sorry, that was wrong.";
                 self.view.userInteractionEnabled = NO;
                 [self performSelector:@selector(showAppas) withObject:nil afterDelay:2.0f];
-                if (numAppas > 3)
-                {
-                    numAppas -= 1;
-                }
+                if (numAppas > 3) { numAppas -= 1; }
             }
             else
             {
