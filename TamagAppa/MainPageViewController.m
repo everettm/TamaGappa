@@ -35,6 +35,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [[Appa sharedInstance]loadState];
 	// Do any additional setup after loading the view.
     wedgeButton = nil;
     skyColor = [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0];
@@ -312,16 +313,14 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    if (self.isMovingFromParentViewController) {
-        NSLog(@"Saving...");
-        [[Appa sharedInstance]saveState];
-    }
+//    if (self.isMovingFromParentViewController) {
+      NSLog(@"Saving...");
+      [[Appa sharedInstance]saveState];
+//    }
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    [[Appa sharedInstance]loadState];
-    NSLog(@"%f", [[Appa sharedInstance] getHealthStatus]);
     [self setAppaBackToNeutral];
 }
 
