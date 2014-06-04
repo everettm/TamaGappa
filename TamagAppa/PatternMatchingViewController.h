@@ -31,5 +31,6 @@
 - (IBAction)instructionsButtonClick:(id)sender;
 - (IBAction)buttonClick:(id)sender;
 - (void)viewWillDisappear:(BOOL)animated;
+- (IBAction)goBackALevelButtonClick:(id)sender;
 
 @end
