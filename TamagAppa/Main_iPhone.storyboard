@@ -755,15 +755,15 @@ Good luck!</string>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fsB-xV-Gqi">
-                                <rect key="frame" x="119" y="72" width="30" height="30"/>
+                                <rect key="frame" x="9" y="72" width="35" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="plq-hx-pM0">
-                                <rect key="frame" x="155" y="72" width="30" height="30"/>
+                                <rect key="frame" x="52" y="72" width="35" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" tag="3" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GN9-7E-sBb">
-                                <rect key="frame" x="189" y="72" width="30" height="30"/>
+                                <rect key="frame" x="95" y="72" width="35" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tFM-zr-qiq">
@@ -777,24 +777,12 @@ Good luck!</string>
                                     <segue destination="FUM-5x-cXm" kind="push" id="o7s-TS-6PL"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T2e-YQ-wyi">
-                                <rect key="frame" x="5" y="72" width="106" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Go back a level">
-                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="goBackLevelButtonClick:" destination="NQe-94-CWo" eventType="touchUpInside" id="QXJ-yU-wNp"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="z70-L2-1mO"/>
                     <connections>
                         <outlet property="gameInfo" destination="RFV-et-G9G" id="uRn-pm-jn0"/>
-                        <outlet property="goBackALevelButton" destination="T2e-YQ-wyi" id="qXu-5j-5Xi"/>
                         <outlet property="numberOfAppas" destination="WtO-bz-bBL" id="6te-Vb-FIX"/>
                     </connections>
                 </viewController>
