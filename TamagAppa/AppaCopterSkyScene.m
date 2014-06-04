@@ -8,6 +8,9 @@
 
 #import "AppaCopterSkyScene.h"
 
+static const uint32_t bisonCategory = 0x1 << 0;
+static const uint32_t obstacleCategory = 0x1 << 1;
+
 static inline CGFloat skRandf() {
     return rand() / (CGFloat) RAND_MAX;
 }
@@ -23,7 +26,7 @@ static inline CGFloat skRand(CGFloat low, CGFloat high) {
 @property NSTimer* cloudSpawnTimer;
 @property int level;
 @property int score;
-@property int numeLives;
+@property int numLives;
 @end
 
 @implementation AppaCopterSkyScene
@@ -73,6 +76,7 @@ static inline CGFloat skRand(CGFloat low, CGFloat high) {
 -(void)startGame{
     _level = 1;
     _score = 0;
+    _numLives = 2;
 
     [self spawnClouds];
 }
@@ -113,29 +117,11 @@ static inline CGFloat skRand(CGFloat low, CGFloat high) {
     appa.size = CGSizeMake(40, 100);
     appa.name = @"appa";
     
-    CGFloat offsetX = appa.frame.size.width * appa.anchorPoint.x;
-    CGFloat offsetY = appa.frame.size.height * appa.anchorPoint.y;
-    
-    CGMutablePathRef path = CGPathCreateMutable();
-    
-    CGPathMoveToPoint(path, NULL, 8 - offsetX, 91 - offsetY);
-    CGPathAddLineToPoint(path, NULL, 14 - offsetX, 111 - offsetY);
-    CGPathAddLineToPoint(path, NULL, 19 - offsetX, 126 - offsetY);
-    CGPathAddLineToPoint(path, NULL, 25 - offsetX, 117 - offsetY);
-    CGPathAddLineToPoint(path, NULL, 22 - offsetX, 99 - offsetY);
-    CGPathAddLineToPoint(path, NULL, 44 - offsetX, 117 - offsetY);
-    CGPathAddLineToPoint(path, NULL, 63 - offsetX, 121 - offsetY);
-    CGPathAddLineToPoint(path, NULL, 82 - offsetX, 118 - offsetY);
-    CGPathAddLineToPoint(path, NULL, 105 - offsetX, 98 - offsetY);
-    CGPathAddLineToPoint(path, NULL, 105 - offsetX, 98 - offsetY);
-    CGPathAddLineToPoint(path, NULL, 108 - offsetX, 125 - offsetY);
-    CGPathAddLineToPoint(path, NULL, 115 - offsetX, 108 - offsetY);
-    CGPathAddLineToPoint(path, NULL, 118 - offsetX, 89 - offsetY);
-    
-    CGPathCloseSubpath(path);
-    
-    appa.physicsBody = [SKPhysicsBody bodyWithPolygonFromPath:path];
+    appa.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:appa.size];
     appa.physicsBody.dynamic = NO;
+    appa.physicsBody.categoryBitMask = bisonCategory;
+    appa.physicsBody.contactTestBitMask = obstacleCategory;
+    appa.physicsBody.collisionBitMask = obstacleCategory;
     appa.position = CGPointMake(CGRectGetMidX(self.frame), 50);
     
     return appa;
@@ -201,12 +187,16 @@ static inline CGFloat skRand(CGFloat low, CGFloat high) {
 
 
 -(void) addCloud{
-    SKSpriteNode* cloud = [[SKSpriteNode alloc] initWithColor:[SKColor whiteColor] size:CGSizeMake(10,10)];
+    SKSpriteNode* cloud = [[SKSpriteNode alloc] initWithImageNamed:@"rock.png"];
+    cloud.size = CGSizeMake(10,10);
     cloud.position = CGPointMake(skRand(0,self.size.width), self.size.height-50);
     cloud.name = @"cloud";
     cloud.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:cloud.size];
     cloud.physicsBody.dynamic = YES;
     cloud.physicsBody.usesPreciseCollisionDetection = YES;
+    cloud.physicsBody.categoryBitMask = obstacleCategory;
+    cloud.physicsBody.contactTestBitMask = bisonCategory;
+    cloud.physicsBody.collisionBitMask = bisonCategory;
     [self addChild:cloud];
 }
 
@@ -248,7 +238,6 @@ static inline CGFloat skRand(CGFloat low, CGFloat high) {
     [appa runAction:[SKAction moveByX:15 y:0 duration:0.1]];
 }
 
-
 -(void)updateScore{
     _score += 20;
     SKLabelNode* scoreGetter = (SKLabelNode*)[self childNodeWithName:@"sIndicator"];
@@ -268,6 +257,65 @@ static inline CGFloat skRand(CGFloat low, CGFloat high) {
     
 }
 
+-(void)loseLife{
+    
+    SKSpriteNode* lifeIndicator = (SKSpriteNode*)[self childNodeWithName:[NSString stringWithFormat:@"life%d",_numLives]];
+    [lifeIndicator removeFromParent];
+    
+    _numLives --;
+    
+    if(_numLives == 0){
+        [self gameOver];
+    }
+    
+    else{
+        [_cloudSpawnTimer invalidate];
+        _cloudSpawnTimer = nil;
+        
+        [self enumerateChildNodesWithName:@"cloud" usingBlock:^(SKNode *node, BOOL *stop) {
+            [node removeFromParent];
+        }];
+        
+        SKLabelNode* lup = (SKLabelNode*)[self childNodeWithName:@"lupIndicator"];
+        lup.text = @"YOU LOSE A LIFE";
+        [lup runAction:[SKAction fadeInWithDuration:2.0]];
+        [lup runAction:[SKAction fadeOutWithDuration:2.0]];
+        
+        SKSpriteNode* atemp = (SKSpriteNode*)[self childNodeWithName:@"appa"];
+        atemp.position = CGPointMake(CGRectGetMidX(self.frame), 50);
+        
+        [self spawnClouds];
+    }
+
+}
+
+-(void)gameOver{
+    [_cloudSpawnTimer invalidate];
+    _cloudSpawnTimer = nil;
+    
+    [self enumerateChildNodesWithName:@"cloud" usingBlock:^(SKNode *node, BOOL *stop) {
+        [node removeFromParent];
+    }];
+    
+    SKLabelNode* lup = (SKLabelNode*)[self childNodeWithName:@"lupIndicator"];
+    lup.text = @"GAME OVER";
+    [lup runAction:[SKAction fadeInWithDuration:2.0]];
+    [lup runAction:[SKAction fadeOutWithDuration:2.0]];
+    
+    if(_score < [[NSUserDefaults standardUserDefaults] integerForKey:@"highScore"]){
+        _score = [[NSUserDefaults standardUserDefaults] integerForKey:@"highScore"];
+    }
+    
+    lup.text = [NSString stringWithFormat:@"HIGH SCORE: %i", _score];
+    [lup runAction:[SKAction fadeInWithDuration:2.0]];
+    
+    [[NSUserDefaults standardUserDefaults] setInteger:_score forKey:@"highScore"];
+    
+    SKSpriteNode* atemp = (SKSpriteNode*)[self childNodeWithName:@"appa"];
+    atemp.position = CGPointMake(CGRectGetMidX(self.frame), 50);
+    [atemp removeFromParent];
+}
+
 -(void)didSimulatePhysics{
     [self enumerateChildNodesWithName:@"cloud" usingBlock:^(SKNode *node, BOOL *stop){
         if(node.position.y < 0){
@@ -278,7 +326,22 @@ static inline CGFloat skRand(CGFloat low, CGFloat high) {
 }
 
 - (void)didBeginContact:(SKPhysicsContact *)contact{
-    NSLog(@"APPA'S BEEN HIT!");
+    SKPhysicsBody *firstBody, *secondBody;
+    if (contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask)
+    {
+        firstBody = contact.bodyA;
+        secondBody = contact.bodyB;
+    }
+    else
+    {
+        firstBody = contact.bodyB;
+        secondBody = contact.bodyA;
+    }
+    if ((firstBody.categoryBitMask & bisonCategory) != 0 &&
+        (secondBody.categoryBitMask & obstacleCategory) != 0)
+    {
+        [self loseLife];
+    }
 }
 
 -(float)toThePowerOf:(float)x :(float)y{

@@ -10,4 +10,10 @@
 
 @interface AppaCopterSkyScene : SKScene <SKPhysicsContactDelegate>
 
+typedef NS_OPTIONS(NSUInteger, CollisionCategory) {
+    categoryOne = (1 << 0),
+    categoryTwo = (1 << 1)
+};
+
+
 @end
