@@ -31,7 +31,7 @@
     else prevTouchWasOnLeftSide = NO;
 }
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
-    SHOW;
+//    SHOW;
     UITouch *touch = [touches anyObject];
     if([touch locationInView:self.view].x < CGRectGetMidX(self.view.bounds)) {
         if (!prevTouchWasOnLeftSide) {
@@ -46,17 +46,16 @@
         prevTouchWasOnLeftSide = NO;
     }
     if (!CGRectContainsPoint(self.view.bounds, [touch locationInView:self.view])) {
-        NSLog(@"RESET");
-        [self reset];
+        self.state = UIGestureRecognizerStateCancelled;
     }
-    else if (changedDirection > 3) self.state = UIGestureRecognizerStateBegan;
+    else if (changedDirection > 2) self.state = UIGestureRecognizerStateBegan;
 }
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
-    SHOW;
+//    SHOW;
     self.state = UIGestureRecognizerStateEnded;
 }
 -(void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event{
-    SHOW;
+//    SHOW;
     self.state = UIGestureRecognizerStateCancelled;
 }
 -(void)reset{

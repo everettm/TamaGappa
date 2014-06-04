@@ -10,9 +10,13 @@
 
 @implementation Appa{
     bool isAsleep;
+    bool isBeingTickled;
     float happinessMultiplier;
     float hungerMultiplier;
     float hour;
+    int amountOfFoodMess;
+    int amountOfWasteMess;
+    
     NSUserDefaults* appaSettings;
 }
 @synthesize level;
@@ -41,6 +45,9 @@
         curHunger = 100 + level*0.5;
         curHealth = 100 + level*0.5;
         isAsleep = false;
+        isBeingTickled = false;
+        amountOfFoodMess = 0;
+        amountOfWasteMess = 0;
     }
     
     maxHappiness = 100 + level*0.5;
@@ -87,141 +94,113 @@
 -(void) updateStatus{
     if(isAsleep){
         [self restoreStatus];
-        curHunger -= (maxHunger/hour)*[self toThePowerOf:.98 :(float)level];
-        if(curHunger <= 0.5*maxHunger){
-            hungerMultiplier = 2.0;
-        }
-        else{
-            hungerMultiplier = 1.0;
-        }
-        if(curHunger <= 0){
-            curHunger = 0;
-        }
+        [self updateHungerBy:(maxHunger/hour)*[self toThePowerOf:.98 :(float)level]];
         
-        curHealth = ((curEnergy + curHappiness + curHunger)/3)*[self toThePowerOf:.98 :(float)level];
-        if(curHealth <= 0){
-            curHealth = 0;
-        }
+        [self calculateMultipliers];
+        
+        [self calculateHealth];
         
     }
     
-    else{
-        curHappiness -= (maxHappiness/hour*3)*[self toThePowerOf:.98 :(float)level];
-        if(curHappiness <= 0.5*maxHappiness){
-            happinessMultiplier = 2.0;
-        }
-        else{
-            happinessMultiplier = 1.0;
-        }
-        if(curHappiness <=0){
-            curHappiness = 0;
-        }
+    else {
+        [self updateHappinessBy: -(maxHappiness/hour)*[self toThePowerOf:.98 :(float)level]*(amountOfWasteMess + amountOfFoodMess)];
+
+        [self updateHungerBy:-((maxHunger/hour*3)*[self toThePowerOf:.98 :(float)level])];
+        [self calculateMultipliers];
         
-        curHunger -= ((maxHunger/hour*3)*[self toThePowerOf:.98 :(float)level]);
-        if(curHunger <= 0.5*maxHunger){
-            hungerMultiplier = 2.0;
-        }
-        else{
-            hungerMultiplier = 1.0;
-        }
-        if(curHunger <= 0){
-            curHunger = 0;
-        }
-        
-        curEnergy -= (maxEnergy/hour*3)*happinessMultiplier*hungerMultiplier*[self toThePowerOf:.98 :(float)level];
-        if(curEnergy <= 0){
-            curEnergy = 0;
-        }
-        
-        curHealth = ((curEnergy + curHappiness + curHunger)/3)*[self toThePowerOf:.98 :(float)level];
-        if(curHealth <= 0){
-            curHealth = 0;
-        }
+        [self updateEnergyBy:-(maxEnergy/hour*3)*hungerMultiplier*[self toThePowerOf:.98 :(float)level]/happinessMultiplier];
+
+        [self calculateHealth];
     }
 }
 
 -(void) restoreStatus{
-    curEnergy += maxEnergy/1800;
-    //    curHappiness += maxHappiness/1800;
-    //curHealth += maxHealth/1800;
-    //    curEnergy += 2;
-    //    curHappiness += 2;
-    //    curHealth += 2;
+    [self updateEnergyBy:(maxEnergy/1800)];
+    [self updateHealthBy:(maxHealth/1800)];
+}
+
+-(void)calculateMultipliers {
+    if(curHappiness <= 0.5*maxHappiness) happinessMultiplier = 2.0;
+    else happinessMultiplier = 1.0;
     
-    if(curEnergy >= maxEnergy){
-        curEnergy = maxEnergy;
-    }
-    
-    if(curHealth >= maxHealth){
-        curHealth = maxHealth;
-    }
-    
-    if(curHappiness >= maxHappiness){
-        curHappiness = maxHappiness;
-    }
+    if(curHunger <= 0.5*maxHunger) hungerMultiplier = 2.0;
+    else hungerMultiplier = 1.0;
+}
+
+-(void)calculateHealth {
+    float baseHealth = ((curEnergy + curHappiness + curHunger)/3)*[self toThePowerOf:.98 :(float)level];
+    curHealth = baseHealth - (amountOfWasteMess) * 5 - amountOfFoodMess;
+    if(curHealth <= 0) curHealth = 0;
 }
 
 -(void) feedAppa{
-    NSLog(@"%f, %f, %f, %f", curHunger, curEnergy, curHappiness, curHealth);
-    if(curHunger >= maxHunger - 5){
+    if(curHunger >= maxHunger - 5) {
         curHunger = maxHunger;
-        
-        curHappiness -= maxHappiness/5;
-        if(curHappiness <=0){
-            curHappiness = 0;
-        }
-
-        curHealth -= maxHealth/5;
-        if(curHealth <= 0){
-            curHealth = 0;
-        }
+        [self updateHappinessBy:(-maxHappiness/5)];
+        [self updateHealthBy:(-maxHealth/5)];
     }
     
     else {
-        curHunger += (maxHunger/4);
-        
-        if(curHunger >= maxHunger){
-            curHunger = maxHunger;
-        }
-        
-        
-        curHappiness += (maxHappiness/5);
-        if(curHappiness >= maxHappiness){
-            curHappiness = maxHappiness;
-        }
-        
-        curEnergy += (maxEnergy/5);
-        if(curEnergy >= maxEnergy){
-            curEnergy = maxEnergy;
-        }
+        [self updateHungerBy:(maxHunger/4)];
+        [self updateHappinessBy:(maxHappiness/5)];
+        [self updateEnergyBy:(maxEnergy/5)];
     }
 }
 
 -(void) playWithAppa{
-    //curHappiness += 50;
-    curHappiness += (maxHappiness/4);
-    if(curHappiness >= maxHappiness) {
-        curHappiness = maxHappiness;
-    }
-    
-    curEnergy -= (maxEnergy/3);
-    if(curEnergy <= 0){
-        curEnergy = 0;
-    }
-
+    [self updateHappinessBy:(maxHappiness/4)];
+    [self updateEnergyBy:(maxEnergy/3)];
 }
 
--(void) putAppaToSleep{
+-(void)putAppaToSleep{
     isAsleep = true;
-    
-    curHappiness += (maxHappiness/4);
-    if(curHappiness >= maxHappiness){
-        curHappiness = maxHappiness;
-    }
+    [self updateHappinessBy:(maxHappiness/4)];
 }
 
--(void) wakeAppaUp{
+-(void)tickleAppa{
+    isBeingTickled = true;
+    if (isAsleep) [self updateHappinessBy: -maxHappiness/5];
+    else [self updateHappinessBy:maxHappiness/5];
+}
+
+-(void)stopTickling {
+    isBeingTickled = false;
+}
+
+-(void)wakeAppaUp{
     isAsleep = false;
+}
+
+-(void)updateHappinessBy:(float) amount {
+    curHappiness += amount;
+    if (curHappiness < 0) curHappiness = 0;
+    else if (curHappiness > maxHappiness) curHappiness = maxHappiness;
+}
+
+-(void)updateHealthBy:(float) amount {
+    curHealth += amount;
+    if (curHealth < 0) curHealth = 0;
+    else if (curHealth > maxHealth) curHealth = maxHealth;
+}
+
+-(void)updateEnergyBy:(float) amount {
+    curEnergy += amount;
+    if (curEnergy < 0) curEnergy = 0;
+    else if (curEnergy > maxEnergy) curEnergy = maxEnergy;
+}
+
+-(void)updateHungerBy:(float) amount {
+    curHunger += amount;
+    if (curHunger < 0) curHunger = 0;
+    else if (curHunger > maxHunger) curHunger = maxHunger;
+}
+
+-(void)updateFoodMessAmountBy:(int) num{
+    amountOfFoodMess += num;
+}
+
+-(void)updateWasteAmountBy:(int)num {
+    amountOfWasteMess += num;
 }
 
 -(void) saveState{

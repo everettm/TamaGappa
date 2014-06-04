@@ -27,10 +27,14 @@
 -(float)getEnergyStatus;
 -(int)getLevel;
 -(bool)getSleepStatus;
+-(void)updateFoodMessAmountBy:(int)num;
+-(void)updateWasteAmountBy:(int)num;
 -(void)feedAppa;
 -(void)playWithAppa;
 -(void)putAppaToSleep;
 -(void)wakeAppaUp;
+-(void)tickleAppa;
+-(void)stopTickling;
 -(void)restoreStatus;
 -(void)saveState;
 -(void)loadState;

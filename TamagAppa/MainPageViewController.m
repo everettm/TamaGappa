@@ -14,7 +14,6 @@
 @interface MainPageViewController (){
     UIColor *skyColor;
     UIButton *wedgeButton;
-    BOOL beingTickled;
     NSMutableDictionary *imageCache;
     NSMutableArray *buttonsToCleanUp;
     NSMutableArray *buttonsToCleanUpOriginalPoints;
@@ -37,7 +36,6 @@
 	// Do any additional setup after loading the view.
     
     wedgeButton = nil;
-    beingTickled = NO;
     skyColor = [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0];
     
     buttonsToCleanUp = [[NSMutableArray alloc] init];
@@ -54,30 +52,30 @@
     
     [_mainAppaView addGestureRecognizer:[[PetGestureRecognizer alloc] initWithTarget:self action:@selector(petting:)]];
     
-    
 }
 
 -(void)petting:(PetGestureRecognizer *)rsd{
     if (rsd.state == UIGestureRecognizerStateChanged) {
-        NSLog(@"Change");
-        [self toggleTickling];
-    }
-    else if (rsd.state == UIGestureRecognizerStateBegan) {
-        beingTickled = YES;
-        NSLog(@"Began");
-    }
-    else if (rsd.state == UIGestureRecognizerStatePossible) {
-        beingTickled = NO;
-        NSLog(@"Possible");
-    }
-}
-
--(void)toggleTickling {
-    if (beingTickled) {
         self.mainAppaView.image = [self getImage:@"appaTickled1"];
+        [[Appa sharedInstance] tickleAppa];
     }
-    else {
-        self.mainAppaView.image = [self getImage:@"appaNeutral"];
+    
+    else if (rsd.state == UIGestureRecognizerStateCancelled || (rsd.state == UIGestureRecognizerStateEnded)) {
+        [[Appa sharedInstance] stopTickling];
+        [UIView transitionWithView:self.mainAppaView
+                          duration:2.0f
+                           options:UIViewAnimationOptionTransitionCrossDissolve
+                        animations:^{
+                            self.mainAppaView.image = [self getImage:@"appaTickled2"];
+                        } completion:^(BOOL finished) {
+                        [UIView transitionWithView:self.mainAppaView
+                           duration:2.0f
+                            options:UIViewAnimationOptionTransitionCrossDissolve
+                         animations:^{
+                             self.mainAppaView.image = [self getImage:@"appaNeutral"];
+                         } completion:nil];
+            }
+         ];
     }
 }
 
@@ -172,6 +170,7 @@
     
     [buttonsToCleanUp addObject:poopButton];
     [buttonsToCleanUpOriginalPoints addObject:NSStringFromCGPoint(poopButton.center)];
+    [[Appa sharedInstance] updateWasteAmountBy:1];
     
     [self.view addSubview:poopButton];
 }
@@ -201,9 +200,10 @@
                          [foodWasteButton addTarget:self action:@selector(imageToCleanUpDragging:withEvent:) forControlEvents:UIControlEventTouchDragInside];
                          [foodWasteButton addTarget:self action:@selector(imageToCleanUpDragging:withEvent:) forControlEvents:UIControlEventTouchDragOutside];
                          [foodWasteButton addTarget:self action:@selector(imageToCleanUpDragEnd:withEvent:) forControlEvents:UIControlEventTouchUpInside];
-                         
+                         foodWasteButton.tag = 6;
                          [buttonsToCleanUp addObject:foodWasteButton];
                          [buttonsToCleanUpOriginalPoints addObject:NSStringFromCGPoint(foodWasteButton.center)];
+                         [[Appa sharedInstance] updateFoodMessAmountBy:1];
                      }
      ];
     
@@ -227,6 +227,8 @@
         if (CGRectContainsPoint([_toolBar convertRect:_cleanUpButton.frame toView:self.view], touchLocation)){
             [buttonsToCleanUpOriginalPoints removeObjectAtIndex:myIndex];
             [buttonsToCleanUp removeObjectAtIndex:myIndex];
+            if (myButton.tag == 6) [[Appa sharedInstance] updateFoodMessAmountBy:-1];
+            else [[Appa sharedInstance] updateWasteAmountBy:-1];
             [myButton removeFromSuperview];
         }
         else {
@@ -250,15 +252,13 @@
     UITouch* touch = [touches anyObject];
     CGPoint touchLocation = [touch locationInView:self.view];
     if (touch.phase == 3) { // signifies dragging has ended
-        if (CGRectContainsPoint(_appaFaceZone.frame, touchLocation)) {
-            if (![[Appa sharedInstance] getSleepStatus]) {
-                [[Appa sharedInstance] feedAppa];
-                int randInt = arc4random() % 4;
-                if (randInt == 0) {
-                    [self showPoop];
-                }
-                [self.view sendSubviewToBack:_appaFaceZone];
-            }
+        if (CGRectContainsPoint(_appaFaceZone.frame, touchLocation) && ![[Appa sharedInstance] getSleepStatus]) {
+            [[Appa sharedInstance] feedAppa];
+            
+            int randInt = arc4random() % 4;
+            if (randInt == 0)  [self showPoop];
+
+            [self.view sendSubviewToBack:_appaFaceZone];
             [wedgeButton removeFromSuperview];
             wedgeButton = nil;
         }
