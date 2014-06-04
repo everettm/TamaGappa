@@ -13,6 +13,7 @@
 //
 
 #import "EliminationGameViewController.h"
+#import "Appa.h"
 
 @interface EliminationGameViewController ()
 
@@ -122,7 +123,7 @@
     {
         if (openSpaces[i] == trueObject) { numOpenSpaces += 1; }
     }
-    if (numOpenSpaces == 14)
+    if (numOpenSpaces == 2)
     {
         gameWon = YES;
         curLevel += 1;
@@ -132,6 +133,13 @@
         self.view.userInteractionEnabled = NO;
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Level up!" message:@"Do you want to keep playing?" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
         [alert show];
+        if (([eliminationSettings integerForKey:@"patternLevel"] + [eliminationSettings integerForKey:@"eliminationLevel"]) % 5 == 0)
+        {
+            int currentLevel = [eliminationSettings integerForKey:@"level"];
+            currentLevel += 1;
+            [eliminationSettings setInteger:currentLevel forKey:@"level"];
+            [eliminationSettings synchronize];
+        }
     }
     else
     {

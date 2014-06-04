@@ -267,5 +267,12 @@
     }
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    Appa *theInstance = [[Appa alloc] init];
+    [theInstance loadState];
+}
+
+
 
 @end
