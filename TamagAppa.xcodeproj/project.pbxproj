@@ -33,6 +33,7 @@
 		68D21E0D191FDD4E00CDEBE5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68D21DEC191FDD4E00CDEBE5 /* UIKit.framework */; };
 		68D21E15191FDD4E00CDEBE5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 68D21E13191FDD4E00CDEBE5 /* InfoPlist.strings */; };
 		68D21E17191FDD4E00CDEBE5 /* TamagAppaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D21E16191FDD4E00CDEBE5 /* TamagAppaTests.m */; };
+		68D286AA193EFAA50036A78E /* PetGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D286A9193EFAA50036A78E /* PetGestureRecognizer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +88,8 @@
 		68D21E12191FDD4E00CDEBE5 /* TamagAppaTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TamagAppaTests-Info.plist"; sourceTree = "<group>"; };
 		68D21E14191FDD4E00CDEBE5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		68D21E16191FDD4E00CDEBE5 /* TamagAppaTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TamagAppaTests.m; sourceTree = "<group>"; };
+		68D286A8193EFAA50036A78E /* PetGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PetGestureRecognizer.h; sourceTree = "<group>"; };
+		68D286A9193EFAA50036A78E /* PetGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PetGestureRecognizer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +172,8 @@
 				68C9CD9C193ED21200F68B6F /* EliminationGameViewController.h */,
 				68C9CD9D193ED21200F68B6F /* EliminationGameViewController.m */,
 				68C9CD9E193ED21200F68B6F /* PatternMatchingViewController.h */,
+				68D286A8193EFAA50036A78E /* PetGestureRecognizer.h */,
+				68D286A9193EFAA50036A78E /* PetGestureRecognizer.m */,
 				68C9CD9F193ED21200F68B6F /* PatternMatchingViewController.m */,
 				68C9CDA0193ED21200F68B6F /* Main_iPhone.storyboard */,
 				68C9CDA1193ED21200F68B6F /* AppaStatusViewController.h */,
@@ -312,6 +317,7 @@
 				68C9CDAC193ED21200F68B6F /* MazeScene.m in Sources */,
 				68D21DF5191FDD4E00CDEBE5 /* main.m in Sources */,
 				68C9CDAA193ED21200F68B6F /* AppDelegate.m in Sources */,
+				68D286AA193EFAA50036A78E /* PetGestureRecognizer.m in Sources */,
 				68C9CDA7193ED21200F68B6F /* AppaCopterViewController.m in Sources */,
 				68C9CDB3193ED21200F68B6F /* MainPageViewController.m in Sources */,
 				68C9CDAF193ED21200F68B6F /* PatternMatchingViewController.m in Sources */,

@@ -8,11 +8,13 @@
 
 #import "MainPageViewController.h"
 #import "Appa.h"
+#import "PetGestureRecognizer.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface MainPageViewController (){
     UIColor *skyColor;
     UIButton *wedgeButton;
+    BOOL beingTickled;
     NSMutableDictionary *imageCache;
     NSMutableArray *buttonsToCleanUp;
     NSMutableArray *buttonsToCleanUpOriginalPoints;
@@ -35,6 +37,7 @@
 	// Do any additional setup after loading the view.
     
     wedgeButton = nil;
+    beingTickled = NO;
     skyColor = [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0];
     
     buttonsToCleanUp = [[NSMutableArray alloc] init];
@@ -48,6 +51,34 @@
     [_feedButton addTarget:self action:@selector(feedImageDragging:withEvent:) forControlEvents:UIControlEventTouchDragOutside];
     [_feedButton addTarget:self action:@selector(checkPhase:withEvent:) forControlEvents:UIControlEventAllTouchEvents];
     
+    
+    [_mainAppaView addGestureRecognizer:[[PetGestureRecognizer alloc] initWithTarget:self action:@selector(petting:)]];
+    
+    
+}
+
+-(void)petting:(PetGestureRecognizer *)rsd{
+    if (rsd.state == UIGestureRecognizerStateChanged) {
+        NSLog(@"Change");
+        [self toggleTickling];
+    }
+    else if (rsd.state == UIGestureRecognizerStateBegan) {
+        beingTickled = YES;
+        NSLog(@"Began");
+    }
+    else if (rsd.state == UIGestureRecognizerStatePossible) {
+        beingTickled = NO;
+        NSLog(@"Possible");
+    }
+}
+
+-(void)toggleTickling {
+    if (beingTickled) {
+        self.mainAppaView.image = [self getImage:@"appaTickled1"];
+    }
+    else {
+        self.mainAppaView.image = [self getImage:@"appaNeutral"];
+    }
 }
 
 - (UIImage*)getImage:(NSString*)fileName {
@@ -64,6 +95,8 @@
 
 
 - (IBAction)feedButtonPressed:(id)sender withEvent:(UIEvent *) event {
+    [self.view bringSubviewToFront:_appaFaceZone];
+    
     NSData *archivedData = [NSKeyedArchiver archivedDataWithRootObject:(UIButton*)sender];
     wedgeButton = (UIButton*)[NSKeyedUnarchiver unarchiveObjectWithData:archivedData];
     wedgeButton.tag = 11;
@@ -224,6 +257,7 @@
                 if (randInt == 0) {
                     [self showPoop];
                 }
+                [self.view sendSubviewToBack:_appaFaceZone];
             }
             [wedgeButton removeFromSuperview];
             wedgeButton = nil;
