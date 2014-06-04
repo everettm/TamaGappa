@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		680D0D77193C840E00846A8A /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 680D0D76193C840E00846A8A /* SpriteKit.framework */; };
 		682D1042193AF65B00F2398C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 682D1041193AF65B00F2398C /* QuartzCore.framework */; };
+		68C641F6193F59DE00CF593C /* NavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C641F5193F59DE00CF593C /* NavViewController.m */; };
 		68C9CDA6193ED21200F68B6F /* Appa.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C9CD8D193ED21200F68B6F /* Appa.m */; };
 		68C9CDA7193ED21200F68B6F /* AppaCopterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C9CD8F193ED21200F68B6F /* AppaCopterViewController.m */; };
 		68C9CDA8193ED21200F68B6F /* FlyingAppa.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C9CD91193ED21200F68B6F /* FlyingAppa.m */; };
@@ -49,6 +50,8 @@
 /* Begin PBXFileReference section */
 		680D0D76193C840E00846A8A /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
 		682D1041193AF65B00F2398C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		68C641F4193F59DE00CF593C /* NavViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavViewController.h; sourceTree = "<group>"; };
+		68C641F5193F59DE00CF593C /* NavViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavViewController.m; sourceTree = "<group>"; };
 		68C9CD8C193ED21200F68B6F /* Appa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Appa.h; sourceTree = "<group>"; };
 		68C9CD8D193ED21200F68B6F /* Appa.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Appa.m; sourceTree = "<group>"; };
 		68C9CD8E193ED21200F68B6F /* AppaCopterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppaCopterViewController.h; sourceTree = "<group>"; };
@@ -159,6 +162,8 @@
 				68C9CD8F193ED21200F68B6F /* AppaCopterViewController.m */,
 				68C9CD90193ED21200F68B6F /* FlyingAppa.h */,
 				68C9CD91193ED21200F68B6F /* FlyingAppa.m */,
+				68C641F4193F59DE00CF593C /* NavViewController.h */,
+				68C641F5193F59DE00CF593C /* NavViewController.m */,
 				68C9CD92193ED21200F68B6F /* GameOverScene.h */,
 				68C9CD93193ED21200F68B6F /* GameOverScene.m */,
 				68C9CD94193ED21200F68B6F /* AppDelegate.h */,
@@ -316,6 +321,7 @@
 				68C9CDAD193ED21200F68B6F /* MazeGameViewController.m in Sources */,
 				68C9CDAC193ED21200F68B6F /* MazeScene.m in Sources */,
 				68D21DF5191FDD4E00CDEBE5 /* main.m in Sources */,
+				68C641F6193F59DE00CF593C /* NavViewController.m in Sources */,
 				68C9CDAA193ED21200F68B6F /* AppDelegate.m in Sources */,
 				68D286AA193EFAA50036A78E /* PetGestureRecognizer.m in Sources */,
 				68C9CDA7193ED21200F68B6F /* AppaCopterViewController.m in Sources */,

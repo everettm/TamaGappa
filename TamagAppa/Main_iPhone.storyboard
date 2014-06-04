@@ -184,9 +184,6 @@
                                         <state key="normal" image="cleanUpButton">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
-                                        <connections>
-                                            <action selector="cleanUpButtonPressed:" destination="EWp-HO-Cc6" eventType="touchUpInside" id="ewr-pG-k9c"/>
-                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.8980392814" green="0.87450987099999999" blue="0.81960791349999995" alpha="1" colorSpace="deviceRGB"/>
@@ -200,10 +197,6 @@
                         <outlet property="cleanUpButton" destination="HNb-yB-6wO" id="Fin-oj-w54"/>
                         <outlet property="dimView" destination="Ewb-fU-Dky" id="Gpz-t4-YCn"/>
                         <outlet property="feedButton" destination="OMq-kV-KX1" id="EPK-d8-fyR"/>
-                        <outlet property="happinessBar" destination="nFd-F7-Evh" id="Yko-EX-f9J"/>
-                        <outlet property="healthBar" destination="kWS-n7-KeO" id="zvE-Ik-pmQ"/>
-                        <outlet property="hungerBar" destination="fU7-Ut-4rK" id="MNZ-Oi-HZ9"/>
-                        <outlet property="levelLabel" destination="fbY-Fy-Jn3" id="d1W-Wz-uWv"/>
                         <outlet property="mainAppaView" destination="w9X-Cw-Ywl" id="5IZ-29-sbg"/>
                         <outlet property="playButton" destination="GZw-0b-eAe" id="1sQ-do-CAy"/>
                         <outlet property="sleepButton" destination="q64-BK-nt3" id="3LV-nt-i2j"/>
@@ -217,10 +210,10 @@
             </objects>
             <point key="canvasLocation" x="581" y="167"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Nav View Controller-->
         <scene sceneID="8UZ-Io-MGc">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="RGo-6k-2HB" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="RGo-6k-2HB" customClass="NavViewController" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="6hY-eb-Vwx">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>

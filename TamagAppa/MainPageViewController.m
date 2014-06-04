@@ -17,6 +17,8 @@
     NSMutableDictionary *imageCache;
     NSMutableArray *buttonsToCleanUp;
     NSMutableArray *buttonsToCleanUpOriginalPoints;
+    BOOL isOkay;
+    NSTimer *myTimer;
 }
 
 @end
@@ -34,7 +36,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    
     wedgeButton = nil;
     skyColor = [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0];
     
@@ -52,6 +53,13 @@
     
     [_mainAppaView addGestureRecognizer:[[PetGestureRecognizer alloc] initWithTarget:self action:@selector(petting:)]];
     
+    myTimer = [NSTimer scheduledTimerWithTimeInterval:.1
+                                               target:self
+                                             selector:@selector(checkAppaStatuses)
+                                             userInfo:nil
+                                              repeats:YES];
+    isOkay = NO;
+    [self setAppaBackToNeutral];
 }
 
 -(void)petting:(PetGestureRecognizer *)rsd{
@@ -72,7 +80,7 @@
                            duration:2.0f
                             options:UIViewAnimationOptionTransitionCrossDissolve
                          animations:^{
-                             self.mainAppaView.image = [self getImage:@"appaNeutral"];
+                             self.mainAppaView.image = [self getNeutralImage];
                          } completion:nil];
             }
          ];
@@ -107,7 +115,7 @@
     if([[Appa sharedInstance] getSleepStatus]){
         [[Appa sharedInstance] wakeAppaUp];
         [sender setImage:[self getImage:@"sleepButton"] forState:UIControlStateNormal];
-        self.mainAppaView.image = [self getImage:@"appaNeutral"];
+        [self setAppaBackToNeutral];
     }
     else {
         [[Appa sharedInstance] putAppaToSleep];
@@ -271,20 +279,30 @@
                 [self showFoodWaste];
             }
         }
-        if(![[Appa sharedInstance] getSleepStatus]){
-            self.mainAppaView.image = [self getImage:@"appaNeutral"];
-        }
+        if(![[Appa sharedInstance] getSleepStatus]) [self setAppaBackToNeutral];
     }
     else if (touch.phase == 1) { // dragging has not ended
         if(![[Appa sharedInstance] getSleepStatus]){
             if (CGRectContainsPoint(_appaFaceZone.frame, touchLocation)) {
                 self.mainAppaView.image = [self getImage:@"appaEating"];
             }
-            else {
-                self.mainAppaView.image = [self getImage:@"appaNeutral"];
-            }
+            else [self setAppaBackToNeutral];
         }
     }
+}
+
+-(void)checkAppaStatuses {
+    isOkay = ![[Appa sharedInstance] isInTrouble];
+}
+
+-(void)setAppaBackToNeutral {
+    if (isOkay) self.mainAppaView.image = [self getImage:@"appaNeutral"];
+    else self.mainAppaView.image = [self getImage:@"appaSad"];
+}
+
+-(UIImage*)getNeutralImage {
+    if (isOkay) return [self getImage:@"appaNeutral"];
+    else return [self getImage:@"appaSad"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -295,6 +313,7 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     if (self.isMovingFromParentViewController) {
+        NSLog(@"Saving...");
         [[Appa sharedInstance]saveState];
     }
 }
@@ -302,6 +321,8 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [[Appa sharedInstance]loadState];
+    NSLog(@"%f", [[Appa sharedInstance] getHealthStatus]);
+    [self setAppaBackToNeutral];
 }
 
 

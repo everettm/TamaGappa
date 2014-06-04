@@ -231,6 +231,13 @@
     }
 }
 
+-(bool)isInTrouble {
+    if (curHealth > maxHealth/5 && curEnergy > maxEnergy/5 && curHappiness > maxHappiness/5 && curHunger > maxHunger/5) {
+        return NO;
+    }
+    return YES;
+}
+
 + (Appa*)sharedInstance{
     static dispatch_once_t pred = 0;
     __strong static id _sharedObject = nil;

@@ -27,6 +27,7 @@
 -(float)getEnergyStatus;
 -(int)getLevel;
 -(bool)getSleepStatus;
+-(bool)isInTrouble;
 -(void)updateFoodMessAmountBy:(int)num;
 -(void)updateWasteAmountBy:(int)num;
 -(void)feedAppa;
